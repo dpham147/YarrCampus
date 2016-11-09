@@ -8,10 +8,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.orangecoastcollege.cs273.yarrcampus.SplashActivity">
+    tools:context="edu.orangecoastcollege.cs273.yarrcampus.SplashActivity"
+    android:orientation="vertical">
+
 
     <TextView
+        android:text="Tip Text Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/splashTipTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="103dp"
+        android:textSize="18sp"
+        android:gravity="center" />
 </RelativeLayout>
