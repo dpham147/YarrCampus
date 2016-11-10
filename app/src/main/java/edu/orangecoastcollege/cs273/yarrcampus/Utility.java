@@ -9,6 +9,7 @@ public class Utility implements Parcelable {
     private String mType;
     private String mDesc;
     private Uri mImageUri;
+    // TODO: add variables to store LAT and LONG from Google Maps API
 
     public Utility()
     {

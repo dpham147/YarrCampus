@@ -4,33 +4,30 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
-public class Building implements Parcelable{
+public class Building implements Parcelable {
     private int mId;
     private String mName;
     private String mDesc;
     private String mHours;
-    private ArrayList<Utility> mUtilities;
     private Uri mImageURI;
+    // TODO: add variables to store LAT and LONG from Google Maps API
 
     public Building()
     {
     }
 
-    public Building(int id, String name, String desc, String hours, ArrayList utilities, Uri imageURI)
+    public Building(int id, String name, String desc, String hours, Uri imageURI)
     {
         mId = id;
         mName = name;
         mDesc = desc;
         mHours = hours;
-        mUtilities = utilities;
         mImageURI = imageURI;
     }
 
-    public Building(String name, String desc, String hours, ArrayList utilities, Uri imageUri)
+    public Building(String name, String desc, String hours, Uri imageUri)
     {
-        this(-1, name, desc, hours, utilities, imageUri);
+        this(-1, name, desc, hours, imageUri);
     }
 
     private Building(Parcel parcel)
