@@ -9,29 +9,82 @@ public class Utility implements Parcelable {
     private String mType;
     private String mDesc;
     private Uri mImageUri;
-    // TODO: add variables to store LAT and LONG from Google Maps API
+    private float mGPSLat;
+    private float mGPSLong;
 
     public Utility()
     {
     }
 
-    public Utility(int id, String type, String desc, Uri imageURI)
+    public Utility(int id, String type, String desc, Uri imageURI, float gpsLat, float gpsLong)
     {
         mId = id;
         mType = type;
         mDesc = desc;
         mImageUri = imageURI;
+        mGPSLat = gpsLat;
+        mGPSLat = gpsLong;
     }
 
-    public Utility(String type, String desc, Uri imageURI)
+    public Utility(String type, String desc, Uri imageURI, float gpsLat, float gpsLong)
     {
-        this(-1, type, desc, imageURI);
+        this(-1, type, desc, imageURI, gpsLat, gpsLong);
     }
 
     private Utility(Parcel source)
     {
 
     }
+
+
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(int mId) {
+        this.mId = mId;
+    }
+
+    public String getmType() {
+        return mType;
+    }
+
+    public void setmType(String mType) {
+        this.mType = mType;
+    }
+
+    public String getmDesc() {
+        return mDesc;
+    }
+
+    public void setmDesc(String mDesc) {
+        this.mDesc = mDesc;
+    }
+
+    public Uri getmImageUri() {
+        return mImageUri;
+    }
+
+    public void setmImageUri(Uri mImageUri) {
+        this.mImageUri = mImageUri;
+    }
+
+    public float getmGPSLat() {
+        return mGPSLat;
+    }
+
+    public void setmGPSLat(float mGPSLat) {
+        this.mGPSLat = mGPSLat;
+    }
+
+    public float getmGPSLong() {
+        return mGPSLong;
+    }
+
+    public void setmGPSLong(float mGPSLong) {
+        this.mGPSLong = mGPSLong;
+    }
+
 
     @Override
     public int describeContents() {

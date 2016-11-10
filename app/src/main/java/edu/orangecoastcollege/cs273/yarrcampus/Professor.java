@@ -39,6 +39,62 @@ public class Professor implements Parcelable {
 
     }
 
+    public int getmId() {
+        return mId;
+    }
+
+    public void setmId(int mId) {
+        this.mId = mId;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getmDesc() {
+        return mDesc;
+    }
+
+    public void setmDesc(String mDesc) {
+        this.mDesc = mDesc;
+    }
+
+    public String getmClasses() {
+        return mClasses;
+    }
+
+    public void setmClasses(String mClasses) {
+        this.mClasses = mClasses;
+    }
+
+    public String getmHours() {
+        return mHours;
+    }
+
+    public void setmHours(String mHours) {
+        this.mHours = mHours;
+    }
+
+    public String getmBuilding() {
+        return mBuilding;
+    }
+
+    public void setmBuilding(String mBuilding) {
+        this.mBuilding = mBuilding;
+    }
+
+    public Uri getmImageURI() {
+        return mImageURI;
+    }
+
+    public void setmImageURI(Uri mImageURI) {
+        this.mImageURI = mImageURI;
+    }
+
     @Override
     public int describeContents() {
         return 0;
