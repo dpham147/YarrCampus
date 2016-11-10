@@ -28,7 +28,7 @@
             android:layout_weight="1" />
 
         <TextView
-            android:text="TextView"
+            android:text="Building Description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buildingDescriptionDetailsTextView"
@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="TextView"
+        android:text="Building Details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buildingDetailsTextView"
