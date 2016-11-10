@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_menu"
     android:layout_width="match_parent"
@@ -8,6 +9,88 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.orangecoastcollege.cs273.yarrcampus.MenuActivity">
+    tools:context="edu.orangecoastcollege.cs273.yarrcampus.MenuActivity"
+    android:columnCount="3"
+    android:background="@color/colorAccent"
+    android:layout_columnWeight="1"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buildingMapsMenuLinearLayout"
+        android:background="?attr/colorButtonNormal"
+        android:layout_marginBottom="5dp"
+        android:onClick="openBuildingLocatorActivity">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/buildingMenuImageView"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="false" />
+
+        <TextView
+            android:text="@string/building_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView"
+            android:textSize="18sp"
+            android:layout_weight="3"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorButtonNormal"
+        android:id="@+id/professorMenuLinearLayout"
+        android:layout_marginBottom="5dp"
+        android:onClick="openProfessorSearchActivity">
+
+        <ImageView
+            android:layout_width="50dp"
+            app:srcCompat="@drawable/occ_pirate_logo"
+            android:id="@+id/professorMenuImageView"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="false"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="@string/professor_search_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:id="@+id/professorMenuTextView" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorButtonNormal"
+        android:id="@+id/utilitiesMenuLinearLayout"
+        android:onClick="openUtilitySearchActivity">
+
+        <ImageView
+            android:layout_width="50dp"
+            app:srcCompat="@drawable/maps_icon"
+            android:id="@+id/utilitiesMenuImageView"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="false"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="@string/utility_search_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:id="@+id/utilitiesMenuTextView" />
+    </LinearLayout>
+</LinearLayout>
