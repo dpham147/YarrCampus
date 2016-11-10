@@ -30,4 +30,5 @@ public class SplashActivity extends AppCompatActivity {
 
         Timer timer = new Timer();
         timer.schedule(menuTask, SPLASH_DELAY);
-    }}
+    }
+}
