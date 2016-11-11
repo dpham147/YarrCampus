@@ -19,7 +19,8 @@
         <activity android:name=".BuidlingListActivity" />
         <activity android:name=".BuildingDetailsActivity" />
         <activity android:name=".ProfessorListActivity" />
-        <activity android:name=".ProfessorDetailsActivity"></activity>
+        <activity android:name=".ProfessorDetailsActivity" />
+        <activity android:name=".UtilitySearchActivity"></activity>
     </application>
 
 </manifest>
