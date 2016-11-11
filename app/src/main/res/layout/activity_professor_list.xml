@@ -8,21 +8,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.orangecoastcollege.cs273.yarrcampus.ProfessorListActivity"
-    android:orientation="vertical"
-    android:background="@color/colorAccent">
+    tools:context="edu.orangecoastcollege.cs273.yarrcampus.BuidlingListActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:text="TextView"
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:id="@+id/textView"
-        tools:text="@string/list_of_professors"
-        android:gravity="center"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/searchProfessorEditText"
+        android:background="@android:color/background_light"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:hint="@string/example_professor_search" />
+
+    <Button
+        android:text="@string/search_professor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchProfessorButton"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:layout_gravity="center" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/professorListView" />
+        android:id="@+id/ProfessorListView" />
 </LinearLayout>
