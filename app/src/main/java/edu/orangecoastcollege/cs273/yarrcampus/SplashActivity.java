@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY = 5000;
+    private static final int SPLASH_DELAY = 1;
     private TextView splashTipTextView;
 
     @Override

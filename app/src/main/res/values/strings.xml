@@ -6,5 +6,8 @@
     <string name="search_building">Search Buildings</string>
     <string name="example_building_search">Ex: Watson Hall</string>
     <string name="example_professor_search">Ex: Michael Paulding</string>
-    <string name="search_professor">Search Professor</string>string>
+    <string name="search_professor">Search Professor</string>
+    <string name="water_fountain">Water Fountains</string>
+    <string name="emergency_phone">Emergency Phones</string>
+    <string name="restrooms">Restrooms</string>string>
 </resources>
