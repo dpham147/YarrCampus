@@ -5,4 +5,5 @@
     <string name="utility_search_menu_button">Search Utilities on Campus</string>
     <string name="search_building">Search Buildings</string>
     <string name="example_building_search">Ex: Watson Hall</string>string>
+    <string name="list_of_professors">List of Professors</string>
 </resources>
