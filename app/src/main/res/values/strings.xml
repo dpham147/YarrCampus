@@ -1,13 +1,27 @@
 <resources>
     <string name="app_name">Yarr Campus</string>
+
+    <!-- BUILDING RELATED STRINGS -->
     <string name="building_menu_button">Campus Building Locator</string>
-    <string name="professor_search_menu_button">Search Professors on Campus</string>
-    <string name="utility_search_menu_button">Search Utilities on Campus</string>
     <string name="search_building">Search Buildings</string>
     <string name="example_building_search">Ex: Watson Hall</string>
+
+    <!-- PROFESSOR RELATED STRINGS-->
+    <string name="professor_search_menu_button">Search Professors on Campus</string>
     <string name="example_professor_search">Ex: Michael Paulding</string>
     <string name="search_professor">Search Professor</string>
+
+    <!-- UTILITY RELATED STRINGS-->
+    <string name="utility_search_menu_button">Search Utilities on Campus</string>
     <string name="water_fountain">Water Fountains</string>
     <string name="emergency_phone">Emergency Phones</string>
     <string name="restrooms">Restrooms</string>string>
+
+    <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
+    <string-array name="splash_screen_tips_list">
+        <item>Did you know the 1 in MSCB 135 refers to the 1st floor of the MSCB?</item>
+        <item>Thanksgiving Break will start on Nov 24</item>
+        <item>Applied for transfer? Be sure to keep updated on deadlines!</item>
+        <item>(Insert snazzy one-liner here)</item>
+    </string-array>
 </resources>

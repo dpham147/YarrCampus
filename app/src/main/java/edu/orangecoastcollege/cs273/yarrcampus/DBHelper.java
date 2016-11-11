@@ -2,23 +2,26 @@ package edu.orangecoastcollege.cs273.yarrcampus;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "YarrCampus";
-    static final String BUILDING_TABLE = "Buildings";
-    static final String PROFESSOR_TABLE = "Professors";
-    static final String UTILITY_TABLE = "Utilities";
+    private static final String BUILDING_TABLE = "Buildings";
+    private static final String PROFESSOR_TABLE = "Professors";
+    private static final String UTILITY_TABLE = "Utilities";
     private static final int DATABASE_VERSION = 1;
 
     private static final String KEY_FIELD_ID = "id";
     private static final String FIELD_BUILDING_NAME = "name";
-    private static final String FIELD_BUILDING_COORDINATE_X = "coordx";
-    private static final String FIELD_BUILDING_COORDINATE_Y = "coordy";
-    private static final String FIELD_BUILDING_HOURS = "hours";
     private static final String FIELD_BUILDING_DESCRIPTION = "desc";
+    private static final String FIELD_BUILDING_HOURS = "hours";
+    private static final String FIELD_BUILDING_COORDINATE_LAT = "lat";
+    private static final String FIELD_BUILDING_COORDINATE_LONG = "long";
     private static final String FIELD_BUILDING_IMAGE_URI = "uri";
 
     private static final String FIELD_PROFESSORS_NAME = "name";
@@ -28,8 +31,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_PROFESSORS_DESCRIPTION = "desc";
 
     private static final String FIELD_UTILITIES_TYPE = "type";
-    private static final String FIELD_UTILITIES_COORDINATE_X = "coordx";
-    private static final String FIELD_UTILITIES_COORDINATE_Y = "coordy";
+    private static final String FIELD_UTILITIES_COORDINATE_LAT = "LAT";
+    private static final String FIELD_UTILITIES_COORDINATE_LONG = "LONG";
     private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
 
     public DBHelper(Context context) {
@@ -40,17 +43,32 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Create the building table
         String table = "CREATE TABLE " + BUILDING_TABLE + "(" +
-                ")";
+                KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FIELD_BUILDING_NAME + " TEXT, " +
+                FIELD_BUILDING_DESCRIPTION + " TEXT, " +
+                FIELD_BUILDING_HOURS + " TEXT, " +
+                FIELD_BUILDING_COORDINATE_LAT + " TEXT, " +
+                FIELD_BUILDING_COORDINATE_LONG + " TEXT, " +
+                FIELD_BUILDING_IMAGE_URI + " TEXT" + ")";
         db.execSQL(table);
 
         // Create the professor table
         table = "CREATE TABLE " + PROFESSOR_TABLE + "(" +
-                ")";
+                KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FIELD_PROFESSORS_NAME + " TEXT, " +
+                FIELD_PROFESSORS_DESCRIPTION + " TEXT, " +
+                FIELD_PROFESSORS_OFFICE_HOURS + " TEXT, " +
+                FIELD_PROFESSORS_CLASSES + " TEXT, " +
+                FIELD_PROFESSORS_IMAGE_URI + " TEXT" + ")";
         db.execSQL(table);
 
         // Create the utilities table
         table = "CREATE TABLE " + UTILITY_TABLE + "(" +
-                ")";
+                KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FIELD_UTILITIES_TYPE + " TEXT, " +
+                FIELD_UTILITIES_DESCRIPTION + " TEXT, " +
+                FIELD_UTILITIES_COORDINATE_LAT + " TEXT, " +
+                FIELD_UTILITIES_COORDINATE_LONG + " TEXT" + ")";
         db.execSQL(table);
 
     }
@@ -62,4 +80,134 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + UTILITY_TABLE);
         onCreate(db);
     }
+
+    public ArrayList<Professor> getAllProfessors()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ArrayList<Professor> allProf = new ArrayList<>();
+        Cursor cursor = db.query(PROFESSOR_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Professor newProf = new Professor();
+                allProf.add(newProf);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allProf;
+    }
+
+    public ArrayList<Professor> queryProfessorByName(String name)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ArrayList<Professor> allProf = new ArrayList<>();
+        Cursor cursor = db.query(PROFESSOR_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Professor newProf = new Professor();
+                allProf.add(newProf);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allProf;
+    }
+
+    public ArrayList<Building> getAllBuildings()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Building> allBuildings = new ArrayList<>();
+        Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Building newBuilding = new Building();
+                allBuildings.add(newBuilding);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allBuildings;
+    }
+
+    public ArrayList<Building> queryBuildingByName()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Building> allBuildings = new ArrayList<>();
+        Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Building newBuilding = new Building();
+                allBuildings.add(newBuilding);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allBuildings;
+    }
+
+    public ArrayList<Utility> getAllUtilities()
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Utility> allUtilities = new ArrayList<>();
+        Cursor cursor = db.query(UTILITY_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Utility newUtility = new Utility();
+                allUtilities.add(newUtility);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allUtilities;
+    }
+
+    public ArrayList<Utility> queryUtilityType (String type)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Utility> queriedUtil = new ArrayList<>();
+
+        Cursor cursor = db.query(UTILITY_TABLE,  null, null, null, null, null, null);
+
+        if (cursor.moveToFirst());
+        {
+            do {
+                // TODO: Retrieve data from the query
+                Utility newUtility =  new Utility();
+                queriedUtil.add(newUtility);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return queriedUtil;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

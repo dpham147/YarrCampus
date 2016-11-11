@@ -11,7 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.orangecoastcollege.cs273.yarrcampus.MenuActivity"
     android:columnCount="3"
-    android:background="@color/colorAccent"
     android:layout_columnWeight="1"
     android:orientation="vertical">
 

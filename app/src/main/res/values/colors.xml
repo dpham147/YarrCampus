@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#0f248a</color>
     <color name="colorPrimaryDark">#00005c</color>
-    <color name="colorAccent">#cf4c00</color>
+    <color name="colorAccent">#0f248a</color>
     <color name="occ_orange">#fc7c19</color>
+    <color name="background">#cf4c00</color>
 </resources>
