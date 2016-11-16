@@ -1,10 +1,12 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import java.util.ArrayList;
 
@@ -31,8 +33,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_PROFESSORS_DESCRIPTION = "desc";
 
     private static final String FIELD_UTILITIES_TYPE = "type";
-    private static final String FIELD_UTILITIES_COORDINATE_LAT = "LAT";
-    private static final String FIELD_UTILITIES_COORDINATE_LONG = "LONG";
+    private static final String FIELD_UTILITIES_COORDINATE_LAT = "lat";
+    private static final String FIELD_UTILITIES_COORDINATE_LONG = "long";
     private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
 
     public DBHelper(Context context) {
@@ -81,6 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // ------ PROFESSOR TABLE OPERATIONS -----------
     public ArrayList<Professor> getAllProfessors()
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -101,26 +104,51 @@ public class DBHelper extends SQLiteOpenHelper {
         return allProf;
     }
 
-    public ArrayList<Professor> queryProfessorByName(String name)
+//    public ArrayList<Professor> queryProfessorByName(String name)
+//    {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        ArrayList<Professor> allProf = new ArrayList<>();
+//        Cursor cursor = db.query(
+//                PROFESSOR_TABLE,
+//                new String[]{FIELD_PROFESSORS_NAME, FIELD_PROFESSORS_CLASSES,
+//                        FIELD_PROFESSORS_OFFICE_HOURS, FIELD_PROFESSORS_IMAGE_URI, FIELD_PROFESSORS_DESCRIPTION},
+//                FIELD_PROFESSORS_NAME + "?=",
+//                new String[]{name},
+//                null, null, null, null);
+//
+//        if (cursor.moveToFirst())
+//        {
+//            do {
+//                // TODO: Retrieve data from the query
+//                Professor newProf = new Professor();
+//                allProf.add(newProf);
+//            }
+//            while (cursor.moveToNext());
+//        }
+//        db.close();
+//        return allProf;
+//    }
+
+    public void addProfessor(Professor professor)
     {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values =  new ContentValues();
 
-        ArrayList<Professor> allProf = new ArrayList<>();
-        Cursor cursor = db.query(PROFESSOR_TABLE, null, null, null, null, null, null);
+        values.put(FIELD_PROFESSORS_NAME, professor.getmName());
+        values.put(FIELD_PROFESSORS_CLASSES, professor.getmClasses());
+        values.put(FIELD_PROFESSORS_OFFICE_HOURS, professor.getmHours());
+        values.put(FIELD_PROFESSORS_IMAGE_URI, professor.getmImageURI().toString());
+        values.put(FIELD_PROFESSORS_DESCRIPTION, professor.getmDesc());
 
-        if (cursor.moveToFirst())
-        {
-            do {
-                // TODO: Retrieve data from the query
-                Professor newProf = new Professor();
-                allProf.add(newProf);
-            }
-            while (cursor.moveToNext());
-        }
+        db.insert(PROFESSOR_TABLE, null, values);
         db.close();
-        return allProf;
     }
 
+
+
+
+    // ------------ BUILDING TABLE OPERATIONS ----------------
     public ArrayList<Building> getAllBuildings()
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -140,25 +168,27 @@ public class DBHelper extends SQLiteOpenHelper {
         return allBuildings;
     }
 
-    public ArrayList<Building> queryBuildingByName()
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Building> allBuildings = new ArrayList<>();
-        Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
+//    public ArrayList<Building> queryBuildingByName()
+//    {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        ArrayList<Building> allBuildings = new ArrayList<>();
+//        Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
+//
+//        if (cursor.moveToFirst())
+//        {
+//            do {
+//                // TODO: Retrieve data from the query
+//                Building newBuilding = new Building();
+//                allBuildings.add(newBuilding);
+//            }
+//            while (cursor.moveToNext());
+//        }
+//        db.close();
+//        return allBuildings;
+//    }
 
-        if (cursor.moveToFirst())
-        {
-            do {
-                // TODO: Retrieve data from the query
-                Building newBuilding = new Building();
-                allBuildings.add(newBuilding);
-            }
-            while (cursor.moveToNext());
-        }
-        db.close();
-        return allBuildings;
-    }
 
+    // -------------- UTILITY TABLE OPERATIONS -------------
     public ArrayList<Utility> getAllUtilities()
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -168,8 +198,13 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
         {
             do {
-                // TODO: Retrieve data from the query
-                Utility newUtility = new Utility();
+                Utility newUtility = new Utility(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        Uri.parse(cursor.getString(3)),
+                        cursor.getFloat(4),
+                        cursor.getFloat(5));
                 allUtilities.add(newUtility);
             }
             while (cursor.moveToNext());
@@ -183,13 +218,17 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Utility> queriedUtil = new ArrayList<>();
 
-        Cursor cursor = db.query(UTILITY_TABLE,  null, null, null, null, null, null);
+        Cursor cursor = db.query(
+                UTILITY_TABLE,
+                new String[]{FIELD_UTILITIES_TYPE, FIELD_UTILITIES_COORDINATE_LAT, FIELD_UTILITIES_COORDINATE_LONG},
+                FIELD_UTILITIES_TYPE + "?=",
+                new String[]{type},
+                null, null, null, null);
 
         if (cursor.moveToFirst());
         {
             do {
-                // TODO: Retrieve data from the query
-                Utility newUtility =  new Utility();
+                Utility newUtility =  new Utility(cursor.getString(0), cursor.getFloat(1), cursor.getFloat(2));
                 queriedUtil.add(newUtility);
             }
             while (cursor.moveToNext());
