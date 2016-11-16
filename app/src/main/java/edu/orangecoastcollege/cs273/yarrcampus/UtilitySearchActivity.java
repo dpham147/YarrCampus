@@ -33,7 +33,23 @@ public class UtilitySearchActivity extends AppCompatActivity {
 
     }
 
-    protected void toggleLocationPins (View view)
+    protected void toggleRestroomPins (View view)
+    {
+        if (view instanceof CheckBox)
+        {
+            CheckBox selectedCheck = (CheckBox) view;
+        }
+    }
+
+    protected void toggleWaterPins (View view)
+    {
+        if (view instanceof CheckBox)
+        {
+            CheckBox selectedCheck = (CheckBox) view;
+        }
+    }
+
+    protected void togglePhonePins (View view)
     {
         if (view instanceof CheckBox)
         {

@@ -31,6 +31,11 @@ public class Utility implements Parcelable {
         this(-1, type, desc, imageURI, gpsLat, gpsLong);
     }
 
+    public Utility(String type, float gpsLat, float gpsLong)
+    {
+        this(-1, type, "", Uri.EMPTY, gpsLat, gpsLong);
+    }
+
     private Utility(Parcel source)
     {
 
