@@ -31,7 +31,7 @@ public class ProfessorListActivity extends AppCompatActivity {
         db = new DBHelper(this);
         professorsList = db.getAllProfessors();
 
-        private TextWatcher searchTextChangedListener = new TextWatcher() {
+        TextWatcher searchTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -54,6 +54,6 @@ public class ProfessorListActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
             }
-        }
+        };
     }
 }
