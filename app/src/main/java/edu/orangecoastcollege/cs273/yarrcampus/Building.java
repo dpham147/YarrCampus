@@ -28,72 +28,6 @@ public class Building implements Parcelable {
         mGPSLong = gpsLong;
     }
 
-    public Building(String name, String desc, String hours, Uri imageUri, float gpsLat, float gpsLong)
-    {
-        this(-1, name, desc, hours, imageUri, gpsLat, gpsLong);
-    }
-
-    private Building(Parcel parcel)
-    {
-
-    }
-
-    public int getmId() {
-        return mId;
-    }
-
-    public void setmId(int mId) {
-        this.mId = mId;
-    }
-
-    public String getmName() {
-        return mName;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public String getmDesc() {
-        return mDesc;
-    }
-
-    public void setmDesc(String mDesc) {
-        this.mDesc = mDesc;
-    }
-
-    public String getmHours() {
-        return mHours;
-    }
-
-    public void setmHours(String mHours) {
-        this.mHours = mHours;
-    }
-
-    public Uri getmImageURI() {
-        return mImageURI;
-    }
-
-    public void setmImageURI(Uri mImageURI) {
-        this.mImageURI = mImageURI;
-    }
-
-    public float getmGPSLat() {
-        return mGPSLat;
-    }
-
-    public void setmGPSLat(float mGPSLat) {
-        this.mGPSLat = mGPSLat;
-    }
-
-    public float getmGPSLong() {
-        return mGPSLong;
-    }
-
-    public void setmGPSLong(float mGPSLong) {
-        this.mGPSLong = mGPSLong;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -101,7 +35,13 @@ public class Building implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(mId);
+        dest.writeString(mName);
+        dest.writeString(mDesc);
+        dest.writeString(mHours);
+        dest.writeString(mImageURI.toString());
+        dest.writeFloat(mGPSLat);
+        dest.writeFloat(mGPSLong);
     }
 
     public static final Parcelable.Creator CREATOR = new Creator() {
@@ -115,4 +55,78 @@ public class Building implements Parcelable {
             return new Building[size];
         }
     };
+
+    public Building(String name, String desc, String hours, Uri imageUri, float gpsLat, float gpsLong)
+    {
+        this(-1, name, desc, hours, imageUri, gpsLat, gpsLong);
+    }
+
+    private Building(Parcel parcel)
+    {
+        mId = parcel.readInt();
+        mName = parcel.readString();
+        mDesc = parcel.readString();
+        mHours = parcel.readString();
+        mImageURI = Uri.parse(parcel.readString());
+        mGPSLat = parcel.readFloat();
+        mGPSLong = parcel.readFloat();
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getDesc() {
+        return mDesc;
+    }
+
+    public void setDesc(String mDesc) {
+        this.mDesc = mDesc;
+    }
+
+    public String getHours() {
+        return mHours;
+    }
+
+    public void setHours(String mHours) {
+        this.mHours = mHours;
+    }
+
+    public Uri getImageURI() {
+        return mImageURI;
+    }
+
+    public void setImageURI(Uri mImageURI) {
+        this.mImageURI = mImageURI;
+    }
+
+    public float getGPSLat() {
+        return mGPSLat;
+    }
+
+    public void setGPSLat(float mGPSLat) {
+        this.mGPSLat = mGPSLat;
+    }
+
+    public float getGPSLong() {
+        return mGPSLong;
+    }
+
+    public void setGPSLong(float mGPSLong) {
+        this.mGPSLong = mGPSLong;
+    }
+
+
 }
