@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_column="2"
+    android:layout_row="1"
+    android:id="@+id/professorListLinearView">
+
+    <ImageView
+        android:layout_width="100dp"
+        app:srcCompat="@android:drawable/sym_def_app_icon"
+        android:id="@+id/professorImageView"
+        android:layout_height="100dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:id="@+id/professorNameTextView"
+            android:layout_height="50dp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:id="@+id/professorDetailTextView"
+            android:layout_height="50dp" />
+    </LinearLayout>
+</LinearLayout>

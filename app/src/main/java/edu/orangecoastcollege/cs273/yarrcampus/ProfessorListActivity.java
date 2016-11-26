@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -16,7 +18,9 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     private DBHelper db;
     private List<Professor> professorsList;
-    private List<Professor> filteredProfessorsList;
+    private List<Building> buildingList;
+    private List<Courses>  allCoursesList;
+    private List<Courses> filteredCoursesList;
 
     private EditText searchProfessorEditText;
     private ListView professorListView;
@@ -33,7 +37,7 @@ public class ProfessorListActivity extends AppCompatActivity {
 
         deleteDatabase(DBHelper.DATABASE_NAME);
         db = new DBHelper(this);
-       // db.importProfessors("professors")
+       // db.importProfessors("professors.csv")
         professorsList = db.getAllProfessors();
 
 
@@ -67,6 +71,27 @@ public class ProfessorListActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
+        }
+    };
+
+    private String[] getCourcesName()
+    {
+        String[] instructorNames = new String[allCoursesList.size() + 1];
+        instructorNames[0] = "[Select Instructor]";
+        for(int i = 1; i < instructorNames.length; ++i)
+            instructorNames[i] = allCoursesList.get(i - 1).getSubject();
+        return instructorNames;
+    }
+
+    public AdapterView.OnItemSelectedListener courcesSpinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            String selectedCourse
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
         }
     };
 }

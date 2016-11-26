@@ -9,29 +9,34 @@ public class Professor implements Parcelable {
     private int mId;
     private String mName;
     private String mDesc;
-    private String mClasses;
     private String mHours;
     private String mBuilding;
     private Uri mImageURI;
 
     public Professor()
     {
+        mName = "";
+        mDesc = "";
+        mHours = "";
+        mBuilding = "";
+
+        mImageURI = Uri.parse("getUriToResource(this, R.drawable.empty_profile_pic)");
     }
 
-    public Professor(int id, String name, String desc, String classes, String hours, String building, Uri imageUri)
+    public Professor(int id, String name, String desc, String hours, String building, Uri imageUri)
     {
         mId = id;
         mName = name;
         mDesc = desc;
-        mClasses = classes;
         mHours = hours;
         mBuilding = building;
         mImageURI = imageUri;
+        //update database to delete classes
     }
 
-    public Professor(String name, String desc, String classes, String hours, String building, Uri imageUri)
+    public Professor(String name, String desc, String hours, String building, Uri imageUri)
     {
-        this(-1, name, desc, classes, hours, building, imageUri);
+        this(-1, name, desc,hours, building, imageUri);
     }
 
     private Professor(Parcel source)
@@ -63,14 +68,6 @@ public class Professor implements Parcelable {
         this.mDesc = mDesc;
     }
 
-    public String getmClasses() {
-        return mClasses;
-    }
-
-    public void setmClasses(String mClasses) {
-        this.mClasses = mClasses;
-    }
-
     public String getmHours() {
         return mHours;
     }
@@ -99,8 +96,7 @@ public class Professor implements Parcelable {
     {
         String details = mDesc + "\n"
                 + mHours + "\n"
-                + mBuilding + "\n"
-                + mClasses;
+                + mBuilding;
         return details;
     }
 
