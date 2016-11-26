@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String BUILDING_TABLE = "Buildings";
     private static final String PROFESSOR_TABLE = "Professors";
     private static final String UTILITY_TABLE = "Utilities";
+    private static final String CLASSES_TABLE = "Courses";
     private static final int DATABASE_VERSION = 1;
 
     private static final String KEY_FIELD_ID = "id";
@@ -36,6 +37,12 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_UTILITIES_COORDINATE_LAT = "lat";
     private static final String FIELD_UTILITIES_COORDINATE_LONG = "long";
     private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
+
+    private static final String FIELD_COURSES_CRN = "crn";
+    private static final String FIELD_COURSES_PROFESSOR_ID = "professor_id";
+    private static final String FIELD_COURSES_BUILDING_ID = "building_id";
+    private static final String FIELD_COURSES_SEMESTER_CODE = "semester_code";
+    private static final String FIELD_COURSES_SUBJECT = "subject";
 
     public DBHelper(Context context) {
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
