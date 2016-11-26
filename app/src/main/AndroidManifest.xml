@@ -20,7 +20,8 @@
         <activity android:name=".BuildingDetailsActivity" />
         <activity android:name=".ProfessorListActivity" />
         <activity android:name=".ProfessorDetailsActivity" />
-        <activity android:name=".UtilitySearchActivity"></activity>
+        <activity android:name=".UtilitySearchActivity" />
+        <activity android:name=".QuizActivity"></activity>
     </application>
 
 </manifest>
