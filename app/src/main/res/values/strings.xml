@@ -10,12 +10,16 @@
     <string name="professor_search_menu_button">Search Professors on Campus</string>
     <string name="example_professor_search">Ex: Michael Paulding</string>
     <string name="search_professor">Search Professor</string>
+    <string name="select_instructor">[Select Instructor]</string>
 
     <!-- UTILITY RELATED STRINGS-->
     <string name="utility_search_menu_button">Search Utilities on Campus</string>
     <string name="water_fountain">Water Fountains</string>
     <string name="emergency_phone">Emergency Phones</string>
-    <string name="restrooms">Restrooms</string>string>
+    <string name="restrooms">Restrooms</string>
+    <string name="filter_instructor">Filter By Instructor</string>
+    <string name="filter_subject">Filter By Subject</string>
+    <string name="reset">Reset</string>string>
 
     <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
     <string-array name="splash_screen_tips_list">

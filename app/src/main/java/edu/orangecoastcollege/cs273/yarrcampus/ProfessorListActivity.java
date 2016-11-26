@@ -16,9 +16,12 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     private DBHelper db;
     private List<Professor> professorsList;
+    private List<Professor> filteredProfessorsList;
 
     private EditText searchProfessorEditText;
     private ListView professorListView;
+
+    private ProfessorListAdapter professorListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,32 +31,42 @@ public class ProfessorListActivity extends AppCompatActivity {
         searchProfessorEditText = (EditText) findViewById(R.id.searchProfessorEditText);
         professorListView = (ListView) findViewById(R.id.ProfessorListView);
 
+        deleteDatabase(DBHelper.DATABASE_NAME);
         db = new DBHelper(this);
+       // db.importProfessors("professors")
         professorsList = db.getAllProfessors();
 
-        TextWatcher searchTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            List<Professor> searchedProfessors = new ArrayList<Professor>();
-                for(Professor p : professorsList)
-                {
-                    if(p.getmName().startsWith(charSequence.toString()))
-                    {
-                        searchedProfessors.add(p);
-
-                    }
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        };
     }
+    private String[] getInstructorNames()
+    {
+        String[] instructorNames = new String[professorsList.size() + 1];
+        instructorNames[0] = "[Select Instructor]";
+        for(int i = 1; i < instructorNames.length; ++i)
+            instructorNames[i] = professorsList.get(i - 1).getmName();
+        return instructorNames;
+    }
+
+    TextWatcher searchTextChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            String input = charSequence.toString().toLowerCase();
+            for(Professor p : professorsList)
+            {
+                for(Professor professor : professorsList)
+                    filteredProfessorsList.add(professor);
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 }
