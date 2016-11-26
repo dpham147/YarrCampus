@@ -95,6 +95,15 @@ public class Professor implements Parcelable {
         this.mImageURI = mImageURI;
     }
 
+    public String getAllDetails()
+    {
+        String details = mDesc + "\n"
+                + mHours + "\n"
+                + mBuilding + "\n"
+                + mClasses;
+        return details;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -116,4 +125,5 @@ public class Professor implements Parcelable {
             return new Professor[size];
         }
     };
+
 }

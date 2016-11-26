@@ -11,27 +11,59 @@
     tools:context="edu.orangecoastcollege.cs273.yarrcampus.BuidlingListActivity"
     android:orientation="vertical">
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:text="@string/filter_subject" />
+
+        <Spinner
+            android:id="@+id/instructorSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/searchProfessorEditText"
-        android:background="@android:color/background_light"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:hint="@string/example_professor_search" />
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="@string/filter_instructor" />
+
+        <EditText
+            android:id="@+id/searchProfessorEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:background="@android:color/background_light"
+            android:layout_marginLeft="10dp"
+            android:hint="@string/example_professor_search" />
+
+    </LinearLayout>
 
     <Button
-        android:text="@string/search_professor"
-        android:layout_width="wrap_content"
+        android:text="@string/reset"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchProfessorButton"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:layout_gravity="center" />
+        android:id="@+id/button" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ProfessorListView" />
+        android:id="@+id/ProfessorListView"
+        android:layout_weight="2" />
 </LinearLayout>
