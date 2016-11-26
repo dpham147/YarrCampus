@@ -1,13 +1,8 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
-import android.content.ContentResolver;
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.AnyRes;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -17,7 +12,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY = 5000;
+    private static final int SPLASH_DELAY = 100;
     private TextView splashTipTextView;
 
     @Override

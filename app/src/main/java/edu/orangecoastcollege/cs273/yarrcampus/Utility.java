@@ -38,7 +38,12 @@ public class Utility implements Parcelable {
 
     private Utility(Parcel source)
     {
-
+        mId = source.readInt();
+        mType = source.readString();
+        mDesc = source.readString();
+        mImageUri = Uri.parse(source.readString());
+        mGPSLat = source.readFloat();
+        mGPSLong = source.readFloat();
     }
 
 
@@ -98,7 +103,12 @@ public class Utility implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(mId);
+        dest.writeString(mType);
+        dest.writeString(mDesc);
+        dest.writeString(mImageUri.toString());
+        dest.writeFloat(mGPSLat);
+        dest.writeFloat(mGPSLong);
     }
 
     public static final Parcelable.Creator CREATOR = new Creator() {
