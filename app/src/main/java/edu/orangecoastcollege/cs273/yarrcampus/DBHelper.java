@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "YarrCampus";
+    static final String DATABASE_NAME = "YarrCampus";
     private static final int DATABASE_VERSION = 1;
 
     private static final String BUILDING_TABLE = "Buildings";
