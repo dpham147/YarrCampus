@@ -260,6 +260,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateCourse(Courses course){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_COURSES_BUILDING_ID, course.getBuildingId());
+        values.put(FIELD_COURSES_PROFESSOR_ID, course.getProfessorId());
+        values.put(FIELD_COURSES_SUBJECT, course.getSubject());
+        db.update(COURSES_TABLE, values, FIELD_COURSES_CRN + " =? ",
+                new String[]{String.valueOf(course.getCRN())});
+
+        db.close();
+    }
+
 }
 
 
