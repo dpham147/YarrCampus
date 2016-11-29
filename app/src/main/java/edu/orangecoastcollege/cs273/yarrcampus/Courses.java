@@ -18,7 +18,8 @@ public class Courses {
         mSubject = "";
     }
 
-    public Courses(int buildingId, int profId, String subject){
+    public Courses(int crn, int buildingId, int profId, String subject){
+        mCRN = crn;
         mBuildingId = buildingId;
         mProfessorId = profId;
         mSubject = subject;
@@ -52,8 +53,8 @@ public class Courses {
         return mSubject;
     }
 
-    public void setSubject(String mSubject) {
-        this.mSubject = mSubject;
+    public void setSubject(String subject) {
+        mSubject = subject;
     }
 
 }

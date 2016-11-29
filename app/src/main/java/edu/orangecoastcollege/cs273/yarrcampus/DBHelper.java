@@ -27,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String PROFESSOR_TABLE = "Professors";
     private static final String PROFESSOR_KEY_FIELD_ID = "id";
     private static final String FIELD_PROFESSORS_NAME = "name";
-    private static final String FIELD_PROFESSORS_CLASSES = "classes";
+    //private static final String FIELD_PROFESSORS_CLASSES = "classes";
     private static final String FIELD_PROFESSORS_OFFICE_HOURS = "hours";
     private static final String FIELD_PROFESSORS_IMAGE_URI = "uri";
     private static final String FIELD_PROFESSORS_DESCRIPTION = "desc";
@@ -39,6 +39,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_UTILITIES_COORDINATE_LONG = "long";
     private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
 
+    private static final String COURSES_TABLE = "Courses";
     private static final String FIELD_COURSES_CRN = "crn";
     private static final String FIELD_COURSES_PROFESSOR_ID = "professor_id";
     private static final String FIELD_COURSES_BUILDING_ID = "building_id";
@@ -68,7 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 FIELD_PROFESSORS_NAME + " TEXT, " +
                 FIELD_PROFESSORS_DESCRIPTION + " TEXT, " +
                 FIELD_PROFESSORS_OFFICE_HOURS + " TEXT, " +
-                FIELD_PROFESSORS_CLASSES + " TEXT, " +
+                //FIELD_PROFESSORS_CLASSES + " TEXT, " +
                 FIELD_PROFESSORS_IMAGE_URI + " TEXT" + ")";
         db.execSQL(table);
 
@@ -81,6 +82,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 FIELD_UTILITIES_COORDINATE_LONG + " TEXT" + ")";
         db.execSQL(table);
 
+        table = "CREATE TABLE " + COURSES_TABLE + "(" +
+                FIELD_COURSES_CRN + " INTEGER PRIMARY KEY, " +
+                FIELD_COURSES_BUILDING_ID + " INTEGER, " +
+                FIELD_COURSES_PROFESSOR_ID + " INTEGER, " +
+                FIELD_COURSES_SUBJECT + "TEXT" +
+                " FOREIGN KEY(" + FIELD_COURSES_BUILDING_ID + ") REFERENCES " +
+                BUILDING_TABLE + "(" + BUILDING_KEY_FIELD_ID + "), " +
+                " FOREIGN KEY(" + FIELD_COURSES_PROFESSOR_ID + ") REFERENCES " +
+                PROFESSOR_TABLE + "(" + PROFESSOR_KEY_FIELD_ID + ")" + ")";
+        db.execSQL(table);
+
     }
 
     @Override
@@ -88,6 +100,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BUILDING_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + PROFESSOR_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + UTILITY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + COURSES_TABLE);
         onCreate(db);
     }
 
@@ -118,7 +131,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values =  new ContentValues();
 
         values.put(FIELD_PROFESSORS_NAME, professor.getmName());
-        values.put(FIELD_PROFESSORS_CLASSES, professor.getmCourses());
+        //values.put(FIELD_PROFESSORS_CLASSES, professor.getmCourses());
         values.put(FIELD_PROFESSORS_OFFICE_HOURS, professor.getmHours());
         values.put(FIELD_PROFESSORS_IMAGE_URI, professor.getmImageURI().toString());
         values.put(FIELD_PROFESSORS_DESCRIPTION, professor.getmDesc());
@@ -197,6 +210,40 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return queriedUtil;
+    }
+
+    public void addCourse(int crn, int buildingId, int profId, String subject){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_COURSES_CRN, crn);
+        values.put(FIELD_COURSES_BUILDING_ID, buildingId);
+        values.put(FIELD_COURSES_PROFESSOR_ID, profId);
+        values.put(FIELD_COURSES_SUBJECT, subject);
+        db.insert(COURSES_TABLE, null, values);
+
+        db.close();
+    }
+
+    public ArrayList<Courses> getAllCourses(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Courses> allCourses = new ArrayList<>();
+        Cursor cursor = db.query(UTILITY_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                Courses newCourse = new Courses(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getString(3));
+                allCourses.add(newCourse);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allCourses;
     }
 
 }
