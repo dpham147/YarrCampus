@@ -246,6 +246,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return allCourses;
     }
 
+    public void deleteCourse(Courses course){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(COURSES_TABLE, FIELD_COURSES_CRN + " = ?",
+                new String[]{String.valueOf(course.getCRN())});
+        db.close();
+    }
+
+    public void deleteAllCourses(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(COURSES_TABLE, null, null);
+        db.close();
+    }
+
 }
 
 
