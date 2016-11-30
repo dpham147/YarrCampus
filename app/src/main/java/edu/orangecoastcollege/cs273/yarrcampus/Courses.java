@@ -20,8 +20,9 @@ public class Courses {
         mSubject = "";
     }
 
-    public Courses(int crn, int buildingId, int profId, String subject){
+    public Courses(int crn, String courseName, int buildingId, int profId, String subject){
         mCRN = crn;
+        mCourseName = courseName;
         mBuildingId = buildingId;
         mProfessorId = profId;
         mSubject = subject;

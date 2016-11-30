@@ -214,11 +214,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return queriedUtil;
     }
 
-    public void addCourse(int crn, int buildingId, int profId, String subject){
+    public void addCourse(int crn, String courseName, int buildingId, int profId, String subject){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(FIELD_COURSES_CRN, crn);
+        values.put(FIELD_COURSES_NAME, courseName);
         values.put(FIELD_COURSES_BUILDING_ID, buildingId);
         values.put(FIELD_COURSES_PROFESSOR_ID, profId);
         values.put(FIELD_COURSES_SUBJECT, subject);
@@ -237,9 +238,10 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 Courses newCourse = new Courses(
                         cursor.getInt(0),
-                        cursor.getInt(1),
+                        cursor.getString(1),
                         cursor.getInt(2),
-                        cursor.getString(3));
+                        cursor.getInt(3),
+                        cursor.getString(4));
                 allCourses.add(newCourse);
             }
             while (cursor.moveToNext());
