@@ -1,13 +1,19 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -16,6 +22,8 @@ import java.util.List;
 public class UtilitySearchActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private DBHelper db;
+    private List<Utility> allUtilities;
+    private List<Utility> displayedUtilities;
     private List<Utility> restroomList;
     private List<Utility> waterList;
     private List<Utility> emergencyList;
@@ -33,6 +41,8 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
         restroomList = db.queryUtilityType("Restroom");
         waterList = db.queryUtilityType("Water Fountain");
         emergencyList = db.queryUtilityType("Emergency Phone");
+        allUtilities = db.getAllUtilities();
+        displayedUtilities = allUtilities;
         restroomCheck = (CheckBox) findViewById(R.id.restroomCheck);
         waterFountainCheck = (CheckBox) findViewById(R.id.waterFountCheck);
         emergencyPhoneCheck = (CheckBox) findViewById(R.id.emergencyPhoneCheck);
@@ -47,22 +57,22 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
         if (view instanceof CheckBox)
         {
             CheckBox selectedCheck = (CheckBox) view;
+            mMap.clear();
+
             if (selectedCheck.isChecked()) {
-                mMap.clear();
-
-                for (Utility utility : waterList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                }
-
-                for (Utility utility : emergencyList) {
+                for (Utility utility : restroomList) {
                     LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
                     mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
                 }
             }
-            else
-            {
-                for (Utility utility : restroomList) {
+            if (waterFountainCheck.isChecked()) {
+                for (Utility utility : waterList) {
+                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                }
+            }
+            if (emergencyPhoneCheck.isChecked()) {
+                for (Utility utility : emergencyList) {
                     LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
                     mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
                 }
@@ -78,21 +88,23 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
             if (selectedCheck.isChecked()) {
                 mMap.clear();
 
-                for (Utility utility : restroomList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (selectedCheck.isChecked()) {
+                    for (Utility utility : waterList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
-
-                for (Utility utility : emergencyList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (restroomCheck.isChecked()) {
+                    for (Utility utility : restroomList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
-            }
-            else
-            {
-                for (Utility utility : waterList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (emergencyPhoneCheck.isChecked()) {
+                    for (Utility utility : emergencyList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
             }
         }
@@ -106,21 +118,23 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
             if (selectedCheck.isChecked()) {
                 mMap.clear();
 
-                for (Utility utility : restroomList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (selectedCheck.isChecked()) {
+                    for (Utility utility : emergencyList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
-
-                for (Utility utility : waterList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (restroomCheck.isChecked()) {
+                    for (Utility utility : restroomList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
-            }
-            else
-            {
-                for (Utility utility : emergencyList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                if (waterFountainCheck.isChecked()) {
+                    for (Utility utility : waterList) {
+                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+                    }
                 }
             }
         }
@@ -148,5 +162,13 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
                 mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
             }
         }
+
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentPosition).zoom(14f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
+
     }
 }
