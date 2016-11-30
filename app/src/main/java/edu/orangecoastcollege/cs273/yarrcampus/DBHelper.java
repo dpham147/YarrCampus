@@ -88,7 +88,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 FIELD_COURSES_NAME + " TEXT, " +
                 FIELD_COURSES_BUILDING_ID + " INTEGER, " +
                 FIELD_COURSES_PROFESSOR_ID + " INTEGER, " +
-                FIELD_COURSES_SUBJECT + "TEXT" +
+                FIELD_COURSES_SUBJECT + " TEXT, " +
+                FIELD_COURSES_SEMESTER_CODE + " TEXT, " +
                 " FOREIGN KEY(" + FIELD_COURSES_BUILDING_ID + ") REFERENCES " +
                 BUILDING_TABLE + "(" + BUILDING_KEY_FIELD_ID + "), " +
                 " FOREIGN KEY(" + FIELD_COURSES_PROFESSOR_ID + ") REFERENCES " +
@@ -214,7 +215,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return queriedUtil;
     }
 
-    public void addCourse(int crn, String courseName, int buildingId, int profId, String subject){
+    public void addCourse(int crn, String courseName, int buildingId, int profId, String subject, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -223,6 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(FIELD_COURSES_BUILDING_ID, buildingId);
         values.put(FIELD_COURSES_PROFESSOR_ID, profId);
         values.put(FIELD_COURSES_SUBJECT, subject);
+        values.put(FIELD_COURSES_SEMESTER_CODE, code);
         db.insert(COURSES_TABLE, null, values);
 
         db.close();
@@ -241,7 +243,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getInt(3),
-                        cursor.getString(4));
+                        cursor.getString(4),
+                        cursor.getString(5));
                 allCourses.add(newCourse);
             }
             while (cursor.moveToNext());
@@ -272,6 +275,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(FIELD_COURSES_BUILDING_ID, course.getBuildingId());
         values.put(FIELD_COURSES_PROFESSOR_ID, course.getProfessorId());
         values.put(FIELD_COURSES_SUBJECT, course.getSubject());
+        values.put(FIELD_COURSES_SEMESTER_CODE, course.getSemesterCode());
         db.update(COURSES_TABLE, values, FIELD_COURSES_CRN + " =? ",
                 new String[]{String.valueOf(course.getCRN())});
 

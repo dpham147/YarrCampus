@@ -11,21 +11,25 @@ public class Courses {
     private int mBuildingId;
     private int mProfessorId;
     private String mSubject;
+    private String mSemesterCode;
 
 
     public Courses(){
         mCRN = -1;
+        mCourseName = "";
         mBuildingId = -1;
         mProfessorId = -1;
         mSubject = "";
+        mSemesterCode = "";
     }
 
-    public Courses(int crn, String courseName, int buildingId, int profId, String subject){
+    public Courses(int crn, String courseName, int buildingId, int profId, String subject, String code){
         mCRN = crn;
         mCourseName = courseName;
         mBuildingId = buildingId;
         mProfessorId = profId;
         mSubject = subject;
+        mSemesterCode = code;
     }
 
     public int getCRN() {
@@ -66,6 +70,14 @@ public class Courses {
 
     public String getCourseName(){
         return mCourseName;
+    }
+
+    public String getSemesterCode() {
+        return mSemesterCode;
+    }
+
+    public void setSemesterCode(String semesterCode) {
+        mSemesterCode = semesterCode;
     }
 
 }
