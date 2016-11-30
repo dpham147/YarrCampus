@@ -134,7 +134,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(FIELD_PROFESSORS_NAME, professor.getmName());
         //values.put(FIELD_PROFESSORS_CLASSES, professor.getmCourses());
-        values.put(FIELD_PROFESSORS_OFFICE_HOURS, professor.getmHours());
+        values.put(FIELD_PROFESSORS_OFFICE_HOURS, professor.getmOfficeHours());
         values.put(FIELD_PROFESSORS_IMAGE_URI, professor.getmImageURI().toString());
         values.put(FIELD_PROFESSORS_DESCRIPTION, professor.getmDesc());
 
