@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuActivity" />
-        <activity android:name=".BuidlingListActivity" />
+        <activity android:name=".BuildingListActivity" />
         <activity android:name=".BuildingDetailsActivity" />
         <activity android:name=".ProfessorListActivity" />
         <activity android:name=".ProfessorDetailsActivity" />

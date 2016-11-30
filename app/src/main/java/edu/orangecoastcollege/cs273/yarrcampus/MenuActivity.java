@@ -22,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
 
     public void openBuildingSearchActivity(View view)
     {
-        startActivity(new Intent(this, BuidlingListActivity.class));
+        startActivity(new Intent(this, BuildingListActivity.class));
     }
 
     public void openProfessorSearchActivity(View view)

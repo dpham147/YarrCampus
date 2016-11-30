@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-public class BuidlingListActivity extends AppCompatActivity {
+public class BuildingListActivity extends AppCompatActivity {
 
     private DBHelper db;
     private List<Building> buildingsList;
