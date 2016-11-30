@@ -7,9 +7,11 @@ package edu.orangecoastcollege.cs273.yarrcampus;
 public class Courses {
 
     private int mCRN;
+    private String mCourseName;
     private int mBuildingId;
     private int mProfessorId;
     private String mSubject;
+
 
     public Courses(){
         mCRN = -1;
@@ -55,6 +57,14 @@ public class Courses {
 
     public void setSubject(String subject) {
         mSubject = subject;
+    }
+
+    public void setCourseName(String courseName){
+        mCourseName = courseName;
+    }
+
+    public String getCourseName(){
+        return mCourseName;
     }
 
 }

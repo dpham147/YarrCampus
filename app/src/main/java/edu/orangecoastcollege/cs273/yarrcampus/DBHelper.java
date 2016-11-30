@@ -41,6 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String COURSES_TABLE = "Courses";
     private static final String FIELD_COURSES_CRN = "crn";
+    private static final String FIELD_COURSES_NAME = "course_name";
     private static final String FIELD_COURSES_PROFESSOR_ID = "professor_id";
     private static final String FIELD_COURSES_BUILDING_ID = "building_id";
     private static final String FIELD_COURSES_SEMESTER_CODE = "semester_code";
@@ -84,6 +85,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         table = "CREATE TABLE " + COURSES_TABLE + "(" +
                 FIELD_COURSES_CRN + " INTEGER PRIMARY KEY, " +
+                FIELD_COURSES_NAME + " TEXT, " +
                 FIELD_COURSES_BUILDING_ID + " INTEGER, " +
                 FIELD_COURSES_PROFESSOR_ID + " INTEGER, " +
                 FIELD_COURSES_SUBJECT + "TEXT" +
@@ -264,6 +266,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(FIELD_COURSES_NAME, course.getCourseName());
         values.put(FIELD_COURSES_BUILDING_ID, course.getBuildingId());
         values.put(FIELD_COURSES_PROFESSOR_ID, course.getProfessorId());
         values.put(FIELD_COURSES_SUBJECT, course.getSubject());
