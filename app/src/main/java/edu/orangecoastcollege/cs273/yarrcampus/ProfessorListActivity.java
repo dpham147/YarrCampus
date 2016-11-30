@@ -86,7 +86,7 @@ public class ProfessorListActivity extends AppCompatActivity {
     public AdapterView.OnItemSelectedListener courcesSpinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedCourse
+            String selectedCourse;
         }
 
         @Override

@@ -28,4 +28,5 @@
         <item>Applied for transfer? Be sure to keep updated on deadlines!</item>
         <item>(Insert snazzy one-liner here)</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>
