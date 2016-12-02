@@ -76,7 +76,7 @@ public class ProfessorListActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String input = charSequence.toString().toLowerCase();
 
-
+            professorListAdapter.clear();
             for(Professor p : professorsList)
             {
                 if(p.getmName().toLowerCase().contains(input) )
