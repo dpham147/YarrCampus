@@ -11,6 +11,8 @@ public class Professor implements Parcelable {
     private String mDesc;
     private String mOfficeHours;
     private String mBuilding;
+    private String mEmail;
+    private String mPhoneNumber;
     private Uri mImageURI;
 
     public Professor()
@@ -31,7 +33,7 @@ public class Professor implements Parcelable {
         mOfficeHours = hours;
         mBuilding = building;
         mImageURI = imageUri;
-        //update database to delete classes
+
     }
 
     public Professor(String name, String desc, String hours, String building, Uri imageUri)
