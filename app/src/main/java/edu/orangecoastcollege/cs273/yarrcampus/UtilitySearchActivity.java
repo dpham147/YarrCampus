@@ -1,13 +1,21 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
-import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,8 +27,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-public class UtilitySearchActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class UtilitySearchActivity extends AppCompatActivity
+        implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
 
+    private static final int FINE_LOCATION_REQUEST_CODE = 100;
+    private static final long LOCATION_REQUEST_INTERVAL = 10000;
+    private static final long LOCATION_REQUEST_FASTEST_INTERVAL = 1000;
     private DBHelper db;
     private List<Utility> allUtilities;
     private List<Utility> displayedUtilities;
@@ -31,6 +46,9 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
     private CheckBox waterFountainCheck;
     private CheckBox emergencyPhoneCheck;
     private GoogleMap mMap;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+    private Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +68,24 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
         SupportMapFragment utilityMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.utilityMapFragment);
         utilityMapFragment.getMapAsync(this);
 
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+            mGoogleApiClient.connect();
+        }
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(LOCATION_REQUEST_INTERVAL)
+                .setFastestInterval(LOCATION_REQUEST_FASTEST_INTERVAL);
+
     }
 
-    protected void toggleRestroomPins (View view)
-    {
-        if (view instanceof CheckBox)
-        {
+    protected void toggleRestroomPins(View view) {
+        if (view instanceof CheckBox) {
             CheckBox selectedCheck = (CheckBox) view;
             mMap.clear();
 
@@ -80,10 +110,8 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-    protected void toggleWaterPins (View view)
-    {
-        if (view instanceof CheckBox)
-        {
+    protected void toggleWaterPins(View view) {
+        if (view instanceof CheckBox) {
             CheckBox selectedCheck = (CheckBox) view;
             if (selectedCheck.isChecked()) {
                 mMap.clear();
@@ -110,10 +138,8 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
-    protected void togglePhonePins (View view)
-    {
-        if (view instanceof CheckBox)
-        {
+    protected void togglePhonePins(View view) {
+        if (view instanceof CheckBox) {
             CheckBox selectedCheck = (CheckBox) view;
             if (selectedCheck.isChecked()) {
                 mMap.clear();
@@ -163,12 +189,40 @@ public class UtilitySearchActivity extends AppCompatActivity implements OnMapRea
             }
         }
 
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        LatLng currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentPosition).zoom(14f).build();
+        LatLng currentCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentCoord).zoom(14.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
 
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
+        }
+        currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.e("YarrCampus", "Connection to Google play was suspended.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.e("YarrCampus", "Connection to Google play has failed.");
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    private void handleLocation(Location location)
+    {
+        mMap.clear();
+        currentLocation = location;
     }
 }
