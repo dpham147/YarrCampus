@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UtilitySearchActivity extends AppCompatActivity
@@ -56,11 +57,11 @@ public class UtilitySearchActivity extends AppCompatActivity
         setContentView(R.layout.activity_utility_search);
 
         db = new DBHelper(this);
-        restroomList = db.queryUtilityType("Restroom");
-        waterList = db.queryUtilityType("Water Fountain");
-        emergencyList = db.queryUtilityType("Emergency Phone");
         allUtilities = db.getAllUtilities();
         displayedUtilities = allUtilities;
+        restroomList = filterUtilityList("Restroom");
+        waterList = filterUtilityList("Water Fountain");
+        emergencyList = filterUtilityList("Emergency Phone");
         restroomCheck = (CheckBox) findViewById(R.id.restroomCheck);
         waterFountainCheck = (CheckBox) findViewById(R.id.waterFountCheck);
         emergencyPhoneCheck = (CheckBox) findViewById(R.id.emergencyPhoneCheck);
@@ -84,85 +85,32 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     }
 
+    protected List<Utility> filterUtilityList(String type) {
+        ArrayList<Utility> filteredList = new ArrayList<>();
+        for (Utility utility : allUtilities) {
+            if (utility.getmType() == type)
+            {
+                filteredList.add(utility);
+            }
+        }
+        return filteredList;
+    }
+
     protected void toggleRestroomPins(View view) {
         if (view instanceof CheckBox) {
-            CheckBox selectedCheck = (CheckBox) view;
-            mMap.clear();
-
-            if (selectedCheck.isChecked()) {
-                for (Utility utility : restroomList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                }
-            }
-            if (waterFountainCheck.isChecked()) {
-                for (Utility utility : waterList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                }
-            }
-            if (emergencyPhoneCheck.isChecked()) {
-                for (Utility utility : emergencyList) {
-                    LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                    mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                }
-            }
+            handleLocation(currentLocation);
         }
     }
 
     protected void toggleWaterPins(View view) {
         if (view instanceof CheckBox) {
-            CheckBox selectedCheck = (CheckBox) view;
-            if (selectedCheck.isChecked()) {
-                mMap.clear();
-
-                if (selectedCheck.isChecked()) {
-                    for (Utility utility : waterList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-                if (restroomCheck.isChecked()) {
-                    for (Utility utility : restroomList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-                if (emergencyPhoneCheck.isChecked()) {
-                    for (Utility utility : emergencyList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-            }
+            handleLocation(currentLocation);
         }
     }
 
     protected void togglePhonePins(View view) {
         if (view instanceof CheckBox) {
-            CheckBox selectedCheck = (CheckBox) view;
-            if (selectedCheck.isChecked()) {
-                mMap.clear();
-
-                if (selectedCheck.isChecked()) {
-                    for (Utility utility : emergencyList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-                if (restroomCheck.isChecked()) {
-                    for (Utility utility : restroomList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-                if (waterFountainCheck.isChecked()) {
-                    for (Utility utility : waterList) {
-                        LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                        mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-                    }
-                }
-            }
+            handleLocation(currentLocation);
         }
     }
 
@@ -198,11 +146,15 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
         }
         currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+        handleLocation(currentLocation);
     }
 
     @Override
@@ -217,12 +169,63 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     @Override
     public void onLocationChanged(Location location) {
-
+        handleLocation(location);
     }
 
     private void handleLocation(Location location)
     {
         mMap.clear();
         currentLocation = location;
+        displayedUtilities.clear();
+
+        if (restroomCheck.isChecked())
+        {
+            for (Utility utility : restroomList)
+            {
+                displayedUtilities.add(utility);
+            }
+        }
+        if (waterFountainCheck.isChecked())
+        {
+            for (Utility utility : waterList)
+            {
+                displayedUtilities.add(utility);
+            }
+        }
+        if (emergencyPhoneCheck.isChecked())
+        {
+            for (Utility utility : emergencyList)
+            {
+                displayedUtilities.add(utility);
+            }
+        }
+
+        for (Utility utility : displayedUtilities)
+        {
+            LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
+            mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+        }
+
+        LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(userCoord).zoom(14.0f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
+
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -191,29 +191,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return allUtilities;
     }
 
-    public ArrayList<Utility> queryUtilityType (String type)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<Utility> queriedUtil = new ArrayList<>();
-
-        Cursor cursor = db.query(
-                UTILITY_TABLE,
-                new String[]{FIELD_UTILITIES_TYPE, FIELD_UTILITIES_COORDINATE_LAT, FIELD_UTILITIES_COORDINATE_LONG},
-                FIELD_UTILITIES_TYPE + "?=",
-                new String[]{type},
-                null, null, null, null);
-
-        if (cursor.moveToFirst());
-        {
-            do {
-                Utility newUtility =  new Utility(cursor.getString(0), cursor.getFloat(1), cursor.getFloat(2));
-                queriedUtil.add(newUtility);
-            }
-            while (cursor.moveToNext());
-        }
-        db.close();
-        return queriedUtil;
-    }
+//    public ArrayList<Utility> queryUtilityType (String type)
+//    {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        ArrayList<Utility> queriedUtil = new ArrayList<>();
+//
+//        Cursor cursor = db.query(
+//                UTILITY_TABLE,
+//                new String[]{FIELD_UTILITIES_TYPE, FIELD_UTILITIES_COORDINATE_LAT, FIELD_UTILITIES_COORDINATE_LONG},
+//                FIELD_UTILITIES_TYPE + " ?=",
+//                new String[]{type},
+//                null, null, null, null);
+//
+//        if (cursor.moveToFirst());
+//        {
+//            do {
+//                Utility newUtility =  new Utility(cursor.getString(0), cursor.getFloat(1), cursor.getFloat(2));
+//                queriedUtil.add(newUtility);
+//            }
+//            while (cursor.moveToNext());
+//        }
+//        db.close();
+//        return queriedUtil;
+//    }
 
     public void addCourse(int crn, String courseName, int buildingId, int profId, String subject, String code){
         SQLiteDatabase db = this.getWritableDatabase();
