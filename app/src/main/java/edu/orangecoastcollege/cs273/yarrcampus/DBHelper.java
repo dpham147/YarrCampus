@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String BUILDING_TABLE = "Buildings";
     private static final String BUILDING_KEY_FIELD_ID = "id";
     private static final String FIELD_BUILDING_NAME = "name";
+    private static final String FIELD_BUILDING_CODE = "code";
     private static final String FIELD_BUILDING_DESCRIPTION = "desc";
     private static final String FIELD_BUILDING_HOURS = "hours";
     private static final String FIELD_BUILDING_COORDINATE_LAT = "lat";
@@ -57,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String table = "CREATE TABLE " + BUILDING_TABLE + "(" +
                 BUILDING_KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FIELD_BUILDING_NAME + " TEXT, " +
+                FIELD_BUILDING_CODE + " TEXT, " +
                 FIELD_BUILDING_DESCRIPTION + " TEXT, " +
                 FIELD_BUILDING_HOURS + " TEXT, " +
                 FIELD_BUILDING_COORDINATE_LAT + " TEXT, " +

@@ -7,6 +7,7 @@ import android.os.Parcelable;
 public class Building implements Parcelable {
     private int mId;
     private String mName;
+    private String mCode;
     private String mDesc;
     private String mHours;
     private Uri mImageURI;
@@ -17,10 +18,11 @@ public class Building implements Parcelable {
     {
     }
 
-    public Building(int id, String name, String desc, String hours, Uri imageURI, float gpsLat, float gpsLong)
+    public Building(int id, String name, String code, String desc, String hours, Uri imageURI, float gpsLat, float gpsLong)
     {
         mId = id;
         mName = name;
+        mCode = code;
         mDesc = desc;
         mHours = hours;
         mImageURI = imageURI;
@@ -37,6 +39,7 @@ public class Building implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mId);
         dest.writeString(mName);
+        dest.writeString(mCode);
         dest.writeString(mDesc);
         dest.writeString(mHours);
         dest.writeString(mImageURI.toString());
@@ -56,15 +59,16 @@ public class Building implements Parcelable {
         }
     };
 
-    public Building(String name, String desc, String hours, Uri imageUri, float gpsLat, float gpsLong)
+    public Building(String name, String desc, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
     {
-        this(-1, name, desc, hours, imageUri, gpsLat, gpsLong);
+        this(-1, name, code, desc, hours, imageUri, gpsLat, gpsLong);
     }
 
     private Building(Parcel parcel)
     {
         mId = parcel.readInt();
         mName = parcel.readString();
+        mCode = parcel.readString();
         mDesc = parcel.readString();
         mHours = parcel.readString();
         mImageURI = Uri.parse(parcel.readString());
@@ -76,17 +80,26 @@ public class Building implements Parcelable {
         return mId;
     }
 
-    public void setId(int mId) {
-        this.mId = mId;
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getName() {
         return mName;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        mName = name;
     }
+
+    public void setCode(String code){
+        mCode = code;
+    }
+
+    public String getCode(){
+        return mCode;
+    }
+
 
     public String getDesc() {
         return mDesc;
