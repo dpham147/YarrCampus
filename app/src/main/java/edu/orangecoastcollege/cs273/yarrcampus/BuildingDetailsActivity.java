@@ -24,6 +24,6 @@ public class BuildingDetailsActivity extends AppCompatActivity {
         buildingDescDetailsTextView.setText(building.getDesc());
         buildingDetailsImageView.setImageURI(building.getImageURI());
         buildingDetailsTextView.setText(building.getName() + ":\n" + building.getCode() + "\nHours: " +
-                                        building.getHours());
+                                        building.getHours() + "\n");
     }
 }
