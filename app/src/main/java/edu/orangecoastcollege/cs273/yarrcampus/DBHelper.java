@@ -168,6 +168,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return allBuildings;
     }
 
+    public void addBuilding(Building building){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_BUILDING_NAME, building.getName());
+        values.put(FIELD_BUILDING_CODE, building.getCode());
+        values.put(FIELD_BUILDING_DESCRIPTION, building.getDesc());
+        values.put(FIELD_BUILDING_HOURS, building.getHours());
+        values.put(FIELD_BUILDING_COORDINATE_LAT, building.getGPSLat());
+        values.put(FIELD_BUILDING_COORDINATE_LONG, building.getGPSLong());
+        values.put(FIELD_BUILDING_IMAGE_URI, String.valueOf(building.getImageURI()));
+        db.insert(COURSES_TABLE, null, values);
+
+        db.close();
+    }
+
     // -------------- UTILITY TABLE OPERATIONS -------------
     public ArrayList<Utility> getAllUtilities()
     {

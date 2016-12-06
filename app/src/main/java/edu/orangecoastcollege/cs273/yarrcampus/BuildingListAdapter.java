@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.orangecoastcollege.cs273.yarrcampus.R.id.buildingListTextView;
+
 /**
  * Created by kevin_000 on 11/16/2016.
  */
@@ -23,7 +25,8 @@ public class BuildingListAdapter extends ArrayAdapter<Building>{
     private  int mResourceId;
     private LinearLayout buildingListLinearLayout;
     private ImageView buildingListImageView;
-    private TextView buildingListTextView;
+    private TextView buildingListNameTextView;
+    private TextView buildingListCodeTextView;
 
 
     public BuildingListAdapter(Context context, int rId, List<Building> buildings){
@@ -38,9 +41,17 @@ public class BuildingListAdapter extends ArrayAdapter<Building>{
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(mResourceId, null);
 
+        Building selectedBuilding = mBuildingList.get(position);
+
         buildingListLinearLayout = (LinearLayout) view.findViewById(R.id.buildingListLinearLayout);
         buildingListImageView = (ImageView) view.findViewById(R.id.buildingListImageView);
-        buildingListTextView = (TextView) view.findViewById(R.id.buildingListTextView);
+        buildingListNameTextView = (TextView) view.findViewById(R.id.buildingListNameTextView);
+        buildingListCodeTextView = (TextView) view.findViewById(R.id.buildingListCodeTextView);
+
+        buildingListNameTextView.setText(selectedBuilding.getName());
+        buildingListCodeTextView.setText(selectedBuilding.getCode());
+        buildingListLinearLayout.setTag(selectedBuilding);
+
         return view;
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/buildingListLinearLayout">
+    android:id="@+id/buildingListLinearLayout"
+    android:onClick="viewBuildingDetailsActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -25,6 +26,12 @@
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buildingListTextView" />
+            android:id="@+id/buildingListNameTextView" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buildingListCodeTextView" />
     </LinearLayout>
 </LinearLayout>

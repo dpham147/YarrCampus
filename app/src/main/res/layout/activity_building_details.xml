@@ -31,7 +31,7 @@
             android:text="Building Description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buildingDescriptionDetailsTextView"
+            android:id="@+id/buildingDescDetailsTextView"
             android:layout_weight="1" />
 
     </LinearLayout>
