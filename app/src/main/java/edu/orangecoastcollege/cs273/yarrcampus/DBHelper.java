@@ -13,13 +13,12 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "YarrCampus";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String BUILDING_TABLE = "Buildings";
     private static final String BUILDING_KEY_FIELD_ID = "id";
     private static final String FIELD_BUILDING_NAME = "name";
     private static final String FIELD_BUILDING_CODE = "code";
-    private static final String FIELD_BUILDING_DESCRIPTION = "desc";
     private static final String FIELD_BUILDING_HOURS = "hours";
     private static final String FIELD_BUILDING_COORDINATE_LAT = "lat";
     private static final String FIELD_BUILDING_COORDINATE_LONG = "long";
@@ -59,7 +58,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 BUILDING_KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FIELD_BUILDING_NAME + " TEXT, " +
                 FIELD_BUILDING_CODE + " TEXT, " +
-                FIELD_BUILDING_DESCRIPTION + " TEXT, " +
                 FIELD_BUILDING_HOURS + " TEXT, " +
                 FIELD_BUILDING_COORDINATE_LAT + " TEXT, " +
                 FIELD_BUILDING_COORDINATE_LONG + " TEXT, " +
@@ -154,7 +152,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Building> allBuildings = new ArrayList<>();
         Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
-
+11
         if (cursor.moveToFirst())
         {
             do {
@@ -174,13 +172,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(FIELD_BUILDING_NAME, building.getName());
         values.put(FIELD_BUILDING_CODE, building.getCode());
-        values.put(FIELD_BUILDING_DESCRIPTION, building.getDesc());
         values.put(FIELD_BUILDING_HOURS, building.getHours());
+        values.put(FIELD_BUILDING_IMAGE_URI, String.valueOf(building.getImageURI()));
         values.put(FIELD_BUILDING_COORDINATE_LAT, building.getGPSLat());
         values.put(FIELD_BUILDING_COORDINATE_LONG, building.getGPSLong());
-        values.put(FIELD_BUILDING_IMAGE_URI, String.valueOf(building.getImageURI()));
-        db.insert(COURSES_TABLE, null, values);
+        db.insert(BUILDING_TABLE, null, values);
 
+        db.close();
+    }
+
+    public void deleteAllBuildings(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(BUILDING_TABLE, null, null);
         db.close();
     }
 
@@ -301,15 +304,3 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

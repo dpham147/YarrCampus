@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BuildingDetailsActivity extends AppCompatActivity {
-    private TextView buildingDescDetailsTextView;
     private TextView buildingDetailsTextView;
     private ImageView buildingDetailsImageView;
 
@@ -15,13 +14,11 @@ public class BuildingDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_building_details);
-        buildingDescDetailsTextView = (TextView) findViewById(R.id.buildingDescDetailsTextView);
-        buildingDetailsTextView = (TextView) findViewById(R.id.buildingDescDetailsTextView);
+        buildingDetailsTextView = (TextView) findViewById(R.id.buildingDetailsTextView);
         buildingDetailsImageView = (ImageView) findViewById(R.id.buildingDetailsImageView);
 
         Intent buildingDetails = getIntent();
-        Building building =  buildingDetails.getParcelableExtra("Building");
-        buildingDescDetailsTextView.setText(building.getDesc());
+        Building building =  (Building) buildingDetails.getParcelableExtra("Building");
         buildingDetailsImageView.setImageURI(building.getImageURI());
         buildingDetailsTextView.setText(building.getName() + ":\n" + building.getCode() + "\nHours: " +
                                         building.getHours() + "\n");

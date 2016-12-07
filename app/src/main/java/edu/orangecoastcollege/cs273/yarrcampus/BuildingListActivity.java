@@ -1,6 +1,7 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -30,10 +31,14 @@ public class BuildingListActivity extends AppCompatActivity {
         searchBuildingEditText.addTextChangedListener(buildingNameTextWatcher);
         buildingListView = (ListView) findViewById(R.id.BuildingListView);
 
-
         db = new DBHelper(this);
+        db.deleteAllBuildings();
+        db.addBuilding(new Building("Watson Hall", "WTNH", "(9:00 AM - 6:00 PM", Uri.parse("Watson"), -1f, -1f));
+        db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", Uri.parse("Computing"), 5f, 7f));
+        db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", Uri.parse("Chem"), 1f, 5f));
+        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", Uri.parse("Books"), -5f, 6f));
         allBuildingsList = db.getAllBuildings();
-        filteredBuildingsList = new ArrayList<>(allBuildingsList);
+        filteredBuildingsList = new ArrayList<> (allBuildingsList);
 
         buildingListAdapter = new BuildingListAdapter(this, R.layout.building_list_item, filteredBuildingsList);
         buildingListView.setAdapter(buildingListAdapter);

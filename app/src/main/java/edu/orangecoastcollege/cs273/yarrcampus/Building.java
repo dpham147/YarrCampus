@@ -8,7 +8,6 @@ public class Building implements Parcelable {
     private int mId;
     private String mName;
     private String mCode;
-    private String mDesc;
     private String mHours;
     private Uri mImageURI;
     private float mGPSLat;
@@ -18,12 +17,11 @@ public class Building implements Parcelable {
     {
     }
 
-    public Building(int id, String name, String code, String desc, String hours, Uri imageURI, float gpsLat, float gpsLong)
+    public Building(int id, String name, String code, String hours, Uri imageURI, float gpsLat, float gpsLong)
     {
         mId = id;
         mName = name;
         mCode = code;
-        mDesc = desc;
         mHours = hours;
         mImageURI = imageURI;
         mGPSLat = gpsLat;
@@ -40,9 +38,8 @@ public class Building implements Parcelable {
         dest.writeInt(mId);
         dest.writeString(mName);
         dest.writeString(mCode);
-        dest.writeString(mDesc);
         dest.writeString(mHours);
-        dest.writeString(mImageURI.toString());
+        dest.writeString(String.valueOf(mImageURI));
         dest.writeFloat(mGPSLat);
         dest.writeFloat(mGPSLong);
     }
@@ -59,9 +56,9 @@ public class Building implements Parcelable {
         }
     };
 
-    public Building(String name, String desc, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
+    public Building(String name, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
     {
-        this(-1, name, code, desc, hours, imageUri, gpsLat, gpsLong);
+        this(-1, name, code, hours, imageUri, gpsLat, gpsLong);
     }
 
     private Building(Parcel parcel)
@@ -69,7 +66,6 @@ public class Building implements Parcelable {
         mId = parcel.readInt();
         mName = parcel.readString();
         mCode = parcel.readString();
-        mDesc = parcel.readString();
         mHours = parcel.readString();
         mImageURI = Uri.parse(parcel.readString());
         mGPSLat = parcel.readFloat();
@@ -100,14 +96,6 @@ public class Building implements Parcelable {
         return mCode;
     }
 
-
-    public String getDesc() {
-        return mDesc;
-    }
-
-    public void setDesc(String mDesc) {
-        this.mDesc = mDesc;
-    }
 
     public String getHours() {
         return mHours;
