@@ -37,6 +37,8 @@ public class UtilitySearchActivity extends AppCompatActivity
     private static final int FINE_LOCATION_REQUEST_CODE = 100;
     private static final long LOCATION_REQUEST_INTERVAL = 10000;
     private static final long LOCATION_REQUEST_FASTEST_INTERVAL = 1000;
+    private static final float OCC_LATITUDE = 33.671028f;
+    private static final float OCC_LONGITUDE = -117.911305f;
     private DBHelper db;
     private List<Utility> allUtilities;
     private List<Utility> displayedUtilities;
@@ -69,6 +71,27 @@ public class UtilitySearchActivity extends AppCompatActivity
         SupportMapFragment utilityMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.utilityMapFragment);
         utilityMapFragment.getMapAsync(this);
 
+        Utility restroom1 = new Utility("Restroom", 33.670791f, -117.912080f);
+        Utility restroom2 = new Utility("Restroom", 33.668963f, -117.912321f);
+        Utility restroom3 = new Utility("Restroom", 33.669663f, -117.909033f);
+        db.addRestroom(restroom1);
+        db.addRestroom(restroom2);
+        db.addRestroom(restroom3);
+
+        Utility emergency1 = new Utility("Emergency Phone", 33.670458f, -117.908969f);
+        Utility emergency2 = new Utility("Emergency Phone", 33.670569f, -117.911248f);
+        Utility emergency3 = new Utility("Emergency Phone", 33.669238f, -117.911938f);
+        db.addPhone(emergency1);
+        db.addPhone(emergency2);
+        db.addPhone(emergency3);
+
+        Utility water1 = new Utility("Water Fountain", 33.668935f, -117.912281f);
+        Utility water2 = new Utility("Water Fountain", 33.668025f, -117.911112f);
+        Utility water3 = new Utility("Water Fountain", 33.669649f, -117.909038f);
+        db.addFountain(water1);
+        db.addFountain(water2);
+        db.addFountain(water3);
+
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -88,7 +111,7 @@ public class UtilitySearchActivity extends AppCompatActivity
     protected List<Utility> filterUtilityList(String type) {
         ArrayList<Utility> filteredList = new ArrayList<>();
         for (Utility utility : allUtilities) {
-            if (utility.getmType() == type)
+            if (utility.getmType().equals(type));
             {
                 filteredList.add(utility);
             }
@@ -96,19 +119,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         return filteredList;
     }
 
-    protected void toggleRestroomPins(View view) {
-        if (view instanceof CheckBox) {
-            handleLocation(currentLocation);
-        }
-    }
-
-    protected void toggleWaterPins(View view) {
-        if (view instanceof CheckBox) {
-            handleLocation(currentLocation);
-        }
-    }
-
-    protected void togglePhonePins(View view) {
+    protected void togglePins(View view) {
         if (view instanceof CheckBox) {
             handleLocation(currentLocation);
         }
@@ -117,31 +128,6 @@ public class UtilitySearchActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        if (restroomCheck.isChecked()) {
-            for (Utility utility : restroomList) {
-                LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-            }
-        }
-        if (waterFountainCheck.isChecked()) {
-            for (Utility utility : waterList) {
-                LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-            }
-        }
-        if (emergencyPhoneCheck.isChecked()) {
-            for (Utility utility : emergencyList) {
-                LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
-                mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-            }
-        }
-
-        LatLng currentCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(currentCoord).zoom(14.0f).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        mMap.moveCamera(cameraUpdate);
-
     }
 
     @Override
@@ -178,6 +164,13 @@ public class UtilitySearchActivity extends AppCompatActivity
         currentLocation = location;
         displayedUtilities.clear();
 
+        LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
+        mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
+
         if (restroomCheck.isChecked())
         {
             for (Utility utility : restroomList)
@@ -205,14 +198,6 @@ public class UtilitySearchActivity extends AppCompatActivity
             LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
             mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
         }
-
-        LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(userCoord).zoom(14.0f).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        mMap.moveCamera(cameraUpdate);
-
-
     }
 }
 

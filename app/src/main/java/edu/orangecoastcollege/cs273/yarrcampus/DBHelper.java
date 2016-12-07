@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 
 import java.util.ArrayList;
 
@@ -34,10 +33,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String UTILITY_TABLE = "Utilities";
     private static final String UTILITIES_KEY_FIELD_ID = "id";
+    private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
     private static final String FIELD_UTILITIES_TYPE = "type";
     private static final String FIELD_UTILITIES_COORDINATE_LAT = "lat";
     private static final String FIELD_UTILITIES_COORDINATE_LONG = "long";
-    private static final String FIELD_UTILITIES_DESCRIPTION = "desc";
+
 
     private static final String COURSES_TABLE = "Courses";
     private static final String FIELD_COURSES_CRN = "crn";
@@ -201,9 +201,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        Uri.parse(cursor.getString(3)),
-                        cursor.getFloat(4),
-                        cursor.getFloat(5));
+                        cursor.getFloat(3),
+                        cursor.getFloat(4));
                 allUtilities.add(newUtility);
             }
             while (cursor.moveToNext());
@@ -211,6 +210,47 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return allUtilities;
     }
+
+    public void addRestroom(Utility restroom){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_UTILITIES_TYPE, "Restroom");
+        values.put(FIELD_UTILITIES_DESCRIPTION, restroom.getmDesc());
+        values.put(FIELD_UTILITIES_COORDINATE_LAT, restroom.getmGPSLat());
+        values.put(FIELD_UTILITIES_COORDINATE_LONG, restroom.getmGPSLong());
+
+        db.insert(UTILITY_TABLE, null, values);
+
+        db.close();
+    }
+    public void addPhone(Utility emergency){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_UTILITIES_TYPE, "Restroom");
+        values.put(FIELD_UTILITIES_DESCRIPTION, emergency.getmDesc());
+        values.put(FIELD_UTILITIES_COORDINATE_LAT, emergency.getmGPSLat());
+        values.put(FIELD_UTILITIES_COORDINATE_LONG, emergency.getmGPSLong());
+
+        db.insert(UTILITY_TABLE, null, values);
+
+        db.close();
+    }
+    public void addFountain(Utility water){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_UTILITIES_TYPE, "Restroom");
+        values.put(FIELD_UTILITIES_DESCRIPTION, water.getmDesc());
+        values.put(FIELD_UTILITIES_COORDINATE_LAT, water.getmGPSLat());
+        values.put(FIELD_UTILITIES_COORDINATE_LONG, water.getmGPSLong());
+
+        db.insert(UTILITY_TABLE, null, values);
+
+        db.close();
+    }
+
 
 //    public ArrayList<Utility> queryUtilityType (String type)
 //    {
