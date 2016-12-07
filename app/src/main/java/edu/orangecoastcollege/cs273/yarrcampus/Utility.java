@@ -83,6 +83,10 @@ public class Utility implements Parcelable {
         this.mGPSLong = mGPSLong;
     }
 
+    @Override
+    public String toString() {
+        return "Utility: " + mType;
+    }
 
     @Override
     public int describeContents() {

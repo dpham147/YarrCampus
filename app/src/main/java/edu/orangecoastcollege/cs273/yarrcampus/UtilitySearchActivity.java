@@ -59,7 +59,23 @@ public class UtilitySearchActivity extends AppCompatActivity
         setContentView(R.layout.activity_utility_search);
 
         db = new DBHelper(this);
+        db.deleteAllUtilities();
+        db.addUtility(new Utility("Restroom", 33.670791f, -117.912080f));
+        db.addUtility(new Utility("Restroom", 33.668963f, -117.912321f));
+        db.addUtility(new Utility("Restroom", 33.669663f, -117.909033f));
+        db.addUtility(new Utility("Emergency Phone", 33.670458f, -117.908969f));
+        db.addUtility(new Utility("Emergency Phone", 33.670569f, -117.911248f));
+        db.addUtility(new Utility("Emergency Phone", 33.669238f, -117.911938f));
+        db.addUtility(new Utility("Water Fountain", 33.668935f, -117.912281f));
+        db.addUtility(new Utility("Water Fountain", 33.668025f, -117.911112f));
+        db.addUtility(new Utility("Water Fountain", 33.669649f, -117.909038f));
+
         allUtilities = db.getAllUtilities();
+
+        Log.i("YarrCampus", allUtilities.get(0).toString() + " in onCreate()");
+        Log.i("YarrCampus", allUtilities.get(3).toString() + " in onCreate()");
+        Log.i("YarrCampus", allUtilities.get(6).toString() + " in onCreate()");
+
         displayedUtilities = allUtilities;
         restroomList = filterUtilityList("Restroom");
         waterList = filterUtilityList("Water Fountain");
@@ -71,26 +87,8 @@ public class UtilitySearchActivity extends AppCompatActivity
         SupportMapFragment utilityMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.utilityMapFragment);
         utilityMapFragment.getMapAsync(this);
 
-        Utility restroom1 = new Utility("Restroom", 33.670791f, -117.912080f);
-        Utility restroom2 = new Utility("Restroom", 33.668963f, -117.912321f);
-        Utility restroom3 = new Utility("Restroom", 33.669663f, -117.909033f);
-        db.addRestroom(restroom1);
-        db.addRestroom(restroom2);
-        db.addRestroom(restroom3);
 
-        Utility emergency1 = new Utility("Emergency Phone", 33.670458f, -117.908969f);
-        Utility emergency2 = new Utility("Emergency Phone", 33.670569f, -117.911248f);
-        Utility emergency3 = new Utility("Emergency Phone", 33.669238f, -117.911938f);
-        db.addPhone(emergency1);
-        db.addPhone(emergency2);
-        db.addPhone(emergency3);
 
-        Utility water1 = new Utility("Water Fountain", 33.668935f, -117.912281f);
-        Utility water2 = new Utility("Water Fountain", 33.668025f, -117.911112f);
-        Utility water3 = new Utility("Water Fountain", 33.669649f, -117.909038f);
-        db.addFountain(water1);
-        db.addFountain(water2);
-        db.addFountain(water3);
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -197,6 +195,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         {
             LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
             mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
+            Log.i("YarrCampus", utility.toString() + " in handleLocation()");
         }
     }
 }

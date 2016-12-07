@@ -157,7 +157,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Building> allBuildings = new ArrayList<>();
         Cursor cursor = db.query(BUILDING_TABLE, null, null, null, null, null, null);
-11
+
         if (cursor.moveToFirst())
         {
             do {
@@ -216,11 +216,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return allUtilities;
     }
 
-    public void addRestroom(Utility restroom){
+    public void addUtility(Utility restroom){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(FIELD_UTILITIES_TYPE, "Restroom");
+        values.put(FIELD_UTILITIES_TYPE, restroom.getmType());
         values.put(FIELD_UTILITIES_DESCRIPTION, restroom.getmDesc());
         values.put(FIELD_UTILITIES_COORDINATE_LAT, restroom.getmGPSLat());
         values.put(FIELD_UTILITIES_COORDINATE_LONG, restroom.getmGPSLong());
@@ -229,30 +229,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
     }
-    public void addPhone(Utility emergency){
+
+    public void deleteAllUtilities(){
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(FIELD_UTILITIES_TYPE, "Restroom");
-        values.put(FIELD_UTILITIES_DESCRIPTION, emergency.getmDesc());
-        values.put(FIELD_UTILITIES_COORDINATE_LAT, emergency.getmGPSLat());
-        values.put(FIELD_UTILITIES_COORDINATE_LONG, emergency.getmGPSLong());
-
-        db.insert(UTILITY_TABLE, null, values);
-
-        db.close();
-    }
-    public void addFountain(Utility water){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(FIELD_UTILITIES_TYPE, "Restroom");
-        values.put(FIELD_UTILITIES_DESCRIPTION, water.getmDesc());
-        values.put(FIELD_UTILITIES_COORDINATE_LAT, water.getmGPSLat());
-        values.put(FIELD_UTILITIES_COORDINATE_LONG, water.getmGPSLong());
-
-        db.insert(UTILITY_TABLE, null, values);
-
+        db.delete(UTILITY_TABLE, null, null);
         db.close();
     }
 
