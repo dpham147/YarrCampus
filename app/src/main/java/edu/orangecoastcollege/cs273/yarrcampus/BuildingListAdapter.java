@@ -13,8 +13,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.orangecoastcollege.cs273.yarrcampus.R.id.buildingListTextView;
-
 /**
  * Created by kevin_000 on 11/16/2016.
  */
