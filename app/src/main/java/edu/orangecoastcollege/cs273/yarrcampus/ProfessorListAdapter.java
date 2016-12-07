@@ -45,7 +45,7 @@ public class ProfessorListAdapter extends ArrayAdapter<Professor> {
         professorListLinearLayout = (LinearLayout) view.findViewById(R.id.professorListLinearView);
         professorListImageView = (ImageView) view.findViewById(R.id.professorImageView);
         professorListNameTextView = (TextView) view.findViewById(R.id.professorNameTextView);
-        professorListDetailsTextView = (TextView) view.findViewById(R.id.professorDetailsTextView);
+        professorListDetailsTextView = (TextView) view.findViewById(R.id.professorDetailTextView);
 
         Professor selectedProfessor = mProfessorList.get(position);
         professorListLinearLayout.setTag(selectedProfessor);

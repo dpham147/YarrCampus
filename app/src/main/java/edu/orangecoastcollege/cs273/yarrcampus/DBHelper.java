@@ -144,7 +144,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-
+    public void deleteAllProfessors() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(PROFESSOR_TABLE, null, null);
+        db.close();
+    }
 
 
     // ------------ BUILDING TABLE OPERATIONS ----------------
