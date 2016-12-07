@@ -1,6 +1,5 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,7 +7,6 @@ public class Utility implements Parcelable {
     private int mId;
     private String mType;
     private String mDesc;
-    private Uri mImageUri;
     private float mGPSLat;
     private float mGPSLong;
 
@@ -16,24 +14,23 @@ public class Utility implements Parcelable {
     {
     }
 
-    public Utility(int id, String type, String desc, Uri imageURI, float gpsLat, float gpsLong)
+    public Utility(int id, String type, String desc, float gpsLat, float gpsLong)
     {
         mId = id;
         mType = type;
         mDesc = desc;
-        mImageUri = imageURI;
         mGPSLat = gpsLat;
         mGPSLat = gpsLong;
     }
 
-    public Utility(String type, String desc, Uri imageURI, float gpsLat, float gpsLong)
+    public Utility(String type, String desc, float gpsLat, float gpsLong)
     {
-        this(-1, type, desc, imageURI, gpsLat, gpsLong);
+        this(-1, type, desc, gpsLat, gpsLong);
     }
 
     public Utility(String type, float gpsLat, float gpsLong)
     {
-        this(-1, type, "", Uri.EMPTY, gpsLat, gpsLong);
+        this(-1, type, "", gpsLat, gpsLong);
     }
 
     private Utility(Parcel source)
@@ -41,7 +38,6 @@ public class Utility implements Parcelable {
         mId = source.readInt();
         mType = source.readString();
         mDesc = source.readString();
-        mImageUri = Uri.parse(source.readString());
         mGPSLat = source.readFloat();
         mGPSLong = source.readFloat();
     }
@@ -71,14 +67,6 @@ public class Utility implements Parcelable {
         this.mDesc = mDesc;
     }
 
-    public Uri getmImageUri() {
-        return mImageUri;
-    }
-
-    public void setmImageUri(Uri mImageUri) {
-        this.mImageUri = mImageUri;
-    }
-
     public float getmGPSLat() {
         return mGPSLat;
     }
@@ -106,7 +94,6 @@ public class Utility implements Parcelable {
         dest.writeInt(mId);
         dest.writeString(mType);
         dest.writeString(mDesc);
-        dest.writeString(mImageUri.toString());
         dest.writeFloat(mGPSLat);
         dest.writeFloat(mGPSLong);
     }
