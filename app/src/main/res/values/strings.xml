@@ -29,4 +29,5 @@
         <item>(Insert snazzy one-liner here)</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="locate_office_button">Locate Office</string>
 </resources>

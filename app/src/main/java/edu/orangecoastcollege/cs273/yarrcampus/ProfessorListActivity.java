@@ -1,6 +1,12 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.AnyRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,9 +40,18 @@ public class ProfessorListActivity extends AppCompatActivity {
 
 
         db = new DBHelper(this);
+        db.deleteAllProfessors();
+
         // db.importProfessors("professors.csv")
+        Uri image = getUriResource(this, R.drawable.empty_profile_pic);
+        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image));
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image));
+
         professorsList = db.getAllProfessors();
-        buildingList = db.getAllBuildings();
+
+        /**
+         * Hard Coding Professors in professorList
+         */
 
 
         filteredProfessors = new ArrayList<>(professorsList);
@@ -45,26 +60,10 @@ public class ProfessorListActivity extends AppCompatActivity {
         professorListAdapter =
                 new ProfessorListAdapter(this, R.layout.professor_list_item, filteredProfessors);
         professorListView.setAdapter(professorListAdapter);
-
-
-
-
-
-
-
+        searchProfessorEditText.addTextChangedListener(searchTextChangedListener);
 
 
     }
-    /*
-    private String[] getCoursesName()
-    {
-        String[] coursesNames = new String[allCoursesList.size() + 1];
-        coursesNames[0] = "[Select Course]";
-        for(int i = 1; i < coursesNames.length; ++i)
-            coursesNames[i] = allCoursesList.get(i - 1).getCourseName();
-        return coursesNames;
-    }
-    */
 
     TextWatcher searchTextChangedListener = new TextWatcher() {
         @Override
@@ -91,44 +90,24 @@ public class ProfessorListActivity extends AppCompatActivity {
         public void afterTextChanged(Editable editable) {
         }
     };
-/*
-    private String[] getCourcesName()
-    {
-        String[] instructorNames = new String[allCoursesList.size() + 1];
-        instructorNames[0] = "[Select Course]";
-        for(int i = 1; i < instructorNames.length; ++i)
-            instructorNames[i] = allCoursesList.get(i - 1).getSubject();
-        return instructorNames;
-    }
 
-    public AdapterView.OnItemSelectedListener courcesSpinnerListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedCourse = String.valueOf(parent.getItemAtPosition(position));
-            courseListAdapter.clear();
-            if (selectedCourse.equals("[Select Course]")) {
-                for(Professor professor : professorsList)
-                    courseListAdapter.add(professor);
-            }
-            else
-            {
-                for(Courses course : allCoursesList) {
-                    if(course.getCourseName().equals(selectedCourse)) {
-                        int instructorID = course.getProfessorId();
-                        for (Professor professor : professorsList) {
+    /**
+     * Get URI to any resource type within  an android studio project static
+     * to allow other classes to use  it as a helper function
+     * @param context The current context
+     * @param resId The resource by given id
+     * @return Uri to resource by given id
+     * @throws Resources.NotFoundException if the given resource does not exist
+     */
+public static Uri getUriResource(@NonNull Context context, @AnyRes int resId) throws Resources.NotFoundException
+{
+    //Return  a resource instance for your application package
+    Resources res = context.getResources();
 
-                        }
+    //return uri
+    return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+            "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
+            + '/' + res.getResourceEntryName(resId));
 
-                    }
-                }
-            }
-
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-    };
-    */
+}
 }

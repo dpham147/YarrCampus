@@ -43,4 +43,10 @@
         android:id="@+id/professorDetailsTextView"
         android:layout_weight="1" />
 
+    <Button
+        android:text="@string/locate_office_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2" />
+
 </LinearLayout>
