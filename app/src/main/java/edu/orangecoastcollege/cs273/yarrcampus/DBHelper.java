@@ -120,6 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 // TODO: Retrieve data from the query
                 Professor newProf = new Professor();
+                // Rememer to finish this
                 allProf.add(newProf);
             }
             while (cursor.moveToNext());
