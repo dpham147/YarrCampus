@@ -37,8 +37,8 @@ public class UtilitySearchActivity extends AppCompatActivity
     private static final int FINE_LOCATION_REQUEST_CODE = 100;
     private static final long LOCATION_REQUEST_INTERVAL = 10000;
     private static final long LOCATION_REQUEST_FASTEST_INTERVAL = 1000;
-    private static final float OCC_LATITUDE = 33.671028f;
-    private static final float OCC_LONGITUDE = -117.911305f;
+    protected static final float OCC_LATITUDE = 33.671028f;
+    protected static final float OCC_LONGITUDE = -117.911305f;
     private DBHelper db;
     private List<Utility> allUtilities;
     private List<Utility> displayedUtilities;
@@ -76,7 +76,6 @@ public class UtilitySearchActivity extends AppCompatActivity
         Log.i("YarrCampus", allUtilities.get(3).toString() + " in onCreate()");
         Log.i("YarrCampus", allUtilities.get(6).toString() + " in onCreate()");
 
-        displayedUtilities = allUtilities;
         restroomList = filterUtilityList("Restroom");
         waterList = filterUtilityList("Water Fountain");
         emergencyList = filterUtilityList("Emergency Phone");
@@ -109,7 +108,7 @@ public class UtilitySearchActivity extends AppCompatActivity
     protected List<Utility> filterUtilityList(String type) {
         ArrayList<Utility> filteredList = new ArrayList<>();
         for (Utility utility : allUtilities) {
-            if (utility.getmType().equals(type));
+            if (type.equals(utility.getmType()));
             {
                 filteredList.add(utility);
             }
