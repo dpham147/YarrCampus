@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import java.util.ArrayList;
 
@@ -162,7 +163,14 @@ public class DBHelper extends SQLiteOpenHelper {
         {
             do {
                 // TODO: Retrieve data from the query
-                Building newBuilding = new Building();
+                Building newBuilding = new Building(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        Uri.parse(cursor.getString(4)),
+                        cursor.getFloat(5),
+                        cursor.getFloat(6));
                 allBuildings.add(newBuilding);
             }
             while (cursor.moveToNext());
