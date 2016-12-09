@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/occ_pirate_logo"
-        android:id="@+id/imageView" />
+        android:id="@+id/splashPirateImageView" />
 
     <TextView
         android:text="Tip Text Here"
@@ -26,7 +26,7 @@
         android:id="@+id/splashTipTextView"
         android:textSize="18sp"
         android:gravity="center"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/splashPirateImageView"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
