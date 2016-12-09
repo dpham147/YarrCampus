@@ -24,15 +24,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class BuildingDetailsActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,
-        GoogleMap.OnInfoWindowClickListener{
+        LocationListener{
 
     private int FINE_LOCATION_REQUEST_CODE = 100;
     private TextView buildingNameDetailsTextView;
@@ -83,7 +81,7 @@ public class BuildingDetailsActivity extends AppCompatActivity
         LatLng buildingLocation = new LatLng(building.getGPSLat(), building.getGPSLong());
         CameraPosition buildingPosition = new CameraPosition.Builder().target(buildingLocation).zoom(18.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(buildingPosition);
-        mMap.addMarker(new MarkerOptions().position(buildingLocation).title("Building Location"));
+        mMap.addMarker(new MarkerOptions().position(buildingLocation).title(building.getName()));
         mMap.moveCamera(cameraUpdate);
     }
     @Override
@@ -101,12 +99,5 @@ public class BuildingDetailsActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        mMap.setOnInfoWindowClickListener(this);
-    }
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-        startActivity(new Intent(this, MenuActivity.class));
     }
 }

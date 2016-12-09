@@ -10,8 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -99,15 +97,16 @@ public class ProfessorListActivity extends AppCompatActivity {
      * @return Uri to resource by given id
      * @throws Resources.NotFoundException if the given resource does not exist
      */
-public static Uri getUriResource(@NonNull Context context, @AnyRes int resId) throws Resources.NotFoundException
-{
-    //Return  a resource instance for your application package
-    Resources res = context.getResources();
+    public static Uri getUriResource(@NonNull Context context, @AnyRes int resId) throws Resources.NotFoundException
+    {
+        //Return  a resource instance for your application package
+        Resources res = context.getResources();
 
-    //return uri
-    return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-            "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
-            + '/' + res.getResourceEntryName(resId));
+        //return uri
+        return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
+                + '/' + res.getResourceEntryName(resId));
 
+    }
 }
-}
+

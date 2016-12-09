@@ -1,7 +1,6 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -12,6 +11,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static edu.orangecoastcollege.cs273.yarrcampus.ProfessorListActivity.getUriResource;
 
 public class BuildingListActivity extends AppCompatActivity {
 
@@ -31,12 +32,13 @@ public class BuildingListActivity extends AppCompatActivity {
         searchBuildingEditText.addTextChangedListener(buildingNameTextWatcher);
         buildingListView = (ListView) findViewById(R.id.BuildingListView);
 
+
         db = new DBHelper(this);
         db.deleteAllBuildings();
-        db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", Uri.parse("Watson"), 33.670686f,  -117.909255f));
-        db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", Uri.parse("Computing"), 33.670797f, -117.912142f));
-        db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", Uri.parse("Chem"), 33.671648f, -117.914652f));
-        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", Uri.parse("Books"), 33.668890f, -117.912638f));
+        db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.670686f,  -117.909255f));
+        db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670797f, -117.912142f));
+        db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.671648f, -117.914652f));
+        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668890f, -117.912638f));
         allBuildingsList = db.getAllBuildings();
         filteredBuildingsList = new ArrayList<> (allBuildingsList);
 
@@ -88,4 +90,5 @@ public class BuildingListActivity extends AppCompatActivity {
     public void goToMapView(View view){
         startActivity(new Intent(this, BuildingMapViewActivity.class) );
     }
+
 }

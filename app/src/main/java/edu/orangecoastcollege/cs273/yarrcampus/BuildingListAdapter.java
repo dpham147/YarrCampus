@@ -50,6 +50,7 @@ public class BuildingListAdapter extends ArrayAdapter<Building>{
         buildingListNameTextView.setText(selectedBuilding.getName());
         buildingListCodeTextView.setText(selectedBuilding.getCode());
         buildingListLinearLayout.setTag(selectedBuilding);
+        buildingListImageView.setImageURI(selectedBuilding.getImageURI());
 
         return view;
     }

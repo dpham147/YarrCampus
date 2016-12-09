@@ -1,8 +1,14 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.AnyRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -48,6 +54,18 @@ public class SplashActivity extends AppCompatActivity {
 
         Timer timer = new Timer();
         timer.schedule(menuTask, SPLASH_DELAY);
+    }
+
+    protected Uri getUriResource(@NonNull Context context, @AnyRes int resId) throws Resources.NotFoundException
+    {
+        //Return  a resource instance for your application package
+        Resources res = context.getResources();
+
+        //return uri
+        return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
+                + '/' + res.getResourceEntryName(resId));
+
     }
 
 
