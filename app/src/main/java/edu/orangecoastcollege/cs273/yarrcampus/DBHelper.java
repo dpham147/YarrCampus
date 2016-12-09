@@ -80,8 +80,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 UTILITIES_KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FIELD_UTILITIES_TYPE + " TEXT, " +
                 FIELD_UTILITIES_DESCRIPTION + " TEXT, " +
-                FIELD_UTILITIES_COORDINATE_LAT + " TEXT, " +
-                FIELD_UTILITIES_COORDINATE_LONG + " TEXT" + ")";
+                FIELD_UTILITIES_COORDINATE_LAT + " REAL, " +
+                FIELD_UTILITIES_COORDINATE_LONG + " REAL" + ")";
         db.execSQL(table);
 
         table = "CREATE TABLE " + COURSES_TABLE + "(" +
@@ -162,7 +162,6 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
         {
             do {
-                // TODO: Retrieve data from the query
                 Building newBuilding = new Building(
                         cursor.getInt(0),
                         cursor.getString(1),

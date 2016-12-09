@@ -10,9 +10,7 @@ public class Utility implements Parcelable {
     private float mGPSLat;
     private float mGPSLong;
 
-    public Utility()
-    {
-    }
+
 
     public Utility(int id, String type, String desc, float gpsLat, float gpsLong)
     {
@@ -20,7 +18,7 @@ public class Utility implements Parcelable {
         mType = type;
         mDesc = desc;
         mGPSLat = gpsLat;
-        mGPSLat = gpsLong;
+        mGPSLong = gpsLong;
     }
 
     public Utility(String type, String desc, float gpsLat, float gpsLong)
@@ -85,7 +83,7 @@ public class Utility implements Parcelable {
 
     @Override
     public String toString() {
-        return "Utility: " + mType;
+        return "Lat " + mGPSLat + " Long " + mGPSLong;
     }
 
     @Override
