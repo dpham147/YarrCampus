@@ -35,6 +35,11 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent(this, UtilitySearchActivity.class));
     }
 
+    public void openCourseSearchActivity(View view)
+    {
+        startActivity(new Intent(this, CoursesSearchActivity.class));
+    }
+
 //    @Override
 //    public  boolean dispatchTouchEvent(MotionEvent ev){
 //        super.dispatchTouchEvent(ev);

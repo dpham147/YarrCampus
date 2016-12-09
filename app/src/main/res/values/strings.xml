@@ -8,19 +8,27 @@
     <string name="building_map_view">Go to map view</string>
 
     <!-- PROFESSOR RELATED STRINGS-->
-    <string name="professor_search_menu_button">Search Professors on Campus</string>
+    <string name="professor_search_menu_button">Search Professors</string>
     <string name="example_professor_search">Ex: Michael Paulding</string>
     <string name="search_professor">Search Professor</string>
     <string name="select_instructor">[Select Instructor]</string>
 
     <!-- UTILITY RELATED STRINGS-->
-    <string name="utility_search_menu_button">Search Utilities on Campus</string>
+    <string name="utility_search_menu_button">Search Utilities</string>
     <string name="water_fountain">Water Fountains</string>
     <string name="emergency_phone">Emergency Phones</string>
     <string name="restrooms">Restrooms</string>
     <string name="filter_instructor">Filter By Instructor</string>
     <string name="filter_subject">Filter By Subject</string>
     <string name="reset">Reset</string>string>
+
+    <!-- COURSES RELATED STRING-->
+    <string name="courses_search_menu_button">Search Courses</string>
+
+    <!-- FAQ RELATED STRINGS-->
+    <string name="faq_menu_button">FAQ</string>
+
+    <string name="contact_us_menu_button">Contact the Devs</string>
 
     <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
     <string-array name="splash_screen_tips_list">
@@ -29,6 +37,7 @@
         <item>Applied for transfer? Be sure to keep updated on deadlines!</item>
         <item>(Insert snazzy one-liner here)</item>
         <item>YarrCampus sounds like Your Campus</item>
+        <item>Paulding is awesome</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="locate_office_button">Locate Office</string>
