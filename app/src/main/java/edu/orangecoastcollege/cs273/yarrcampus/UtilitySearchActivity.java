@@ -73,6 +73,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         db.addUtility(new Utility("Water Fountain", 33.669649f, -117.909038f));
 
         allUtilities = db.getAllUtilities();
+        displayedUtilities = new ArrayList<>();
 
         Log.i("YarrCampus", allUtilities.get(0).toString() + " in onCreate()");
         Log.i("YarrCampus", allUtilities.get(3).toString() + " in onCreate()");
@@ -110,7 +111,7 @@ public class UtilitySearchActivity extends AppCompatActivity
     protected List<Utility> filterUtilityList(String type) {
         ArrayList<Utility> filteredList = new ArrayList<>();
         for (Utility utility : allUtilities) {
-            if (type.equals(utility.getmType()));
+            if (type.equals(utility.getmType()))
             {
                 filteredList.add(utility);
             }
