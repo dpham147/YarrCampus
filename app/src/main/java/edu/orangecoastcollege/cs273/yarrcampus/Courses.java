@@ -8,26 +8,16 @@ public class Courses {
 
     private int mCRN;
     private String mCourseName;
-    private int mBuildingId;
-    private int mProfessorId;
+    private Building mBuilding;
+    private Professor mProfessor;
     private String mSubject;
     private String mSemesterCode;
 
-
-    public Courses(){
-        mCRN = -1;
-        mCourseName = "";
-        mBuildingId = -1;
-        mProfessorId = -1;
-        mSubject = "";
-        mSemesterCode = "";
-    }
-
-    public Courses(int crn, String courseName, int buildingId, int profId, String subject, String code){
+    public Courses(int crn, String courseName, Building building, Professor professor, String subject, String code){
         mCRN = crn;
         mCourseName = courseName;
-        mBuildingId = buildingId;
-        mProfessorId = profId;
+        mBuilding = building;
+        mProfessor = professor;
         mSubject = subject;
         mSemesterCode = code;
     }
@@ -40,20 +30,20 @@ public class Courses {
         mCRN = CRN;
     }
 
-    public int getBuildingId() {
-        return mBuildingId;
+    public Building getmBuilding() {
+        return mBuilding;
     }
 
-    public void setBuildingId(int buildingId) {
-        mBuildingId = buildingId;
+    public void setmBuilding(Building building) {
+        mBuilding = building;
     }
 
-    public int getProfessorId() {
-        return mProfessorId;
+    public Professor getmProfessor() {
+        return mProfessor;
     }
 
-    public void setProfessorId(int professorId) {
-        mProfessorId = professorId;
+    public void setmProfessor(Professor professor) {
+        mProfessor = professor;
     }
 
     public String getSubject() {

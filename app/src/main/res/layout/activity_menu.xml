@@ -156,11 +156,11 @@
         android:background="?attr/colorButtonNormal"
         android:id="@+id/contactMenuLinearLayout"
         android:layout_marginBottom="5dp"
-        android:onClick="openUtilitySearchActivity">
+        android:onClick="openContactActivity">
 
         <ImageView
             android:layout_width="50dp"
-            app:srcCompat="@drawable/maps_icon"
+            app:srcCompat="@drawable/contact_icon"
             android:id="@+id/contactMenuImageView"
             android:scaleType="fitCenter"
             android:adjustViewBounds="false"

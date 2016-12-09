@@ -28,6 +28,7 @@
     <!-- FAQ RELATED STRINGS-->
     <string name="faq_menu_button">FAQ</string>
 
+    <!-- CONTACT US RELATED STRINGS-->
     <string name="contact_us_menu_button">Contact the Devs</string>
 
     <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
@@ -41,4 +42,6 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="locate_office_button">Locate Office</string>
+    <string name="filter_crn">Filter by CRN</string>
+    <string name="example_crn">Ex: 12345</string>
 </resources>

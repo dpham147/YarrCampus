@@ -23,7 +23,27 @@
             android:text="@string/filter_subject" />
 
         <Spinner
-            android:id="@+id/instructorSpinner"
+            android:id="@+id/subjectSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:text="@string/filter_instructor" />
+
+        <Spinner
+            android:id="@+id/professorSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,17 +61,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:text="@string/filter_instructor" />
+            android:text="@string/filter_crn" />
 
         <EditText
             android:id="@+id/searchCourseEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:ems="10"
             android:background="@android:color/background_light"
             android:layout_marginLeft="10dp"
-            android:hint="@string/example_professor_search" />
+            android:hint="@string/example_crn" />
 
     </LinearLayout>
 
@@ -64,6 +84,6 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/ProfessorListView"
+        android:id="@+id/coursesListView"
         android:layout_weight="2" />
 </LinearLayout>
