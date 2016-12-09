@@ -33,10 +33,10 @@ public class BuildingListActivity extends AppCompatActivity {
 
         db = new DBHelper(this);
         db.deleteAllBuildings();
-        db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", Uri.parse("Watson"), 33.668890f,  -117.912638f));
+        db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", Uri.parse("Watson"), 33.670686f,  -117.909255f));
         db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", Uri.parse("Computing"), 33.670797f, -117.912142f));
         db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", Uri.parse("Chem"), 33.671648f, -117.914652f));
-        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", Uri.parse("Books"), 33.668890f, 117.912638f));
+        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", Uri.parse("Books"), 33.668890f, -117.912638f));
         allBuildingsList = db.getAllBuildings();
         filteredBuildingsList = new ArrayList<> (allBuildingsList);
 

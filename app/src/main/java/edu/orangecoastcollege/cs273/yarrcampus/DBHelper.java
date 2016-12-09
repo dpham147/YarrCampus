@@ -168,9 +168,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
-                        Uri.parse(cursor.getString(4)),
-                        cursor.getFloat(5),
-                        cursor.getFloat(6));
+                        Uri.parse(cursor.getString(6)),
+                        cursor.getFloat(4),
+                        cursor.getFloat(5));
                 allBuildings.add(newBuilding);
             }
             while (cursor.moveToNext());

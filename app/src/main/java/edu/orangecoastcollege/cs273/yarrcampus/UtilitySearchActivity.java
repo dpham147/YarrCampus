@@ -28,6 +28,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+// AutoCompleteTextView https://www.youtube.com/watch?v=7SVGPBxRrS0
+
 public class UtilitySearchActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,

@@ -22,16 +22,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class BuildingDetailsActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        GoogleMap.OnInfoWindowClickListener{
+
     private int FINE_LOCATION_REQUEST_CODE = 100;
     private TextView buildingNameDetailsTextView;
     private TextView buildingCodeDetailsTextView;
@@ -74,6 +76,15 @@ public class BuildingDetailsActivity extends AppCompatActivity
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
         }
+
+        Intent buildingDetails = getIntent();
+        Building building =  buildingDetails.getParcelableExtra("Building");
+        mMap.clear();
+        LatLng buildingLocation = new LatLng(building.getGPSLat(), building.getGPSLong());
+        CameraPosition buildingPosition = new CameraPosition.Builder().target(buildingLocation).zoom(18.0f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(buildingPosition);
+        mMap.addMarker(new MarkerOptions().position(buildingLocation).title("Building Location"));
+        mMap.moveCamera(cameraUpdate);
     }
     @Override
     public void onConnectionSuspended(int i) {
@@ -85,17 +96,17 @@ public class BuildingDetailsActivity extends AppCompatActivity
     }
     @Override
     public void onLocationChanged(Location location) {
-        Intent buildingDetails = getIntent();
-        Building building =  buildingDetails.getParcelableExtra("Building");
-        mMap.clear();
-        LatLng buildingLocation = new LatLng(building.getGPSLat(), building.getGPSLong());
-        CameraPosition buildingPosition = new CameraPosition.Builder().target(buildingLocation).zoom(14.0f).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(buildingPosition);
-        mMap.addMarker(new MarkerOptions().position(buildingLocation).title("Building Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.basic_building)));
-        mMap.moveCamera(cameraUpdate);
+
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        mMap.setOnInfoWindowClickListener(this);
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        startActivity(new Intent(this, MenuActivity.class));
     }
 }
