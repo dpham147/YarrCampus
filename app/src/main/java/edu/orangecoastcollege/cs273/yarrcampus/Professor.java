@@ -11,6 +11,8 @@ public class Professor implements Parcelable {
     private String mDesc;
     private String mOfficeHours;
     private String mBuilding;
+    private float mOfficeLat;
+    private float mOfficeLong;
     private String mEmail;
     private String mPhoneNumber;
     private Uri mImageURI;
@@ -21,11 +23,12 @@ public class Professor implements Parcelable {
         mDesc = "";
         mOfficeHours = "";
         mBuilding = "";
-
+        mOfficeLat = 0.0f;
+        mOfficeLong = 0.0f;
         mImageURI = Uri.parse("getUriToResource(this, R.drawable.empty_profile_pic)");
     }
 
-    public Professor(int id, String name, String desc, String hours, String building, Uri imageUri)
+    public Professor(int id, String name, String desc, String hours, String building, Uri imageUri, float latitude, float longitude)
     {
         mId = id;
         mName = name;
@@ -33,17 +36,26 @@ public class Professor implements Parcelable {
         mOfficeHours = hours;
         mBuilding = building;
         mImageURI = imageUri;
+        mOfficeLat = latitude;
+        mOfficeLong = longitude;
 
     }
 
-    public Professor(String name, String desc, String hours, String building, Uri imageUri)
+    public Professor(String name, String desc, String hours, String building, Uri imageUri, float latitude, float longitude)
     {
-        this(-1, name, desc,hours, building, imageUri);
+        this(-1, name, desc,hours, building, imageUri, latitude, longitude);
     }
 
-    private Professor(Parcel source)
+    private Professor(Parcel parcel)
     {
-
+        mId = parcel.readInt();
+        mName = parcel.readString();
+        mDesc = parcel.readString();
+        mOfficeHours = parcel.readString();
+        mBuilding = parcel.readString();
+        mImageURI = Uri.parse(parcel.readString());
+        mOfficeLat = parcel.readFloat();
+        mOfficeLong = parcel.readFloat();
     }
 
     public int getmId() {
@@ -109,7 +121,14 @@ public class Professor implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(mId);
+        dest.writeString(mName);
+        dest.writeString(mDesc);
+        dest.writeString(mOfficeHours);
+        dest.writeString(mBuilding);
+        dest.writeString(String.valueOf(mImageURI));
+        dest.writeFloat(mOfficeLat);
+        dest.writeFloat(mOfficeLong);
     }
 
     public static final Parcelable.Creator CREATOR = new Creator() {
@@ -124,4 +143,19 @@ public class Professor implements Parcelable {
         }
     };
 
+    public float getmOfficeLat() {
+        return mOfficeLat;
+    }
+
+    public void setmOfficeLat(float mOfficeLat) {
+        this.mOfficeLat = mOfficeLat;
+    }
+
+    public float getmOfficeLong() {
+        return mOfficeLong;
+    }
+
+    public void setmOfficeLong(float mOfficeLong) {
+        this.mOfficeLong = mOfficeLong;
+    }
 }

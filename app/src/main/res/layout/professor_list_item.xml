@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_column="2"
     android:layout_row="1"
-    android:id="@+id/professorListLinearView">
+    android:id="@+id/professorListLinearView"
+    android:onClick="viewProfessorDetails" >
 
     <ImageView
         android:layout_width="100dp"

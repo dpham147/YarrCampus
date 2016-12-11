@@ -43,6 +43,8 @@
 
         <activity android:name=".BuildingMapViewActivity" />
         <activity android:name=".CoursesSearchActivity" />
+        <activity android:name=".ProfessorMapActivity"></activity>
+        <activity android:name=".CoursesSearchActivity" />
         <activity android:name=".CampusContactsActivity"></activity>
     </application>
 

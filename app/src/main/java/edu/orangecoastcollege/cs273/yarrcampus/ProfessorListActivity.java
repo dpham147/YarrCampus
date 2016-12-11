@@ -2,6 +2,7 @@ package edu.orangecoastcollege.cs273.yarrcampus;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -22,7 +25,6 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     private DBHelper db;
     private List<Professor> professorsList;
-    private List<Building> buildingList;
 
     private EditText searchProfessorEditText;
     private ListView professorListView;
@@ -36,20 +38,20 @@ public class ProfessorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_list);
 
-
         db = new DBHelper(this);
         db.deleteAllProfessors();
 
         // db.importProfessors("professors.csv")
-        Uri image = getUriResource(this, R.drawable.empty_profile_pic);
-        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image));
-        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image));
-
-        professorsList = db.getAllProfessors();
-
         /**
          * Hard Coding Professors in professorList
          */
+
+        Uri image = getUriResource(this, R.drawable.empty_profile_pic);
+        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image, 33.671404f, -117.911482f));
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image,33.671404f, -117.911482f));
+
+        professorsList = db.getAllProfessors();
+
 
 
         filteredProfessors = new ArrayList<>(professorsList);
@@ -61,6 +63,14 @@ public class ProfessorListActivity extends AppCompatActivity {
         searchProfessorEditText.addTextChangedListener(searchTextChangedListener);
 
 
+    }
+
+    public void viewProfessorDetails (View view)
+    {
+            Intent professorDetailsIntent = new Intent(this, ProfessorDetailsActivity.class);
+            Professor selectedProfessor = (Professor) view.getTag();
+            professorDetailsIntent.putExtra("SelectedProfessor", selectedProfessor);
+            startActivity(professorDetailsIntent);
     }
 
     TextWatcher searchTextChangedListener = new TextWatcher() {
@@ -102,11 +112,11 @@ public class ProfessorListActivity extends AppCompatActivity {
         //Return  a resource instance for your application package
         Resources res = context.getResources();
 
-        //return uri
-        return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
-                + '/' + res.getResourceEntryName(resId));
+    //return uri
+    return  Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+            "://" + res.getResourcePackageName(resId) + '/' + res.getResourceTypeName(resId)
+            + '/' + res.getResourceEntryName(resId));
 
-    }
+}
 }
 

@@ -8,28 +8,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.orangecoastcollege.cs273.yarrcampus.BuildingListActivity"
+    tools:context="edu.orangecoastcollege.cs273.yarrcampus.ProfessorListActivity"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:text="@string/filter_subject" />
-
-        <Spinner
-            android:id="@+id/instructorSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -45,10 +26,9 @@
 
         <EditText
             android:id="@+id/searchProfessorEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:ems="10"
             android:background="@android:color/background_light"
             android:layout_marginLeft="10dp"
             android:hint="@string/example_professor_search" />
@@ -65,5 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ProfessorListView"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        />
 </LinearLayout>
