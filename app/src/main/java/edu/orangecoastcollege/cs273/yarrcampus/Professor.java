@@ -106,10 +106,11 @@ public class Professor implements Parcelable {
         this.mImageURI = mImageURI;
     }
 
+    public int getProfessorId() {return mId;}
+
     public String getAllDetails()
     {
-        String details = mDesc + "\n"
-                + mOfficeHours + "\n"
+        String details = mOfficeHours + "\n"
                 + mBuilding;
         return details;
     }

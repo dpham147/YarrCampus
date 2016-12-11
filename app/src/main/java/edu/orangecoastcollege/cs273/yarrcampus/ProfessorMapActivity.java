@@ -114,7 +114,7 @@ public class ProfessorMapActivity extends AppCompatActivity
 
         // Add my marker
        LatLng coordinate = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(coordinate).title(selectedProfessor.getmName()));
+        mMap.addMarker(new MarkerOptions().position(coordinate).title("You"));
     }
 }
 
