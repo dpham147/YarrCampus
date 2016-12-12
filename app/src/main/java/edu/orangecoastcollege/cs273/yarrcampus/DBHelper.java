@@ -147,7 +147,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 PROFESSOR_TABLE,
                 new String[]{PROFESSOR_KEY_FIELD_ID, FIELD_PROFESSORS_NAME,
                         FIELD_PROFESSORS_BUILDING, FIELD_PROFESSORS_OFFICE_HOURS,
-                        FIELD_PROFESSORS_IMAGE_URI, FIELD_PROFESSORS_IMAGE_URI,
+                        FIELD_PROFESSORS_IMAGE_URI, FIELD_PROFESSORS_DESCRIPTION,
                         FIELD_PROFESSORS_OFFICE_LATITUDE, FIELD_PROFESSORS_OFFICE_LONGITUDE},
                 PROFESSOR_KEY_FIELD_ID + "=?",
                 new String[]{String.valueOf(id)},
@@ -322,16 +322,20 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Courses> getAllCourses(){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Courses> allCourses = new ArrayList<>();
-        Cursor cursor = db.query(UTILITY_TABLE, null, null, null, null, null, null);
+        Cursor cursor = db.query(COURSES_TABLE,
+                new String[]{FIELD_COURSES_CRN, FIELD_COURSES_NAME, FIELD_COURSES_BUILDING_ID,
+                        FIELD_COURSES_PROFESSOR_ID, FIELD_COURSES_SUBJECT, FIELD_COURSES_SEMESTER_CODE},
+                null, null, null, null, null, null);
 
         if (cursor.moveToFirst())
         {
             do {
+                Building building = getBuilding(cursor.getInt(2));
+                Professor professor = getProfessor(cursor.getInt(3));
                 Courses newCourse = new Courses(
                         cursor.getInt(0),
                         cursor.getString(1),
-                        getBuilding(cursor.getInt(2)),
-                        getProfessor(cursor.getInt(3)),
+                        building, professor,
                         cursor.getString(4),
                         cursor.getString(5));
                 allCourses.add(newCourse);

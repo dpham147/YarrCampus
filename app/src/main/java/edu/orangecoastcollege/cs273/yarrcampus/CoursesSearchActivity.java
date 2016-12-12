@@ -47,7 +47,7 @@ public class CoursesSearchActivity extends AppCompatActivity {
         db.addCourse(15732, "Eng 101", 2, 3, "College Writing", "32451");
 
         db.addBuilding(new Building(1, "MBSC", "MBSC", "8:00-10:00", Uri.EMPTY, 0.0f, 0.0f));
-        db.addBuilding(new Building(1, "Writers Row", "WRR", "8:00-10:00", Uri.EMPTY, 0.0f, 0.0f));
+        db.addBuilding(new Building(2, "Writers Row", "WRR", "8:00-10:00", Uri.EMPTY, 0.0f, 0.0f));
 
         db.addProfessor(new Professor(1, "M. Paulding", "Cool guy", "800-2000", "MBSC", Uri.EMPTY, 0.0f, 0.0f));
         db.addProfessor(new Professor(2, "Art Moore", "Interesting guy", "1700-2000", "MBSC", Uri.EMPTY, 0.0f, 0.0f));
