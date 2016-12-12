@@ -78,7 +78,7 @@ public class CoursesSearchActivity extends AppCompatActivity {
         crn.addTextChangedListener(crnTextWatcher);
 
         coursesListView = (ListView) findViewById(R.id.coursesListView);
-        coursesListAdapter = new CoursesListAdapter(this, R.layout.courses_list_item, coursesList);
+        coursesListAdapter = new CoursesListAdapter(this, R.layout.courses_list_item, filteredCoursesList);
         coursesListView.setAdapter(coursesListAdapter);
 
         logList();
@@ -388,7 +388,7 @@ public class CoursesSearchActivity extends AppCompatActivity {
     }
 
     private void logList() {
-        for (Courses courses : coursesList)
+        for (Courses courses : filteredCoursesList)
         {
             Log.i("YarrCampus", courses.toString());
         }
