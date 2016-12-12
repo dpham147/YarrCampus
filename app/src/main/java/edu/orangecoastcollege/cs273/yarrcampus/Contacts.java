@@ -5,13 +5,24 @@ package edu.orangecoastcollege.cs273.yarrcampus;
  */
 
 public class Contacts {
+    private int mId;
     private String mName;
     private String mPhoneNumber;
 
-    public Contacts(String name, String phone){
+    public Contacts(int id, String name, String phone){
+        mId = id;
         mName = name;
         mPhoneNumber = phone;
     }
+
+    public Contacts(String name, String phone){
+        this(-1, name, phone);
+    }
+
+    public int getId(){
+        return mId;
+    }
+
     public String getPhoneNumber() {
         return mPhoneNumber;
     }
