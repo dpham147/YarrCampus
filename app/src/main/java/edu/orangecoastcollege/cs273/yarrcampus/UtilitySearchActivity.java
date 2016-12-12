@@ -181,8 +181,7 @@ public class UtilitySearchActivity extends AppCompatActivity
 
         LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
-        Utility user = new Utility("You are here.", (float) userCoord.latitude, (float) userCoord.longitude);
-        displayedUtilities.add(user);
+        mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
         CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
