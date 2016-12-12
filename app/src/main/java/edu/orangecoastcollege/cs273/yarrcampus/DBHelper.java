@@ -303,14 +303,14 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
         {
             do {
-                Courses newCourse = new Courses(
-                        cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getInt(2),
-                        cursor.getInt(3),
-                        cursor.getString(4),
-                        cursor.getString(5));
-                allCourses.add(newCourse);
+//                Courses newCourse = new Courses(
+//                        cursor.getInt(0),
+//                        cursor.getString(1),
+//                        cursor.getInt(2),
+//                        cursor.getInt(3),
+//                        cursor.getString(4),
+//                        cursor.getString(5));
+//                allCourses.add(newCourse);
             }
             while (cursor.moveToNext());
         }
