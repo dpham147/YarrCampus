@@ -40,9 +40,7 @@ public class CoursesSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_courses_search);
 
         db = new DBHelper(this);
-        db.deleteAllCourses();
-        db.deleteAllBuildings();
-        db.deleteAllProfessors();
+        deleteDatabase(DBHelper.DATABASE_NAME);
 
         db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.670686f,  -117.909255f));
         db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670797f, -117.912142f));
@@ -80,7 +78,7 @@ public class CoursesSearchActivity extends AppCompatActivity {
         crn.addTextChangedListener(crnTextWatcher);
 
         coursesListView = (ListView) findViewById(R.id.coursesListView);
-        coursesListAdapter = new CoursesListAdapter(this, R.layout.courses_list_item, filteredCoursesList);
+        coursesListAdapter = new CoursesListAdapter(this, R.layout.courses_list_item, coursesList);
         coursesListView.setAdapter(coursesListAdapter);
 
         logList();

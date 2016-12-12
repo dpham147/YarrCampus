@@ -233,20 +233,23 @@ public class DBHelper extends SQLiteOpenHelper {
         return allBuildings;
     }
 
-    public Building getBuilding(int id)
-    {
+    public Building getBuilding(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 BUILDING_TABLE,
-                new String[]{BUILDING_KEY_FIELD_ID, FIELD_BUILDING_NAME,
-                        FIELD_BUILDING_CODE, FIELD_BUILDING_HOURS,
-                        FIELD_BUILDING_COORDINATE_LAT, FIELD_BUILDING_COORDINATE_LONG,
+                new String[]{BUILDING_KEY_FIELD_ID,
+                        FIELD_BUILDING_NAME,
+                        FIELD_BUILDING_CODE,
+                        FIELD_BUILDING_HOURS,
+                        FIELD_BUILDING_COORDINATE_LAT,
+                        FIELD_BUILDING_COORDINATE_LONG,
                         FIELD_BUILDING_IMAGE_URI}, BUILDING_KEY_FIELD_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);
 
         if (cursor != null)
+        {
             cursor.moveToFirst();
-
+        }
         Building newBuilding = new Building(
                 cursor.getInt(0),
                 cursor.getString(1),
@@ -255,6 +258,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 Uri.parse(cursor.getString(6)),
                 cursor.getFloat(4),
                 cursor.getFloat(5));
+
         db.close();
         return newBuilding;
     }
