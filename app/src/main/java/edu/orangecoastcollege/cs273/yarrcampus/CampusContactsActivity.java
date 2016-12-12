@@ -27,8 +27,8 @@ public class CampusContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campus_contacts);
         db = new DBHelper(this);
         db.deleteAllContacts();
-        db.addContact(new Contacts("Kevin Do", "tel:7147574625"));
-        db.addContact(new Contacts("Roman Barron", "tel:9512882633"));
+        db.addContact(new Contacts("Kevin Do", "7147574625"));
+        db.addContact(new Contacts("Roman Barron", "9512882633"));
         allContactsList = db.getAllContacts();
         Log.d("Yarr Campus", "test");
         for (Contacts contact : allContactsList)
@@ -47,7 +47,7 @@ public class CampusContactsActivity extends AppCompatActivity {
         if(view instanceof LinearLayout){
             Contacts contact = (Contacts) view.getTag();
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
-            callIntent.setData(Uri.parse(contact.getPhoneNumber()));
+            callIntent.setData(Uri.parse("tel:" + contact.getPhoneNumber()));
 
             startActivity(callIntent);
         }
