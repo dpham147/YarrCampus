@@ -13,7 +13,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -63,6 +62,10 @@ public class ProfessorListActivity extends AppCompatActivity {
         searchProfessorEditText.addTextChangedListener(searchTextChangedListener);
 
 
+    }
+
+    public void reset(View view) {
+        searchProfessorEditText.setText("");
     }
 
     public void viewProfessorDetails (View view)

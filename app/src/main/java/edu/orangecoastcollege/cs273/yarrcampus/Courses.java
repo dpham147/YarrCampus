@@ -17,6 +17,15 @@ public class Courses implements Parcelable{
     private String mSubject;
     private String mSemesterCode;
 
+    /**
+     * Courses overloaded constructor
+     * @param crn - Course registration number (unique field id)
+     * @param courseName - name of the course
+     * @param building - building object class is in
+     * @param professor - course instructor
+     * @param subject - course subject
+     * @param code - semester code
+     */
     public Courses(int crn, String courseName, Building building, Professor professor, String subject, String code){
         mCRN = crn;
         mCourseName = courseName;
@@ -26,6 +35,10 @@ public class Courses implements Parcelable{
         mSemesterCode = code;
     }
 
+    /**
+     * Course parcel constructor
+     * @param parcel - source parcel
+     */
     public Courses(Parcel parcel)
     {
         mCRN = parcel.readInt();
@@ -47,50 +60,106 @@ public class Courses implements Parcelable{
         mSemesterCode = parcel.readString();
     }
 
+    /**
+     * CRN accessor
+     * @return - crn as integer
+     */
     public int getCRN() {
         return mCRN;
     }
 
+    /**
+     * CRN accessor
+     * @return - crn as strin
+     */
+    public String getCRNString() {
+        return String.valueOf(mCRN);
+    }
+
+    /**
+     * CRN mutator
+     * @param CRN - new CRN
+     */
     public void setCRN(int CRN) {
         mCRN = CRN;
     }
 
+    /**
+     * Gets the associated building object
+     * @return - the building
+     */
     public Building getmBuilding() {
         return mBuilding;
     }
 
+    /**
+     * Building object mutator
+     * @param building - new building
+     */
     public void setmBuilding(Building building) {
         mBuilding = building;
     }
 
+    /**
+     * Accesses associated Professor class
+     * @return - the professor
+     */
     public Professor getmProfessor() {
         return mProfessor;
     }
 
+    /**
+     * Professor mutator
+     * @param professor - new professor
+     */
     public void setmProfessor(Professor professor) {
         mProfessor = professor;
     }
 
+    /**
+     * Subject accessor
+     * @return - the subject
+     */
     public String getSubject() {
         return mSubject;
     }
 
+    /**
+     * Subject mutator
+     * @param subject - new subject
+     */
     public void setSubject(String subject) {
         mSubject = subject;
     }
 
+    /**
+     * Course name mutator
+     * @param courseName - new course name
+     */
     public void setCourseName(String courseName){
         mCourseName = courseName;
     }
 
+    /**
+     * course name accessor
+     * @return - the course name
+     */
     public String getCourseName(){
         return mCourseName;
     }
 
+    /**
+     * semester code accessor
+     * @return - the semester code
+     */
     public String getSemesterCode() {
         return mSemesterCode;
     }
 
+    /**
+     * Semester code mutator
+     * @param semesterCode - new semester code
+     */
     public void setSemesterCode(String semesterCode) {
         mSemesterCode = semesterCode;
     }
@@ -133,6 +202,10 @@ public class Courses implements Parcelable{
         }
     };
 
+    /**
+     * Overloaded toString() method
+     * @return - "Courses {courseName, crn}"
+     */
     @Override
     public String toString() {
         return "Courses {" + mCourseName + ", " + mCRN + "}";

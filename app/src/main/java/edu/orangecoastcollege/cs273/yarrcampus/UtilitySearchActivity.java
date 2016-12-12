@@ -60,12 +60,6 @@ public class UtilitySearchActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utility_search);
 
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
-        }
-
         db = new DBHelper(this);
         db.deleteAllUtilities();
         db.addUtility(new Utility("Restroom", 33.670791f, -117.912080f));
@@ -81,10 +75,6 @@ public class UtilitySearchActivity extends AppCompatActivity
         allUtilities = db.getAllUtilities();
         displayedUtilities = new ArrayList<>();
 
-        Log.i("YarrCampus", allUtilities.get(0).toString() + " in onCreate()");
-        Log.i("YarrCampus", allUtilities.get(3).toString() + " in onCreate()");
-        Log.i("YarrCampus", allUtilities.get(6).toString() + " in onCreate()");
-
         restroomList = filterUtilityList("Restroom");
         waterList = filterUtilityList("Water Fountain");
         emergencyList = filterUtilityList("Emergency Phone");
@@ -95,10 +85,8 @@ public class UtilitySearchActivity extends AppCompatActivity
         SupportMapFragment utilityMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.utilityMapFragment);
         utilityMapFragment.getMapAsync(this);
 
-
-
-
-        if (mGoogleApiClient == null) {
+        if (mGoogleApiClient == null)
+        {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -114,6 +102,11 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Filters the allUtilities list for a type of Utility
+     * @param type - Filter target
+     * @return - An ArrayList of all Utilities of the parameter typing
+     */
     protected List<Utility> filterUtilityList(String type) {
         ArrayList<Utility> filteredList = new ArrayList<>();
         for (Utility utility : allUtilities) {
@@ -125,6 +118,10 @@ public class UtilitySearchActivity extends AppCompatActivity
         return filteredList;
     }
 
+    /**
+     * Checkbox onClick method
+     * @param view - the checkbox
+     */
     protected void togglePins(View view) {
         if (view instanceof CheckBox) {
             handleLocation(currentLocation);
@@ -144,9 +141,16 @@ public class UtilitySearchActivity extends AppCompatActivity
         {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
         }
-        currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
+        else
+        {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
+        if (currentLocation == null) {
+            currentLocation = new Location("");
+            currentLocation.setLatitude(OCC_LATITUDE);
+            currentLocation.setLongitude(OCC_LONGITUDE);
+        }
         handleLocation(currentLocation);
     }
 
@@ -165,6 +169,10 @@ public class UtilitySearchActivity extends AppCompatActivity
         handleLocation(location);
     }
 
+    /**
+     * Handles all location logic
+     * @param location - The user's current or last known location
+     */
     private void handleLocation(Location location)
     {
         mMap.clear();
@@ -173,7 +181,8 @@ public class UtilitySearchActivity extends AppCompatActivity
 
         LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
-        mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
+        Utility user = new Utility("You are here.", (float) userCoord.latitude, (float) userCoord.longitude);
+        displayedUtilities.add(user);
         CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
