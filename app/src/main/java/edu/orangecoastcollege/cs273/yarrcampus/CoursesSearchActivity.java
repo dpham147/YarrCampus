@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.orangecoastcollege.cs273.yarrcampus.ProfessorListActivity.getUriResource;
+
 public class CoursesSearchActivity extends AppCompatActivity {
 
     private DBHelper db;
@@ -42,21 +44,25 @@ public class CoursesSearchActivity extends AppCompatActivity {
         db.deleteAllBuildings();
         db.deleteAllProfessors();
 
-        db.addCourse(12345, "CS 273", 1, 1, "Mobile Application Development", "54321");
-        db.addCourse(19876, "Math 295", 1, 2, "Tensor Space", "12576");
-        db.addCourse(15732, "Eng 101", 2, 3, "College Writing", "32451");
+        db.addBuilding(new Building("Watson Hall", "WTNH", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.670686f,  -117.909255f));
+        db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670797f, -117.912142f));
+        db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.671648f, -117.914652f));
+        db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668890f, -117.912638f));
 
-        db.addBuilding(new Building(1, "MBSC", "MBSC", "8:00-10:00", Uri.EMPTY, 0.0f, 0.0f));
-        db.addBuilding(new Building(2, "Writers Row", "WRR", "8:00-10:00", Uri.EMPTY, 0.0f, 0.0f));
+        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" , Uri.EMPTY, 33.671404f, -117.911482f));
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,Uri.EMPTY,33.671404f, -117.911482f));
+        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBSC", Uri.EMPTY, 0.0f, 0.0f));
+        db.addProfessor(new Professor("Eigenvalue", "Simple guy", "0000-2400", "WR", Uri.EMPTY, 0.0f, 0.0f));
 
-        db.addProfessor(new Professor(1, "M. Paulding", "Cool guy", "800-2000", "MBSC", Uri.EMPTY, 0.0f, 0.0f));
-        db.addProfessor(new Professor(2, "Art Moore", "Interesting guy", "1700-2000", "MBSC", Uri.EMPTY, 0.0f, 0.0f));
-        db.addProfessor(new Professor(3, "Eigenvalue", "Simple guy", "0000-2400", "WR", Uri.EMPTY, 0.0f, 0.0f));
+        db.addCourse(12345, "CS 273", 2, 1, "Mobile Application Development", "54321");
+        db.addCourse(19876, "Math 295", 2, 3, "Tensor Space", "12576");
+        db.addCourse(15732, "Eng 101", 1, 4, "College Writing", "32451");
 
-        coursesList = db.getAllCourses();
-        filteredCoursesList = new ArrayList<>(coursesList);
         professorList = db.getAllProfessors();
         buildingList = db.getAllBuildings();
+        coursesList = db.getAllCourses();
+        filteredCoursesList = new ArrayList<>(coursesList);
+
 
         professorSpinner = (Spinner) findViewById(R.id.professorSpinner);
         ArrayAdapter<String> professorSpinnerAdapter =

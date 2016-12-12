@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -145,6 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getFloat(7));
 
                 allProf.add(newProf);
+
             }
             while (cursor.moveToNext());
         }
@@ -164,6 +166,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 PROFESSOR_KEY_FIELD_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
 
         Professor newProf = new Professor( cursor.getInt(0),
                 cursor.getString(1),
@@ -220,6 +225,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getFloat(4),
                         cursor.getFloat(5));
                 allBuildings.add(newBuilding);
+                Log.i("YarrCampus", "Professor ID: " + newBuilding.getId());
             }
             while (cursor.moveToNext());
         }
@@ -237,6 +243,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         FIELD_BUILDING_COORDINATE_LAT, FIELD_BUILDING_COORDINATE_LONG,
                         FIELD_BUILDING_IMAGE_URI}, BUILDING_KEY_FIELD_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
 
         Building newBuilding = new Building(
                 cursor.getInt(0),

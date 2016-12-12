@@ -28,6 +28,11 @@ public class Building implements Parcelable {
         mGPSLong = gpsLong;
     }
 
+    public Building(String name, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
+    {
+        this(-1, name, code, hours, imageUri, gpsLat, gpsLong);
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -56,10 +61,7 @@ public class Building implements Parcelable {
         }
     };
 
-    public Building(String name, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
-    {
-        this(-1, name, code, hours, imageUri, gpsLat, gpsLong);
-    }
+
 
     private Building(Parcel parcel)
     {
