@@ -56,6 +56,12 @@ public class UtilitySearchActivity extends AppCompatActivity
     private Location currentLocation;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utility_search);
@@ -128,9 +134,17 @@ public class UtilitySearchActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Instanciates the map and sets camera onto OCC
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
     }
 
     @Override
@@ -156,12 +170,12 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.e("YarrCampus", "Connection to Google play was suspended.");
+        Log.e("UtilSearch", "Connection to Google play was suspended.");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("YarrCampus", "Connection to Google play has failed.");
+        Log.e("UtilSearch", "Connection to Google play has failed.");
     }
 
     @Override
@@ -180,11 +194,8 @@ public class UtilitySearchActivity extends AppCompatActivity
         displayedUtilities.clear();
 
         LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
         mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        mMap.moveCamera(cameraUpdate);
+
 
         if (restroomCheck.isChecked())
         {
@@ -212,7 +223,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         {
             LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
             mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-            Log.i("YarrCampus", utility.toString() + " in handleLocation()");
+            Log.i("UtilSearch", utility.toString() + " is displayed");
         }
     }
 }

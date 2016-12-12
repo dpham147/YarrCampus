@@ -48,5 +48,6 @@
     <string name="example_crn">Ex: 12345</string>
     <string name="filter_building">Filter by Building</string>
     <string name="campus_contacts">Campus Contacts</string>
+    <string name="course_locate">Locate Building</string>
 
 </resources>
