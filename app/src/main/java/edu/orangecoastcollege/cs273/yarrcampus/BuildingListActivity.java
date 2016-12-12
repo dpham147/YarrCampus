@@ -39,6 +39,7 @@ public class BuildingListActivity extends AppCompatActivity {
         db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670797f, -117.912142f));
         db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.671648f, -117.914652f));
         db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668890f, -117.912638f));
+
         allBuildingsList = db.getAllBuildings();
         filteredBuildingsList = new ArrayList<> (allBuildingsList);
 
@@ -46,6 +47,11 @@ public class BuildingListActivity extends AppCompatActivity {
         buildingListView.setAdapter(buildingListAdapter);
     }
 
+    /**
+     * Whenever the user enters text into the edit text, filter out all the buildings
+     * that contain whatever is in the edit text. Checks both the building name
+     * and the building code
+     */
     public TextWatcher buildingNameTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,6 +83,12 @@ public class BuildingListActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * When the user clicks on a building in the list view, start up the details activity and pass
+     * the selected building to the activity
+     *
+     * @param view The current view
+     */
     public void viewBuildingDetailsActivity(View view){
         Intent buildingDetails = new Intent(this, BuildingDetailsActivity.class);
         Building building = (Building) view.getTag();
@@ -84,6 +96,11 @@ public class BuildingListActivity extends AppCompatActivity {
         startActivity(buildingDetails);
     }
 
+    /**
+     * Goes to the Map Activity when the user clicks on the button
+     *
+     * @param  view The current view
+     */
     public void goToMapView(View view){
         startActivity(new Intent(this, BuildingMapViewActivity.class) );
     }

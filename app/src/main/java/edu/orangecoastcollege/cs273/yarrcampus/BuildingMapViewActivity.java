@@ -41,6 +41,13 @@ public class BuildingMapViewActivity extends AppCompatActivity implements OnMapR
     private ArrayList<Building> allBuildingsList;
     private GoogleApiClient mGoogleApiClient;
 
+    /**
+     * Loads up the Google Maps centered on Orange Coast College
+     * and asks for permission to get the current location of
+     * user.
+     *
+     * @param savedInstanceState Last instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +66,13 @@ public class BuildingMapViewActivity extends AppCompatActivity implements OnMapR
 
     }
 
+    /**
+     * Empty the map and resets the the location of the map onto Orange Coast College.
+     * Gets all the buildings at and puts a marker above the location. Also every marker
+     * contains the building below it.
+     *
+     * @param bundle
+     */
     public void onConnected(@Nullable Bundle bundle) {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
@@ -78,18 +92,22 @@ public class BuildingMapViewActivity extends AppCompatActivity implements OnMapR
         }
 
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         Log.e("Yarr Campus", "Suspended connection from Google Play Services.");
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.e("Yarr Campus", "Failed connection from Google Play Services.");
     }
+
     @Override
     public void onLocationChanged(Location location) {
 
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         campusMap = googleMap;
@@ -97,6 +115,13 @@ public class BuildingMapViewActivity extends AppCompatActivity implements OnMapR
         campusMap.setOnInfoWindowClickListener(this);
     }
 
+    /**
+     * When the window above the marker is clicked start up the details activity.
+     * When starting the activity send over the building that was included with
+     * the marker.
+     *
+     * @param marker Marker above the location
+     */
     @Override
     public void onInfoWindowClick(Marker marker) {
         Intent buildingDetails = new Intent(this, BuildingDetailsActivity.class);

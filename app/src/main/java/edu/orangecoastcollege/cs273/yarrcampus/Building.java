@@ -13,10 +13,17 @@ public class Building implements Parcelable {
     private float mGPSLat;
     private float mGPSLong;
 
-    public Building()
-    {
-    }
-
+    /**
+     * Constructor for a building, initializes all the variables to the parameters being passed
+     *
+     * @param id int, id of the building
+     * @param name String, the name of the building
+     * @param code String, the shortened name of the building
+     * @param hours String, hours the building is operable, format 00:00 AM - 00:00 PM
+     * @param imageURI Uri, link to the image of the building
+     * @param gpsLat float, Latitude of the building in Decimal Format
+     * @param gpsLong float, Longitude of the building in Decimal Format
+     */
     public Building(int id, String name, String code, String hours, Uri imageURI, float gpsLat, float gpsLong)
     {
         mId = id;
@@ -28,6 +35,16 @@ public class Building implements Parcelable {
         mGPSLong = gpsLong;
     }
 
+    /**
+     * Constructor for a building, initializes all the variables to the parameters being passed
+     *
+     * @param name String, the name of the building
+     * @param code String, the shortened name of the building
+     * @param hours String, hours the building is operable, format 00:00 AM - 00:00 PM
+     * @param imageUri Uri, link to the image of the building
+     * @param gpsLat float, Latitude of the building
+     *
+     */
     public Building(String name, String code, String hours, Uri imageUri, float gpsLat, float gpsLong)
     {
         this(-1, name, code, hours, imageUri, gpsLat, gpsLong);
@@ -74,63 +91,128 @@ public class Building implements Parcelable {
         mGPSLong = parcel.readFloat();
     }
 
+    /**
+     *
+     * @return id of the building
+     */
     public int getId() {
         return mId;
     }
 
-    public void setId(int id) {
-        mId = id;
-    }
-
+    /**
+     * Gets name of the building
+     *
+     * @return name of the building
+     */
     public String getName() {
         return mName;
     }
 
+    /**
+     * Changes the name of this building
+     *
+     * @param name Building's new name
+     */
     public void setName(String name) {
         mName = name;
     }
 
+    /**
+     * Changes the shortened name of the building to the new one
+     *
+     * @param code New shortened name for the building
+     */
     public void setCode(String code){
         mCode = code;
     }
 
+    /**
+     * Gets the shortened name of the building
+     *
+     * @return code for the building
+     */
     public String getCode(){
         return mCode;
     }
 
-
+    /**
+     * Gets the hours of the building
+     *
+     * @return The hours of the building
+     */
     public String getHours() {
         return mHours;
     }
 
+    /**
+     * Changes the hours of the building
+     *
+     * @param mHours The new hours of the building
+     */
     public void setHours(String mHours) {
         this.mHours = mHours;
     }
 
+    /**
+     * Gets the link to the image of the building
+     *
+     * @return The image of the building
+     */
     public Uri getImageURI() {
         return mImageURI;
     }
 
+    /**
+     * Changes the link to the image of the building
+     *
+     * @param mImageURI New image of the building
+     */
     public void setImageURI(Uri mImageURI) {
         this.mImageURI = mImageURI;
     }
 
+    /**
+     * Gets the Latitude of the building in Decimal format
+     *
+     * @return The Latitude of the building
+     */
     public float getGPSLat() {
         return mGPSLat;
     }
 
+    /**
+     * Changes the Latitude of the building, may be a bit difficult
+     *
+     * @param mGPSLat The new latitude location of the building in Decimal Format
+     */
     public void setGPSLat(float mGPSLat) {
         this.mGPSLat = mGPSLat;
     }
 
+    /**
+     * Gets the Longitude of the building in Decimal Format
+     *
+     * @return The Longitude of the building
+     */
     public float getGPSLong() {
         return mGPSLong;
     }
 
+    /**
+     * Changes the Longitude of the building, may be a bit difficult
+     *
+     * @param mGPSLong The new Longitude location of the building in Decimal Format
+     */
     public void setGPSLong(float mGPSLong) {
         this.mGPSLong = mGPSLong;
     }
 
+    /**
+     * Gets the name and id of the building and gives it in a certain format
+     * "Building{Building Name, Building ID}"
+     *
+     * @return Name and ID of the building
+     */
     @Override
     public String toString() {
         return "Building {" + mName + ", " + mId + "}";
