@@ -44,4 +44,5 @@
     <string name="locate_office_button">Locate Office</string>
     <string name="filter_crn">Filter by CRN</string>
     <string name="example_crn">Ex: 12345</string>
+    <string name="filter_building">Filter by Building</string>
 </resources>

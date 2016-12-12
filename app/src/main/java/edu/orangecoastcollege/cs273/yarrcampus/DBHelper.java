@@ -140,6 +140,31 @@ public class DBHelper extends SQLiteOpenHelper {
         return allProf;
     }
 
+    public Professor getProfessor(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                PROFESSOR_TABLE,
+                new String[]{PROFESSOR_KEY_FIELD_ID, FIELD_PROFESSORS_NAME,
+                        FIELD_PROFESSORS_BUILDING, FIELD_PROFESSORS_OFFICE_HOURS,
+                        FIELD_PROFESSORS_IMAGE_URI, FIELD_PROFESSORS_IMAGE_URI,
+                        FIELD_PROFESSORS_OFFICE_LATITUDE, FIELD_PROFESSORS_OFFICE_LONGITUDE},
+                PROFESSOR_KEY_FIELD_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        Professor newProf = new Professor( cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                Uri.parse(cursor.getString(5)),
+                cursor.getFloat(6),
+                cursor.getFloat(7));
+        db.close();
+        return newProf;
+    }
+
     public void addProfessor(Professor professor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -188,6 +213,29 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return allBuildings;
+    }
+
+    public Building getBuilding(int id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                BUILDING_TABLE,
+                new String[]{BUILDING_KEY_FIELD_ID, FIELD_BUILDING_NAME,
+                        FIELD_BUILDING_CODE, FIELD_BUILDING_HOURS,
+                        FIELD_BUILDING_COORDINATE_LAT, FIELD_BUILDING_COORDINATE_LONG,
+                        FIELD_BUILDING_IMAGE_URI}, BUILDING_KEY_FIELD_ID + "=?", new String[]{String.valueOf(id)},
+                null, null, null, null);
+
+        Building newBuilding = new Building(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                Uri.parse(cursor.getString(6)),
+                cursor.getFloat(4),
+                cursor.getFloat(5));
+        db.close();
+        return newBuilding;
     }
 
     public void addBuilding(Building building){
@@ -256,30 +304,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-//    public ArrayList<Utility> queryUtilityType (String type)
-//    {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        ArrayList<Utility> queriedUtil = new ArrayList<>();
-//
-//        Cursor cursor = db.query(
-//                UTILITY_TABLE,
-//                new String[]{FIELD_UTILITIES_TYPE, FIELD_UTILITIES_COORDINATE_LAT, FIELD_UTILITIES_COORDINATE_LONG},
-//                FIELD_UTILITIES_TYPE + " ?=",
-//                new String[]{type},
-//                null, null, null, null);
-//
-//        if (cursor.moveToFirst());
-//        {
-//            do {
-//                Utility newUtility =  new Utility(cursor.getString(0), cursor.getFloat(1), cursor.getFloat(2));
-//                queriedUtil.add(newUtility);
-//            }
-//            while (cursor.moveToNext());
-//        }
-//        db.close();
-//        return queriedUtil;
-//    }
-
     public void addCourse(int crn, String courseName, int buildingId, int profId, String subject, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -303,14 +327,14 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst())
         {
             do {
-//                Courses newCourse = new Courses(
-//                        cursor.getInt(0),
-//                        cursor.getString(1),
-//                        cursor.getInt(2),
-//                        cursor.getInt(3),
-//                        cursor.getString(4),
-//                        cursor.getString(5));
-//                allCourses.add(newCourse);
+                Courses newCourse = new Courses(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        getBuilding(cursor.getInt(2)),
+                        getProfessor(cursor.getInt(3)),
+                        cursor.getString(4),
+                        cursor.getString(5));
+                allCourses.add(newCourse);
             }
             while (cursor.moveToNext());
         }

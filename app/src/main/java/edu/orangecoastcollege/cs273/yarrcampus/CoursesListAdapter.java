@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,9 @@ public class CoursesListAdapter extends ArrayAdapter<Courses> {
     private Context mContext;
     private List<Courses> mCoursesList = new ArrayList<>();
     private int mResourceId;
+    private LinearLayout coursesListLinearLayout;
+    private TextView coursesTitleTextView;
+    private TextView coursesProfessorTextView;
 
 
     public CoursesListAdapter(Context context, int resource, List<Courses> courses) {
@@ -30,8 +35,20 @@ public class CoursesListAdapter extends ArrayAdapter<Courses> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(mResourceId, null);
+
+
+        coursesListLinearLayout = (LinearLayout) view.findViewById(R.id.coursesListLinearLayout);
+        coursesTitleTextView = (TextView) view.findViewById(R.id.courseTitleTextView);
+        coursesProfessorTextView = (TextView) view.findViewById(R.id.courseProfessorTextView);
+
+        Courses course = mCoursesList.get(position);
+        coursesListLinearLayout.setTag(course);
+
+        coursesTitleTextView.setText(course.getCourseName());
+        coursesProfessorTextView.setText(course.getmProfessor().getmName());
 
         return view;
     }
