@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "YarrCampus";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
 
     private static final String BUILDING_TABLE = "Buildings";
     private static final String BUILDING_KEY_FIELD_ID = "id";
@@ -49,6 +49,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_COURSES_BUILDING_ID = "building_id";
     private static final String FIELD_COURSES_SEMESTER_CODE = "semester_code";
     private static final String FIELD_COURSES_SUBJECT = "subject";
+
+    private static final String CONTACTS_TABLE = "Contacts";
+    private static final String CONTACTS_KEY_FIELD_ID = "id";
+    private static final String FIELD_CONTACTS_NAME = "name";
+    private static final String FIELD_CONTACTS_NUMBER = "phone_number";
 
     public DBHelper(Context context) {
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -101,6 +106,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 PROFESSOR_TABLE + "(" + PROFESSOR_KEY_FIELD_ID + ")" + ")";
         db.execSQL(table);
 
+        table = "CREATE TABLE " + CONTACTS_TABLE + "(" +
+                CONTACTS_KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FIELD_CONTACTS_NAME + " TEXT, " +
+                FIELD_CONTACTS_NUMBER + " TEXT" + ")";
+        db.execSQL(table);
+
     }
 
     @Override
@@ -109,6 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + PROFESSOR_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + UTILITY_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + COURSES_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CONTACTS_TABLE);
         onCreate(db);
     }
 
@@ -375,4 +387,41 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public ArrayList<Contacts> getAllContacts(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Contacts> allContacts = new ArrayList<>();
+        Cursor cursor = db.query(CONTACTS_TABLE, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                Contacts newContact = new Contacts(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                allContacts.add(newContact);
+            }
+            while (cursor.moveToNext());
+        }
+        db.close();
+        return allContacts;
+    }
+
+    public void addContact(Contacts contact){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(FIELD_CONTACTS_NAME, contact.getName());
+        values.put(FIELD_CONTACTS_NUMBER, contact.getPhoneNumber());
+        db.insert(CONTACTS_TABLE, null, values);
+
+        db.close();
+    }
+
+    public void deleteAllContacts(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(CONTACTS_TABLE, null, null);
+        db.close();
+    }
 }

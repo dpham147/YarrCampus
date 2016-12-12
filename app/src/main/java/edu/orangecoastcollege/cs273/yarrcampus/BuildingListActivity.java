@@ -44,9 +44,6 @@ public class BuildingListActivity extends AppCompatActivity {
 
         buildingListAdapter = new BuildingListAdapter(this, R.layout.building_list_item, filteredBuildingsList);
         buildingListView.setAdapter(buildingListAdapter);
-
-
-
     }
 
     public TextWatcher buildingNameTextWatcher = new TextWatcher() {

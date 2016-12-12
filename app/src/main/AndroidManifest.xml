@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -44,7 +45,6 @@
         <activity android:name=".BuildingMapViewActivity" />
         <activity android:name=".CoursesSearchActivity" />
         <activity android:name=".ProfessorMapActivity" />
-        <activity android:name=".CoursesSearchActivity" />
         <activity android:name=".CampusContactsActivity" />
         <activity android:name=".CourseDetailsActivity"></activity>
     </application>

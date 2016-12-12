@@ -45,6 +45,9 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         contactsNameListTextView.setText(selectedContact.getName());
         contactsNumberListTextView.setText(selectedContact.getPhoneNumber());
 
+        contactsListLinearLayout.setTag(selectedContact);
+
+
 
         return view;
     }
