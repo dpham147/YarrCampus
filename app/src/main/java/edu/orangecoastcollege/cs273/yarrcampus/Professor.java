@@ -159,4 +159,9 @@ public class Professor implements Parcelable {
     public void setmOfficeLong(float mOfficeLong) {
         this.mOfficeLong = mOfficeLong;
     }
+
+    @Override
+    public String toString() {
+        return "Professor {" + mName + ", " + mId + "}";
+    }
 }

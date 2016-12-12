@@ -131,5 +131,9 @@ public class Building implements Parcelable {
         this.mGPSLong = mGPSLong;
     }
 
+    @Override
+    public String toString() {
+        return "Building {" + mName + ", " + mId + "}";
+    }
 
 }

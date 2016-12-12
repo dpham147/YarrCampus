@@ -77,8 +77,8 @@ public class CoursesSearchActivity extends AppCompatActivity {
         crn = (EditText) findViewById(R.id.searchCourseEditText);
         crn.addTextChangedListener(crnTextWatcher);
 
-        coursesListView = (ListView) findViewById(R.id.coursesListView);
         coursesListAdapter = new CoursesListAdapter(this, R.layout.courses_list_item, filteredCoursesList);
+        coursesListView = (ListView) findViewById(R.id.coursesListView);
         coursesListView.setAdapter(coursesListAdapter);
 
         logList();
@@ -391,6 +391,14 @@ public class CoursesSearchActivity extends AppCompatActivity {
         for (Courses courses : filteredCoursesList)
         {
             Log.i("YarrCampus", courses.toString());
+        }
+        for (Professor professor : professorList)
+        {
+            Log.i("YarrCampus", professor.toString());
+        }
+        for (Building building : buildingList)
+        {
+            Log.i("YarrCampus", building.toString());
         }
     }
 

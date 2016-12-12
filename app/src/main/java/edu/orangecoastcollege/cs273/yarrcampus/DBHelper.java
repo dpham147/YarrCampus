@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -225,7 +224,6 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getFloat(4),
                         cursor.getFloat(5));
                 allBuildings.add(newBuilding);
-                Log.i("YarrCampus", "Professor ID: " + newBuilding.getId());
             }
             while (cursor.moveToNext());
         }

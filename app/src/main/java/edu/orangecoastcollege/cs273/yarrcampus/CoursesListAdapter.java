@@ -2,6 +2,7 @@ package edu.orangecoastcollege.cs273.yarrcampus;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,20 +36,21 @@ public class CoursesListAdapter extends ArrayAdapter<Courses> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater =
-                (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(mResourceId, null);
 
+        final Courses course = mCoursesList.get(position);
 
         coursesListLinearLayout = (LinearLayout) view.findViewById(R.id.coursesListLinearLayout);
         coursesTitleTextView = (TextView) view.findViewById(R.id.courseTitleTextView);
         coursesProfessorTextView = (TextView) view.findViewById(R.id.courseProfessorTextView);
 
-        Courses course = mCoursesList.get(position);
-        coursesListLinearLayout.setTag(course);
-
         coursesTitleTextView.setText(course.getCourseName());
         coursesProfessorTextView.setText(course.getmProfessor().getmName());
+
+        coursesListLinearLayout.setTag(course);
+
+        Log.i("YarrCourseAdapter", course.toString());
 
         return view;
     }
