@@ -67,7 +67,6 @@ public class ContactDeveloperActivity extends AppCompatActivity {
 
             try {
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                finish();
                 Log.i("Finished sending email", "");
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(ContactDeveloperActivity.this,

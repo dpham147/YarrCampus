@@ -138,7 +138,7 @@ public class ProfessorMapActivity extends AppCompatActivity
                 .title("Current Location"));
         //.icon(BitmapDescriptorFactory.fromResource(R.drawable.my_marker)));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(officeCoordinate).zoom(18.0f).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(officeCoordinate).zoom(16.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
 
