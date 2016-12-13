@@ -12,6 +12,7 @@
     <string name="example_professor_search">Ex: Michael Paulding</string>
     <string name="search_professor">Search Professor</string>
     <string name="select_instructor">[Select Instructor]</string>
+    <string name="locate_office_button">Locate Office</string>
 
     <!-- UTILITY RELATED STRINGS-->
     <string name="utility_search_menu_button">Search Utilities</string>
@@ -24,6 +25,10 @@
 
     <!-- COURSES RELATED STRING-->
     <string name="courses_search_menu_button">Search Courses</string>
+    <string name="filter_crn">Filter by CRN</string>
+    <string name="example_crn">Ex: 12345</string>
+    <string name="filter_building">Filter by Building</string>
+    <string name="course_locate">Locate Building</string>
 
     <!-- FAQ RELATED STRINGS-->
     <string name="faq_menu_button">FAQ</string>
@@ -33,14 +38,21 @@
     <string name="contacting_us">App Review\nSubmit general questions about the app,
         or give us a rating and tell us what you like or dislike about our app</string>
 
+    <!-- CAMPUS CONTACT RELATED STRINGS-->
+    <string name="campus_contacts">Campus Contacts</string>
+
     <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
     <string-array name="splash_screen_tips_list">
-        <item>Did you know the 1 in MSCB 135 refers to the 1st floor of the MSCB?</item>
-        <item>Thanksgiving Break will start on Nov 24</item>
+        <item>Happy Holidays!</item>
+        <item>Last class meeting is 12/15</item>
         <item>Applied for transfer? Be sure to keep updated on deadlines!</item>
-        <item>(Insert snazzy one-liner here)</item>
-        <item>YarrCampus sounds like Your Campus</item>
+        <item>I need a monster</item>
+        <item>YarrCampus sounds like YourCampus</item>
         <item>Paulding is awesome</item>
+        <item>Shiver me timberrrs</item>
+        <item>Yarr matey!</item>
+        <item>WAKE ME UP INSIDE</item>
+
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="locate_office_button">Locate Office</string>

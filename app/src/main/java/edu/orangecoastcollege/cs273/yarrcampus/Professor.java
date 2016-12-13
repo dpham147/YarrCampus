@@ -43,7 +43,7 @@ public class Professor implements Parcelable {
 
     public Professor(String name, String desc, String hours, String building, Uri imageUri, float latitude, float longitude)
     {
-        this(-1, name, desc,hours, building, imageUri, latitude, longitude);
+        this(-1, name, desc, hours, building, imageUri, latitude, longitude);
     }
 
     private Professor(Parcel parcel)
@@ -158,5 +158,10 @@ public class Professor implements Parcelable {
 
     public void setmOfficeLong(float mOfficeLong) {
         this.mOfficeLong = mOfficeLong;
+    }
+
+    @Override
+    public String toString() {
+        return "Professor {" + mName + ", " + mId + "}";
     }
 }

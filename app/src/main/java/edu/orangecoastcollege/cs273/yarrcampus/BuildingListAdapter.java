@@ -27,7 +27,13 @@ public class BuildingListAdapter extends ArrayAdapter<Building>{
     private TextView buildingListNameTextView;
     private TextView buildingListCodeTextView;
 
-
+    /**
+     * Creates a new <code>GameListAdapter</code> given a mContext, resource id and list of games.
+     *
+     * @param context The mContext for which the adapter is being used (typically an activity)
+     * @param rId The resource id (typically the layout file name)
+     * @param buildings The list of buildings to display
+     */
     public BuildingListAdapter(Context context, int rId, List<Building> buildings){
         super(context, rId, buildings);
         mContext = context;
@@ -35,6 +41,14 @@ public class BuildingListAdapter extends ArrayAdapter<Building>{
         mBuildingList = buildings;
     }
 
+
+    /**
+     * Gets the view associated with the layout.
+     * @param position The position of the Building selected in the list.
+     * @param convertView The converted view.
+     * @param parent The parent - ArrayAdapter
+     * @return The new view with all content set.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);

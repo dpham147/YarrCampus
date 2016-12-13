@@ -24,6 +24,13 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         private TextView contactsNameListTextView;
         private TextView contactsNumberListTextView;
 
+    /**
+     * Creates a new <code>GameListAdapter</code> given a mContext, resource id and list of games.
+     *
+     * @param context The mContext for which the adapter is being used (typically an activity)
+     * @param rId The resource id (typically the layout file name)
+     * @param contacts The list of buildings to display
+     */
     public ContactsListAdapter(Context context, int rId, List<Contacts> contacts){
         super(context, rId, contacts);
         mContext = context;
@@ -31,6 +38,13 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         mContactsList = contacts;
     }
 
+    /**
+     * Gets the view associated with the layout.
+     * @param position The position of the Contact selected in the list.
+     * @param convertView The converted view.
+     * @param parent The parent - ArrayAdapter
+     * @return The new view with all content set.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -43,7 +57,10 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         contactsNumberListTextView = (TextView) view.findViewById(R.id.contactsNumberListTextView);
 
         contactsNameListTextView.setText(selectedContact.getName());
-        contactsNumberListTextView.setText(selectedContact.getPhoneNumber());
+        String phone = selectedContact.getPhoneNumber();
+        contactsNumberListTextView.setText("(" + phone.substring(0, 3) +
+                                            ") " + phone.substring(3, 6) +
+                                            " - " + phone.substring(6));
 
         contactsListLinearLayout.setTag(selectedContact);
 

@@ -56,15 +56,15 @@ public class UtilitySearchActivity extends AppCompatActivity
     private Location currentLocation;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utility_search);
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
-        }
 
         db = new DBHelper(this);
         db.deleteAllUtilities();
@@ -81,10 +81,6 @@ public class UtilitySearchActivity extends AppCompatActivity
         allUtilities = db.getAllUtilities();
         displayedUtilities = new ArrayList<>();
 
-        Log.i("YarrCampus", allUtilities.get(0).toString() + " in onCreate()");
-        Log.i("YarrCampus", allUtilities.get(3).toString() + " in onCreate()");
-        Log.i("YarrCampus", allUtilities.get(6).toString() + " in onCreate()");
-
         restroomList = filterUtilityList("Restroom");
         waterList = filterUtilityList("Water Fountain");
         emergencyList = filterUtilityList("Emergency Phone");
@@ -95,10 +91,8 @@ public class UtilitySearchActivity extends AppCompatActivity
         SupportMapFragment utilityMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.utilityMapFragment);
         utilityMapFragment.getMapAsync(this);
 
-
-
-
-        if (mGoogleApiClient == null) {
+        if (mGoogleApiClient == null)
+        {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -114,6 +108,11 @@ public class UtilitySearchActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Filters the allUtilities list for a type of Utility
+     * @param type - Filter target
+     * @return - An ArrayList of all Utilities of the parameter typing
+     */
     protected List<Utility> filterUtilityList(String type) {
         ArrayList<Utility> filteredList = new ArrayList<>();
         for (Utility utility : allUtilities) {
@@ -125,15 +124,27 @@ public class UtilitySearchActivity extends AppCompatActivity
         return filteredList;
     }
 
+    /**
+     * Checkbox onClick method
+     * @param view - the checkbox
+     */
     protected void togglePins(View view) {
         if (view instanceof CheckBox) {
             handleLocation(currentLocation);
         }
     }
 
+    /**
+     * Instanciates the map and sets camera onto OCC
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
     }
 
     @Override
@@ -144,20 +155,27 @@ public class UtilitySearchActivity extends AppCompatActivity
         {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_LOCATION_REQUEST_CODE);
         }
-        currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
+        else
+        {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
+        if (currentLocation == null) {
+            currentLocation = new Location("");
+            currentLocation.setLatitude(OCC_LATITUDE);
+            currentLocation.setLongitude(OCC_LONGITUDE);
+        }
         handleLocation(currentLocation);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.e("YarrCampus", "Connection to Google play was suspended.");
+        Log.e("UtilSearch", "Connection to Google play was suspended.");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e("YarrCampus", "Connection to Google play has failed.");
+        Log.e("UtilSearch", "Connection to Google play has failed.");
     }
 
     @Override
@@ -165,6 +183,10 @@ public class UtilitySearchActivity extends AppCompatActivity
         handleLocation(location);
     }
 
+    /**
+     * Handles all location logic
+     * @param location - The user's current or last known location
+     */
     private void handleLocation(Location location)
     {
         mMap.clear();
@@ -172,11 +194,8 @@ public class UtilitySearchActivity extends AppCompatActivity
         displayedUtilities.clear();
 
         LatLng userCoord = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        LatLng occCoord = new LatLng(OCC_LATITUDE, OCC_LONGITUDE);
         mMap.addMarker(new MarkerOptions().position(userCoord).title("You are here"));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(occCoord).zoom(16.0f).build();
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
-        mMap.moveCamera(cameraUpdate);
+
 
         if (restroomCheck.isChecked())
         {
@@ -204,7 +223,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         {
             LatLng coordinate = new LatLng(utility.getmGPSLat(), utility.getmGPSLong());
             mMap.addMarker(new MarkerOptions().position(coordinate).title(utility.getmType()));
-            Log.i("YarrCampus", utility.toString() + " in handleLocation()");
+            Log.i("UtilSearch", utility.toString() + " is displayed");
         }
     }
 }

@@ -126,6 +126,34 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/callContactMenuLinearLayout"
+        android:background="?attr/colorButtonNormal"
+        android:layout_marginBottom="5dp"
+        android:onClick="openCallContactActivity">
+
+        <ImageView
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/phone"
+            android:adjustViewBounds="false"
+            android:id="@+id/callContactImageView"
+            android:layout_width="50dp" />
+
+        <TextView
+            android:text="@string/campus_contacts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/textView4"
+            android:layout_weight="3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="?attr/colorButtonNormal"
         android:id="@+id/faqMenuLinearLayout"
         android:layout_marginBottom="5dp"
@@ -174,29 +202,6 @@
             android:layout_weight="3"
             android:gravity="center"
             android:id="@+id/contactMenuTextView" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/callContactMenuLinearLayout"
-        android:onClick="openCallContactActivity">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/phone"
-            android:id="@+id/callContactImageView"
-            android:layout_weight="1" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:layout_weight="1" />
-
     </LinearLayout>
 
 

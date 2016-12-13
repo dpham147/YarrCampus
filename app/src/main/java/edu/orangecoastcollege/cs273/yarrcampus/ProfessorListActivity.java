@@ -14,7 +14,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -67,7 +66,9 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     }
 
-
+    public void reset(View view) {
+        searchProfessorEditText.setText("");
+    }
 
     public void viewProfessorDetails (View view)
     {

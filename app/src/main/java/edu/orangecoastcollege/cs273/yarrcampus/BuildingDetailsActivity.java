@@ -40,6 +40,13 @@ public class BuildingDetailsActivity extends AppCompatActivity
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
+    /**
+     * Loads up the map centered on the building selected. Loads up the
+     * Name of the building, the code, hours active, and the image of
+     * the building.
+     *
+     * @param savedInstanceState Last instance of when the activity was loaded
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +75,11 @@ public class BuildingDetailsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Center the map on the building selected and add a marker above it.
+     *
+     * @param bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&

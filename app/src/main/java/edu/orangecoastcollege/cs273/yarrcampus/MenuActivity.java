@@ -7,39 +7,54 @@ import android.view.View;
 
 public class MenuActivity extends AppCompatActivity {
 
-//    private int gameCounter = 0;
-//    private GestureDetector gestureDetector;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
 
-        //gestureDetector = new GestureDetector(this, this);
-
     }
 
+    /**
+     * Launches BuildingSearchActivity
+     * @param view - button
+     */
     public void openBuildingSearchActivity(View view)
     {
         startActivity(new Intent(this, BuildingListActivity.class));
     }
 
+    /**
+     * Launches ProfessorSearchActivity
+     * @param view - button
+     */
     public void openProfessorSearchActivity(View view)
     {
         startActivity(new Intent(this, ProfessorListActivity.class));
     }
 
+    /**
+     * Launches UtilitySearchActivity
+     * @param view - button
+     */
     public void openUtilitySearchActivity(View view)
     {
         startActivity(new Intent(this, UtilitySearchActivity.class));
     }
 
+    /**
+     * Launches CourseSearchActivity
+     * @param view - button
+     */
     public void openCourseSearchActivity(View view)
     {
         startActivity(new Intent(this, CoursesSearchActivity.class));
     }
 
+    /**
+     * Launches CampusContactsActivity
+     * @param view - button
+     */
     public void openCallContactActivity(View view){
         startActivity(new Intent(this, CampusContactsActivity.class));
     }
@@ -53,51 +68,6 @@ public class MenuActivity extends AppCompatActivity {
 //        startActivity(new Intent(this, FaqActivity.class));
 //    }
 
-//    public void openContactActivity(View view)
-//    {
-//        startActivity(new Intent(this, ContactActivity.class));
-//    }
-
-//    @Override
-//    public  boolean dispatchTouchEvent(MotionEvent ev){
-//        super.dispatchTouchEvent(ev);
-//        return gestureDetector.onTouchEvent(ev);
-//    }
-//
-//    @Override
-//    public boolean onDown(MotionEvent e) {
-//        return false;
-//    }
-//
-//    @Override
-//    public void onShowPress(MotionEvent e) {
-//
-//    }
-//
-//    @Override
-//    public boolean onSingleTapUp(MotionEvent e) {
-//        gameCounter++;
-//        if (gameCounter > 10)
-//        {
-//            startActivity(new Intent(this, QuizActivity.class));
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//        return false;
-//    }
-//
-//    @Override
-//    public void onLongPress(MotionEvent e) {
-//
-//    }
-//
-//    @Override
-//    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//        return false;
-//    }
 }
 
 

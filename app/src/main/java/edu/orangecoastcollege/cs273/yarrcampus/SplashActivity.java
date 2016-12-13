@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY = 10;
+    private static final int SPLASH_DELAY = 5000;
     private TextView splashTipTextView;
     private Animation splashAnim;
     private ImageView splashPirateImageView;
@@ -40,9 +40,17 @@ public class SplashActivity extends AppCompatActivity {
         int randomHint = rng.nextInt(allTips.length);
         splashTipTextView.setText(allTips[randomHint]);
 
-        splashAnim = AnimationUtils.loadAnimation(this, R.anim.splash_anim);
-        splashPirateImageView.startAnimation(splashAnim);
-
+        int randomAnim = rng.nextInt(3);
+        if (randomAnim == 1)
+        {
+            splashAnim = AnimationUtils.loadAnimation(this, R.anim.shake_anim);
+            splashPirateImageView.startAnimation(splashAnim);
+        }
+        else if (randomAnim == 2)
+        {
+            splashAnim = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
+            splashPirateImageView.startAnimation(splashAnim);
+        }
 
         TimerTask menuTask = new TimerTask() {
             @Override
