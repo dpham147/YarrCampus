@@ -11,6 +11,7 @@
         android:toXScale="1.0"
         android:fromYScale="10.0"
         android:toYScale="1.0"
+        android:duration="1000"
         android:fillAfter="false"
         />
 </set>
