@@ -14,6 +14,12 @@ public class FaqActivity extends AppCompatActivity {
     private List<Questions> questionsList;
     private ListAdapter questionsListAdapter;
 
+    /**
+     * Creates the activity_FAQ
+     * Creates and populates a list of questions.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

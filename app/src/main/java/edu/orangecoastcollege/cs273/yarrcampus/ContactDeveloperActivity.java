@@ -16,12 +16,17 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+
 public class ContactDeveloperActivity extends AppCompatActivity {
 
     private EditText contactDeveloperEditText;
     private TextView wordCountTextView;
     private Button sendEmailButton;
     @Override
+    /**
+     * Creates activity_contact_developer and sets each variable to its appropriate widgets and text fields
+     * as well as setting any Listeners to the variables.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_developer);
@@ -35,6 +40,9 @@ public class ContactDeveloperActivity extends AppCompatActivity {
         contactDeveloperEditText.addTextChangedListener(searchTextChangedListener);
     }
 
+    /**
+     *Listens to any text change in our single Edit Text and displays the number of characters in the field.
+     */
     TextWatcher searchTextChangedListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -53,6 +61,13 @@ public class ContactDeveloperActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * Creates an intent to send an email to our developer.
+     * This function sets who the email is being sent to and populates the message
+     * the the user's message
+     *
+     * @param view
+     */
     public void sendEmail(View view){
             String[] TO = {"someone@gmail.com"};
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
@@ -67,6 +82,7 @@ public class ContactDeveloperActivity extends AppCompatActivity {
 
             try {
                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                contactDeveloperEditText.setText("");
                 Log.i("Finished sending email", "");
             } catch (android.content.ActivityNotFoundException ex) {
                 Toast.makeText(ContactDeveloperActivity.this,

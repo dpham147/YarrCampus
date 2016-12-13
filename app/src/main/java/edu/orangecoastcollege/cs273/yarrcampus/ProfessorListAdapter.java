@@ -36,6 +36,14 @@ public class ProfessorListAdapter extends ArrayAdapter<Professor> {
     mProfessorList = objects;
    }
 
+    /**
+     * Connects all the variables to the appropriate widgets and text files and sets the values from the object
+     * into the item on the list.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView (int position, View convertView, ViewGroup parent)
     {

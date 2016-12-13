@@ -191,6 +191,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return professor;
     }
 
+    /**
+     * Adds a professor to the Data Base
+     *
+     * @param professor
+     */
     public void addProfessor(Professor professor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -207,6 +212,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(PROFESSOR_TABLE, null, values);
         db.close();
     }
+
+    /**
+     * deletes a professor from the data base
+     */
 
     public void deleteAllProfessors() {
         SQLiteDatabase db = this.getWritableDatabase();

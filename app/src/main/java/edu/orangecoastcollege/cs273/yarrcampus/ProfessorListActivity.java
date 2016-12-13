@@ -32,7 +32,11 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     private ProfessorListAdapter professorListAdapter;
 
-
+    /**
+     * Creates activity_professor_list and sets each variable to its appropriate widgets and text fields
+     * as well as setting any Listeners to the variables.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,10 +74,19 @@ public class ProfessorListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets the Search Text to an empty string
+     * @param view
+     */
     public void reset(View view) {
         searchProfessorEditText.setText("");
     }
 
+    /**
+     * Creates an intent to pass the professor to ProfessorDetailsActivity
+     * Launches ProfessorDetailsActivity
+     * @param view
+     */
     public void viewProfessorDetails (View view)
     {
             Intent professorDetailsIntent = new Intent(this, ProfessorDetailsActivity.class);
@@ -82,6 +95,9 @@ public class ProfessorListActivity extends AppCompatActivity {
             startActivity(professorDetailsIntent);
     }
 
+    /**
+     * Listens to text change edit text
+     */
     TextWatcher searchTextChangedListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

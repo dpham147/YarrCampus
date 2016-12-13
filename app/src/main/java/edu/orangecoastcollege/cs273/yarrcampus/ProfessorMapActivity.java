@@ -42,6 +42,12 @@ public class ProfessorMapActivity extends AppCompatActivity
     private LocationRequest mLocationRequest;
     private Marker marker;
 
+    /**
+     * Creates activity_professor_map
+     * creates the supportMapFragments and connects the google api client.
+     * Also initializes a set interval for updating your location
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,9 @@ public class ProfessorMapActivity extends AppCompatActivity
 
     }
 
+    /**
+     * stops the location update
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -78,6 +87,9 @@ public class ProfessorMapActivity extends AppCompatActivity
 
     }
 
+    /**
+     * resumes the location update
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,6 +103,11 @@ public class ProfessorMapActivity extends AppCompatActivity
                 mGoogleApiClient, mLocationRequest, this);
     }
 
+    /**
+     * Checks for permissions and asks if permissions are not granted.
+     * Sets your current location on the map
+     * @param bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -120,11 +137,19 @@ public class ProfessorMapActivity extends AppCompatActivity
         Log.e("Yarr Campus", "Failed connection from Google Play Services.");
     }
 
+    /**
+     * calls handleNewLocation function
+     * @param location
+     */
     @Override
     public void onLocationChanged(Location location) {
         handleNewLocation(location);
         }
 
+    /**
+     * Adds the marker for the Professor Office location and sets the camera to that location
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -144,6 +169,10 @@ public class ProfessorMapActivity extends AppCompatActivity
 
     }
 
+    /**
+     * deletes the old marker and creates a new one in respect to your current location.
+     * @param location
+     */
     public void handleNewLocation(Location location) {
 
         myLocation = location;
