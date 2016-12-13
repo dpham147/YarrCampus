@@ -29,7 +29,8 @@ public class CampusContactsActivity extends AppCompatActivity {
     private Context context;
 
     /**
-     * Loads all the Contacts in to the adapter and displays them into the ListView
+     * Loads all the Contacts in to the adapter and displays them into the ListView.
+     * When the user shakes the phone, rotate the layout out of view for 10 seconds
      *
      * @param savedInstanceState Last instance of when the activity was loaded
      */
