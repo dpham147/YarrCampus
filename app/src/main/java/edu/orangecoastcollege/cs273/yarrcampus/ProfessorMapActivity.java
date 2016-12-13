@@ -60,14 +60,11 @@ public class ProfessorMapActivity extends AppCompatActivity
         }
 
 
-
         // Define the interval for updates:
         mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10000)
                 .setFastestInterval(1000);
-
-
 
 
     }
@@ -77,6 +74,21 @@ public class ProfessorMapActivity extends AppCompatActivity
         super.onPause();
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
+        Log.i("Location Request", "Location updates: " + mLocationRequest.getNumUpdates());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+        }
+        if(mGoogleApiClient.isConnected())
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, mLocationRequest, this);
     }
 
     @Override
@@ -126,7 +138,7 @@ public class ProfessorMapActivity extends AppCompatActivity
                 .title("Current Location"));
         //.icon(BitmapDescriptorFactory.fromResource(R.drawable.my_marker)));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(officeCoordinate).zoom(16.0f).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(officeCoordinate).zoom(18.0f).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
 

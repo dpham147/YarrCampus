@@ -63,10 +63,11 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent(this, FaqActivity.class));
     }
 
-//    public void openFaqActivity(View view)
-//    {
-//        startActivity(new Intent(this, FaqActivity.class));
-//    }
+    public void openContactActivity(View view)
+    {
+        startActivity(new Intent (this, ContactDeveloperActivity.class));
+    }
+
 
 }
 

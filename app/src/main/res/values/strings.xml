@@ -12,7 +12,7 @@
     <string name="example_professor_search">Ex: Michael Paulding</string>
     <string name="search_professor">Search Professor</string>
     <string name="select_instructor">[Select Instructor]</string>
-    <string name="locate_office_button">Locate Office</string>
+
 
     <!-- UTILITY RELATED STRINGS-->
     <string name="utility_search_menu_button">Search Utilities</string>
@@ -25,9 +25,6 @@
 
     <!-- COURSES RELATED STRING-->
     <string name="courses_search_menu_button">Search Courses</string>
-    <string name="filter_crn">Filter by CRN</string>
-    <string name="example_crn">Ex: 12345</string>
-    <string name="filter_building">Filter by Building</string>
     <string name="course_locate">Locate Building</string>
 
     <!-- FAQ RELATED STRINGS-->
@@ -36,7 +33,9 @@
     <!-- CONTACT US RELATED STRINGS-->
     <string name="contact_us_menu_button">Contact the Devs</string>
     <string name="contacting_us">App Review\nSubmit general questions about the app,
-        or give us a rating and tell us what you like or dislike about our app</string>
+        or give us a rating and tell us what you like or dislike about our app.\n
+        Technical\nReport any bugs you encounter  or submit any ideas on improving our app.</string>
+    <string name="letters_cap">/140</string>
 
     <!-- CAMPUS CONTACT RELATED STRINGS-->
     <string name="campus_contacts">Campus Contacts</string>
@@ -59,5 +58,6 @@
     <string name="filter_crn">Filter by CRN</string>
     <string name="example_crn">Ex: 12345</string>
     <string name="filter_building">Filter by Building</string>
+    <string name="send_email">Send Email</string>
 
 </resources>

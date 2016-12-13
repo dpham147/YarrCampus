@@ -15,5 +15,33 @@
         android:text="@string/contacting_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
+        android:id="@+id/textView5"
+        android:textSize="18sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/contactDeveloperEditText"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/white"
+        android:inputType="text|textMultiLine|textCapSentences"
+        android:maxLength="140"
+        android:maxLines="7"
+        android:gravity="top"
+        android:hint="Text Here..." />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wordCountTextView" />
+
+    <Button
+        android:text="@string/send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendEmailButton"
+        android:layout_marginTop="40dp"
+        android:onClick="sendEmail" />
+
 </LinearLayout>

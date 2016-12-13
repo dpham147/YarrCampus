@@ -51,6 +51,10 @@ public class ProfessorListActivity extends AppCompatActivity {
         Log.i("YarrCampus", "Professor id: " + professor.getmId() );
         db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image,33.669912f, -117.911927f));
 
+        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBCC", image, 33.671380f, -117.911276f));
+        db.addProfessor(new Professor("Arlene Vieau", "Nice lady", "0000-2400", "CHEM", image, 33.670817f, -117.912982f));
+
+
         professorsList = db.getAllProfessors();
 
 

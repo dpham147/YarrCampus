@@ -28,8 +28,6 @@ public class FaqActivity extends AppCompatActivity {
                         " there you will find Building names, Professor names and the CRN"));
         questionsList.add(new Questions("Where can I find parking?",
                 "Please download OCC parking application"));
-        questionsList.add(new Questions("Where can I find parking?",
-                "Please download OCC parking application"));
         questionsList.add(new Questions("Can my class schedule change?",
                 "Your class schedule is prepared months in advance and changes inevitably occur."));
 
