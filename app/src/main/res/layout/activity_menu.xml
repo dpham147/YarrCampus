@@ -154,6 +154,33 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/onlineResourceMenuLinearLayout"
+        android:background="?attr/colorButtonNormal"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            app:srcCompat="@drawable/cursor"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="false"
+            android:id="@+id/onlineResourceImageView"
+            android:layout_width="50dp" />
+
+        <TextView
+            android:text="@string/online_resources"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:id="@+id/textView6"
+            android:layout_weight="3"
+            android:onClick="openOnlineResourceActivity" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="?attr/colorButtonNormal"
         android:id="@+id/faqMenuLinearLayout"
         android:layout_marginBottom="5dp"

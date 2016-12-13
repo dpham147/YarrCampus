@@ -39,6 +39,11 @@
 
     <!-- CAMPUS CONTACT RELATED STRINGS-->
     <string name="campus_contacts">Campus Contacts</string>
+    <!-- ONLINE RESOURCES RELATED STRINGS-->
+    <string name="occ_website">OCC Main Website</string>
+    <string name="blackboard">Blackboard</string>
+    <string name="canvas">Canvas</string>
+    <string name="my_occ">MyOCC Login Webpage</string>
 
     <!-- SPLASH SCREEN TIPS (ADD YOUR OWN JOKES OR SOMETHING) -->
     <string-array name="splash_screen_tips_list">
@@ -59,5 +64,6 @@
     <string name="example_crn">Ex: 12345</string>
     <string name="filter_building">Filter by Building</string>
     <string name="send_email">Send Email</string>
+    <string name="online_resources">Online Resources</string>
 
 </resources>

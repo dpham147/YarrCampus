@@ -8,6 +8,7 @@ public class Contacts {
     private int mId;
     private String mName;
     private String mPhoneNumber;
+    private String mHours;
 
     /**
      * Represents a contact at Orange Coast College
@@ -15,11 +16,13 @@ public class Contacts {
      * @param id int, ID to be stored in the database
      * @param name String, Name of the contact
      * @param phone String, Phone number of the contact, no format necessary, just the numbers
+     * @param hours String, Hours the contact is available, in the format 00:00 AM - 00:00 PM
      */
-    public Contacts(int id, String name, String phone){
+    public Contacts(int id, String name, String phone, String hours){
         mId = id;
         mName = name;
         mPhoneNumber = phone;
+        mHours = hours;
     }
 
     /**
@@ -28,8 +31,8 @@ public class Contacts {
      * @param name String, Name of the contact
      * @param phone String, Phone number of the contact, no format necessary, just the numbers
      */
-    public Contacts(String name, String phone){
-        this(-1, name, phone);
+    public Contacts(String name, String phone, String hours){
+        this(-1, name, phone, hours);
     }
 
     /**
@@ -75,5 +78,24 @@ public class Contacts {
      */
     public void setmName(String name) {
         mName = name;
+    }
+
+    /**
+     * Gets the hours the contact is available for
+     *
+     * @return The hours for the contact
+     */
+    public String getHours(){
+        return mHours;
+    }
+
+
+    /**
+     * Changes the hours the contact is available for
+     *
+     * @param hours New hours the contact is available for
+     */
+    public void setHours(String hours){
+        mHours = hours;
     }
 }

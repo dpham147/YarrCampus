@@ -23,6 +23,7 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         private LinearLayout contactsListLinearLayout;
         private TextView contactsNameListTextView;
         private TextView contactsNumberListTextView;
+        private TextView contactsHoursListTextView;
 
     /**
      * Creates a new <code>GameListAdapter</code> given a mContext, resource id and list of games.
@@ -55,12 +56,14 @@ public class ContactsListAdapter extends ArrayAdapter<Contacts> {
         contactsListLinearLayout = (LinearLayout) view.findViewById(R.id.contactsLinearLayout);
         contactsNameListTextView = (TextView) view.findViewById(R.id.contactsNameListTextView);
         contactsNumberListTextView = (TextView) view.findViewById(R.id.contactsNumberListTextView);
+        contactsHoursListTextView = (TextView) view.findViewById(R.id.contactsHoursListTextView);
 
         contactsNameListTextView.setText(selectedContact.getName());
         String phone = selectedContact.getPhoneNumber();
         contactsNumberListTextView.setText("(" + phone.substring(0, 3) +
                                             ") " + phone.substring(3, 6) +
                                             " - " + phone.substring(6));
+        contactsHoursListTextView.setText(selectedContact.getHours());
 
         contactsListLinearLayout.setTag(selectedContact);
 
