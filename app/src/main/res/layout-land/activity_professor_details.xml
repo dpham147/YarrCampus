@@ -15,7 +15,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="196dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -27,27 +27,35 @@
             android:scaleType="fitCenter"
             android:layout_weight="1" />
 
-        <TextView
-            android:text="TextView"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/professorDescriptionDetailsTextView"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/professorDescriptionDetailsTextView"
+                android:layout_weight="1" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/professorDetailsTextView"
+                android:layout_weight="1" />
+        </LinearLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/professorDetailsTextView"
-        android:layout_weight="1" />
 
     <Button
         android:text="@string/locate_office_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/locateProfessorButton"
-        android:onClick="locateProfessorOffice" />
+        android:onClick="locateProfessorOffice"
+        android:layout_weight="0.30" />
 
 </LinearLayout>
