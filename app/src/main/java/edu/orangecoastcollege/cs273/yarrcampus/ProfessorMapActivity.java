@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -43,6 +44,7 @@ public class ProfessorMapActivity extends AppCompatActivity
     private Location myLocation;
     private LocationRequest mLocationRequest;
     private Marker marker;
+    private LinearLayout mapLinearLayout;
 
     /**
      * Creates activity_professor_map
@@ -55,6 +57,8 @@ public class ProfessorMapActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_map);
+
+        mapLinearLayout = (LinearLayout) findViewById(R.id.activity_professor_map) ;
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.officeMapFragment);
         mapFragment.getMapAsync(this);
@@ -94,6 +98,9 @@ public class ProfessorMapActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.reverse_grow_anim);
+        mapLinearLayout.startAnimation(animation);
+
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
