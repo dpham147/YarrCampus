@@ -1,7 +1,9 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ProfessorDetailsActivity extends AppCompatActivity {
+    private static final int LOCATION_REQUEST_CODE = 200 ;
     private ImageView professorImageView;
     private TextView professorDetailsTextView;
     private TextView professorDescriptionTextView;
@@ -37,8 +40,16 @@ public class ProfessorDetailsActivity extends AppCompatActivity {
 
     public void locateProfessorOffice(View view)
     {
-        Intent googleMapsIntent = new Intent(this, ProfessorMapActivity.class);
-        googleMapsIntent.putExtra("SelectedProfessor", selectedProfessor);
-        startActivity(googleMapsIntent);
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
+        }
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Intent googleMapsIntent = new Intent(this, ProfessorMapActivity.class);
+            googleMapsIntent.putExtra("SelectedProfessor", selectedProfessor);
+            startActivity(googleMapsIntent);
+        }
     }
 }
