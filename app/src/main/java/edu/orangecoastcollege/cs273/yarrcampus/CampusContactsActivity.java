@@ -1,25 +1,36 @@
 package edu.orangecoastcollege.cs273.yarrcampus;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
 public class CampusContactsActivity extends AppCompatActivity {
 
-    private static final int PHONE_CALL_REQUEST_CODE = 99;
     private DBHelper db;
     private List<Contacts> allContactsList;
     private ContactsListAdapter contactsListAdapter;
     private ListView contactsListView;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private ShakeDetector shakeDetector;
+    private RelativeLayout activity_campus_contacts;
+    private Context context;
 
     /**
-     * Loads all the Contacts in to the adapter and displays them into the ListView
+     * Loads all the Contacts in to the adapter and displays them into the ListView.
+     * When the user shakes the phone, rotate the layout out of view for 10 seconds
      *
      * @param savedInstanceState Last instance of when the activity was loaded
      */
@@ -27,6 +38,8 @@ public class CampusContactsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campus_contacts);
+
+        activity_campus_contacts = (RelativeLayout) findViewById(R.id.activity_campus_contacts);
         db = new DBHelper(this);
         db.deleteAllContacts();
         db.addContact(new Contacts("Michael Paulding", "7144326842", "24/7/365"));
@@ -40,6 +53,16 @@ public class CampusContactsActivity extends AppCompatActivity {
         contactsListAdapter = new ContactsListAdapter(this, R.layout.contacts_list_item, allContactsList);
         contactsListView = (ListView) findViewById(R.id.contactsListView);
         contactsListView.setAdapter(contactsListAdapter);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        context = this;
+        shakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
+            @Override
+            public void onShake() {
+                Animation animation = AnimationUtils.loadAnimation(context, R.anim.reverse_anim);
+                activity_campus_contacts.startAnimation(animation);
+            }
+        });
     }
 
     /**
@@ -55,5 +78,17 @@ public class CampusContactsActivity extends AppCompatActivity {
 
             startActivity(callIntent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(shakeDetector);
     }
 }
