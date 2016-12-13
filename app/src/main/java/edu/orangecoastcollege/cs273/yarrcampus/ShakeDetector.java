@@ -12,7 +12,7 @@ import android.hardware.SensorManager;
 public class ShakeDetector implements SensorEventListener{
 
     private static final float SHAKE_THRESHOLD = 30f;
-    private static final int SHAKE_TIME_LAPSE = 1000;
+    private static final int SHAKE_TIME_LAPSE = 30000;
     private long timeOfLastShake;
     private OnShakeListener shakeListener;
     public ShakeDetector(OnShakeListener listener){
@@ -36,8 +36,10 @@ public class ShakeDetector implements SensorEventListener{
 
             if(gForce > SHAKE_THRESHOLD){
                 long now = System.currentTimeMillis();
-                if(now - timeOfLastShake > SHAKE_TIME_LAPSE)
+                if(now - timeOfLastShake > SHAKE_TIME_LAPSE){
                     shakeListener.onShake();
+                    timeOfLastShake = now;
+                }
             }
         }
     }
