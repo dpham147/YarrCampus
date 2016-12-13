@@ -40,13 +40,15 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value= "AIzaSyBZaIJZvGofRNv8evtEl5BjzwzpdQ9IH-I" />
+            android:value="AIzaSyBZaIJZvGofRNv8evtEl5BjzwzpdQ9IH-I" />
 
         <activity android:name=".BuildingMapViewActivity" />
         <activity android:name=".CoursesSearchActivity" />
         <activity android:name=".ProfessorMapActivity" />
         <activity android:name=".CampusContactsActivity" />
-        <activity android:name=".CourseDetailsActivity"></activity>
+        <activity android:name=".CourseDetailsActivity" />
+        <activity android:name=".FaqActivity" />
+        <activity android:name=".ContactDeveloperActivity"></activity>
     </application>
 
 </manifest>

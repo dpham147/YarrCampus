@@ -4,6 +4,7 @@ import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ProfessorMapActivity extends AppCompatActivity
@@ -38,6 +40,7 @@ public class ProfessorMapActivity extends AppCompatActivity
     private GoogleApiClient mGoogleApiClient;
     private Location myLocation;
     private LocationRequest mLocationRequest;
+    private Marker marker;
 
 
     @Override
@@ -70,6 +73,13 @@ public class ProfessorMapActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
+
+    @Override
     public void onConnected(@Nullable Bundle bundle) {
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -83,7 +93,6 @@ public class ProfessorMapActivity extends AppCompatActivity
             myLocation.setLongitude(0.0f);
             myLocation.setLatitude(0.0f);
         }
-
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         myLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
@@ -107,15 +116,10 @@ public class ProfessorMapActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-    }
-
-    public void handleNewLocation(Location location) {
         Intent professorDetailsIntent = getIntent();
         Professor selectedProfessor = professorDetailsIntent.getParcelableExtra("SelectedProfessor");
 
         mMap.clear();
-        myLocation = location;
         LatLng officeCoordinate = new LatLng(selectedProfessor.getmOfficeLat(), selectedProfessor.getmOfficeLong());
         mMap.addMarker(new MarkerOptions()
                 .position(officeCoordinate)
@@ -126,9 +130,17 @@ public class ProfessorMapActivity extends AppCompatActivity
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         mMap.moveCamera(cameraUpdate);
 
+    }
+
+    public void handleNewLocation(Location location) {
+
+        myLocation = location;
         // Add my marker
        LatLng coordinate = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(coordinate).title("You"));
+        if(marker != null)
+            marker.remove();
+        marker = mMap.addMarker(new MarkerOptions().position(coordinate).title("You"));
+
     }
 }
 

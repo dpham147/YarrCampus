@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -45,10 +46,11 @@ public class ProfessorListActivity extends AppCompatActivity {
         /**
          * Hard Coding Professors in professorList
          */
-
         Uri image = getUriResource(this, R.drawable.empty_profile_pic);
-        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image, 33.671404f, -117.911482f));
-        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image,33.671404f, -117.911482f));
+        Professor professor = new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image, 33.671404f, -117.911482f);
+        db.addProfessor(professor );
+        Log.i("YarrCampus", "Professor id: " + professor.getmId() );
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image,33.669912f, -117.911927f));
 
         professorsList = db.getAllProfessors();
 
@@ -64,6 +66,8 @@ public class ProfessorListActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void viewProfessorDetails (View view)
     {

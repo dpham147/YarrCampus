@@ -44,6 +44,10 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent(this, CampusContactsActivity.class));
     }
 
+    public void openFaqActivity(View view){
+        startActivity(new Intent(this, FaqActivity.class));
+    }
+
 //    public void openFaqActivity(View view)
 //    {
 //        startActivity(new Intent(this, FaqActivity.class));
