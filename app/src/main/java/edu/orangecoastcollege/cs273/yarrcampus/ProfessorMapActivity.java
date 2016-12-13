@@ -11,6 +11,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -83,7 +85,6 @@ public class ProfessorMapActivity extends AppCompatActivity
         super.onPause();
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
-        Log.i("Location Request", "Location updates: " + mLocationRequest.getNumUpdates());
 
     }
 

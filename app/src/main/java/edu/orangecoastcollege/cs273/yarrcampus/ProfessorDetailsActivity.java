@@ -46,8 +46,8 @@ public class ProfessorDetailsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onResume() {
+        super.onResume();
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.reverse_grow_anim);
         detailsLinearLayout.startAnimation(animation);
     }
@@ -63,8 +63,6 @@ public class ProfessorDetailsActivity extends AppCompatActivity {
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Intent googleMapsIntent = new Intent(this, ProfessorMapActivity.class);
             googleMapsIntent.putExtra("SelectedProfessor", selectedProfessor);
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.grow_anim);
-            detailsLinearLayout.startAnimation(animation);
             startActivity(googleMapsIntent);
         }
     }
