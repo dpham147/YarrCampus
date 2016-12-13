@@ -39,7 +39,9 @@ public class BuildingListActivity extends AppCompatActivity {
         db.addBuilding(new Building("Math Business and Computing Center", "MBCC", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670797f, -117.912142f));
         db.addBuilding(new Building("Chemistry", "CHEM", "9:00 AM - 6:00 PM", getUriResource(this, R.drawable.basic_building), 33.671648f, -117.914652f));
         db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668890f, -117.912638f));
-
+        db.addBuilding(new Building("Robert Moore Theater", "RMTH", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668953f, -117.909493f));
+        db.addBuilding(new Building("Social Science", "SCLS", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670292f, -117.910308f));
+        db.addBuilding(new Building("Writer's Row", "WTRW", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.670075f, -117.912320f));
         allBuildingsList = db.getAllBuildings();
         filteredBuildingsList = new ArrayList<> (allBuildingsList);
 

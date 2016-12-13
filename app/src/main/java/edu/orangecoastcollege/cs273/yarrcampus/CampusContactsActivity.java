@@ -29,8 +29,13 @@ public class CampusContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_campus_contacts);
         db = new DBHelper(this);
         db.deleteAllContacts();
-        db.addContact(new Contacts("Kevin Do", "7147574625"));
-        db.addContact(new Contacts("Roman Barron", "9512882633"));
+        db.addContact(new Contacts("Michael Paulding", "7144326842", "24/7/365"));
+        db.addContact(new Contacts("Answer Center", "7144325772", "8:00 AM - 5:00 PM"));
+        db.addContact(new Contacts("OCC President", "7144325712", "8:00 AM - 5:00 PM"));
+        db.addContact(new Contacts("Transfer Center", "7144325894", "8:00 AM - 5:00 PM"));
+        db.addContact(new Contacts("Library", "7144325885", "8:00 AM - 9:00 PM"));
+        db.addContact(new Contacts("Enrollment Center", "7144325072", "8:00 AM - 5:00 PM"));
+        db.addContact(new Contacts("Campus Safety", "7144325005", "8:00 AM - 10:00 PM"));
         allContactsList = db.getAllContacts();
         contactsListAdapter = new ContactsListAdapter(this, R.layout.contacts_list_item, allContactsList);
         contactsListView = (ListView) findViewById(R.id.contactsListView);

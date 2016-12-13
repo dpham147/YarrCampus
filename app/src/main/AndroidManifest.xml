@@ -39,7 +39,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBZaIJZvGofRNv8evtEl5BjzwzpdQ9IH-I" />
+            android:value="AIzaSyDaBhaNg58-gUWRdouWEBOfbfTGZh8Cc1w" />
 
         <activity android:name=".BuildingMapViewActivity" />
         <activity android:name=".CoursesSearchActivity" />
@@ -47,7 +47,8 @@
         <activity android:name=".CampusContactsActivity" />
         <activity android:name=".CourseDetailsActivity" />
         <activity android:name=".FaqActivity" />
-        <activity android:name=".ContactDeveloperActivity"></activity>
+        <activity android:name=".ContactDeveloperActivity" />
+        <activity android:name=".OnlineResourcesActivity"></activity>
     </application>
 
 </manifest>

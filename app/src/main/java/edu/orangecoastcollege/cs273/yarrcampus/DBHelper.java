@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "YarrCampus";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     private static final String BUILDING_TABLE = "Buildings";
     private static final String BUILDING_KEY_FIELD_ID = "id";
@@ -54,6 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CONTACTS_KEY_FIELD_ID = "id";
     private static final String FIELD_CONTACTS_NAME = "name";
     private static final String FIELD_CONTACTS_NUMBER = "phone_number";
+    private static final String FIELD_CONTACTS_HOURS = "hours";
 
     public DBHelper(Context context) {
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -109,7 +110,8 @@ public class DBHelper extends SQLiteOpenHelper {
         table = "CREATE TABLE " + CONTACTS_TABLE + "(" +
                 CONTACTS_KEY_FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 FIELD_CONTACTS_NAME + " TEXT, " +
-                FIELD_CONTACTS_NUMBER + " TEXT" + ")";
+                FIELD_CONTACTS_NUMBER + " TEXT, " +
+                FIELD_CONTACTS_HOURS + " TEXT " + ")";
         db.execSQL(table);
 
     }
@@ -471,7 +473,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 Contacts newContact = new Contacts(
                         cursor.getInt(0),
                         cursor.getString(1),
-                        cursor.getString(2));
+                        cursor.getString(2),
+                        cursor.getString(3));
                 allContacts.add(newContact);
             }
             while (cursor.moveToNext());
@@ -486,6 +489,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         values.put(FIELD_CONTACTS_NAME, contact.getName());
         values.put(FIELD_CONTACTS_NUMBER, contact.getPhoneNumber());
+        values.put(FIELD_CONTACTS_HOURS, contact.getHours());
         db.insert(CONTACTS_TABLE, null, values);
 
         db.close();

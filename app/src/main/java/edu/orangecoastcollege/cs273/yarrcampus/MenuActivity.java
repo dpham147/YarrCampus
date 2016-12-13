@@ -76,6 +76,10 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent (this, ContactDeveloperActivity.class));
     }
 
+    public void openOnlineResourceActivity(View view){
+        startActivity(new Intent(this, OnlineResourcesActivity.class));
+    }
+
 
 }
 
