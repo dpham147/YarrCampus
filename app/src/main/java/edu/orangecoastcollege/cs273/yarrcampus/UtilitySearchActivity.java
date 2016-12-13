@@ -37,7 +37,7 @@ public class UtilitySearchActivity extends AppCompatActivity
         LocationListener {
 
     private static final int FINE_LOCATION_REQUEST_CODE = 100;
-    private static final long LOCATION_REQUEST_INTERVAL = 10000;
+    private static final long LOCATION_REQUEST_INTERVAL = 5000;
     private static final long LOCATION_REQUEST_FASTEST_INTERVAL = 1000;
     protected static final float OCC_LATITUDE = 33.671028f;
     protected static final float OCC_LONGITUDE = -117.911305f;

@@ -1,2 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Yarr Campus</string>
+    <string name="blackboard">Blackboard</string>
+    <string name="building_map_view">Mapa del Vista</string>
+    <string name="building_menu_button">Localizador del Edificio del Campus</string>
+    <string name="campus_contacts">Contacto en el campus</string>
+    <string name="canvas">Canvas</string>
+    <string name="contact_us_menu_button">Contacta el Devs</string>
+    <string name="contacting_us">Revisión de la aplicación Envíe preguntas generales sobre la aplicación, o dénos una calificación y díganos lo que le gusta o no acerca de nuestra aplicación. Informe técnico de cualquier Error que encuentre o envíe cualquier idea sobre cómo mejorar nuestra aplicación. Vía GMAIL</string>
+    <string name="course_locate">Localizador de Edificios</string>
+    <string name="courses_search_menu_button">Buscar cursos</string>
+    <string name="emergency_phone">Telephonos de emergencia</string>
+    <string name="example_building_search">Eg. Watson Hall</string>
+    <string name="example_crn">Eg. 12345</string>
+    <string name="example_professor_search">Eg. Michael Paulding</string>
+    <string name="faq_menu_button">FAQ</string>
+    <string name="filter_building">Filtrar por Edificio</string>
+    <string name="filter_crn">Filtrar por CRN</string>
+    <string name="filter_instructor">Filtrar por instructor</string>
+    <string name="filter_subject">Filtrar por tema</string>
+    <string name="letters_cap">/140</string>
+    <string name="locate_office_button">Localizar Oficina</string>
+    <string name="my_occ">MyOCC</string>
+    <string name="occ_website">OCC Sitio Principal</string>
+    <string name="online_resources">Recursos en linea</string>
+    <string name="professor_search_menu_button">Profesores de Busqueda</string>
+    <string name="reset">Reiniciar</string>
+    <string name="restrooms">Banos</string>
+    <string name="search_building">Edificio de Buesueda</string>
+    <string name="search_professor">Profesore de Busqueda</string>
+    <string name="select_instructor">[Seleccionar Profesor]</string>
+    <string name="send_email">Enviar Correo Electronico</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="utility_search_menu_button">Utilidades de Busqueda</string>
+    <string name="water_fountain">Fuentes de agua</string>
+</resources>
