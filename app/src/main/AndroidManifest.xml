@@ -39,7 +39,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDaBhaNg58-gUWRdouWEBOfbfTGZh8Cc1w" />
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".BuildingMapViewActivity" />
         <activity android:name=".CoursesSearchActivity" />
