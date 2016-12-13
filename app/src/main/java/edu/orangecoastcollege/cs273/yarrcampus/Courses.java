@@ -55,7 +55,9 @@ public class Courses implements Parcelable{
                 parcel.readString(),
                 Uri.parse(parcel.readString()),
                 parcel.readFloat(),
-                parcel.readFloat());
+                parcel.readFloat(),
+                parcel.readString(),
+                parcel.readString());
         mSubject = parcel.readString();
         mSemesterCode = parcel.readString();
     }

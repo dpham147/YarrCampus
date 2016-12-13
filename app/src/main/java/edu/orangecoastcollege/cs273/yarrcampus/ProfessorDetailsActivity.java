@@ -40,7 +40,9 @@ public class ProfessorDetailsActivity extends AppCompatActivity {
         professorImageView.setImageURI(selectedProfessor.getmImageURI());
         professorDetailsTextView.setText(selectedProfessor.getmName() + "\n" +
                 selectedProfessor.getmBuilding() + "\n" +
-                selectedProfessor.getmOfficeHours());
+                selectedProfessor.getmOfficeHours() + "\n" +
+                selectedProfessor.getmEmail() + "\n" +
+                selectedProfessor.getmPhoneNumber()) ;
         professorDescriptionTextView.setText(selectedProfessor.getmDesc());
     }
 

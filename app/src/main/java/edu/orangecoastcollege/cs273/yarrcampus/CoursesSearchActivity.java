@@ -48,12 +48,12 @@ public class CoursesSearchActivity extends AppCompatActivity {
         db.addBuilding(new Building("Library", "LIBR", "9:00 AM - 10:00 PM", getUriResource(this, R.drawable.basic_building), 33.668890f, -117.912638f));
 
         Uri image = getUriResource(this, R.drawable.empty_profile_pic);
-        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" , getUriResource(this, R.drawable.mpaulding), 33.671404f, -117.911482f));
-        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" , getUriResource(this, R.drawable.mpaulding), 33.671404f, -117.911482f));
-        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBCC", image, 0.0f, 0.0f));
-        db.addProfessor(new Professor("Eigenvalue", "Simple guy", "0000-2400", "WR", image, 0.0f, 0.0f));
-        db.addProfessor(new Professor("Arlene Vieau", "Nice lady", "0000-2400", "CHEM", image, 0.0f, 0.0f));
-        db.addProfessor(new Professor("Gilbert", "Cool guy", "0000-2400", "MBCC", image, 0.0f, 0.0f));
+        db.addProfessor(new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" , getUriResource(this, R.drawable.mpaulding), 33.671404f, -117.911482f, "professor1@gmail.com", "714-445-2997"));
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" , getUriResource(this, R.drawable.mpaulding), 33.671404f, -117.911482f, "professor1@gmail.com", "714-445-2997"));
+        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBCC", image, 0.0f, 0.0f, "professor1@gmail.com", "714-445-2997"));
+        db.addProfessor(new Professor("Eigenvalue", "Simple guy", "0000-2400", "WR", image, 0.0f, 0.0f, "professor1@gmail.com", "714-445-2997"));
+        db.addProfessor(new Professor("Arlene Vieau", "Nice lady", "0000-2400", "CHEM", image, 0.0f, 0.0f, "professor1@gmail.com", "714-445-2997"));
+        db.addProfessor(new Professor("Gilbert", "Cool guy", "0000-2400", "MBCC", image, 0.0f, 0.0f, "professor1@gmail.com", "714-445-2997"));
 
         db.addCourse(12356, "Eng 100", 1, 4, "English", "52345");
         db.addCourse(12367, "Eng 101", 1, 4, "College Writing", "52245");

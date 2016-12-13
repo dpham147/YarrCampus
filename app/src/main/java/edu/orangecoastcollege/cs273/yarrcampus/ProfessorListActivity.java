@@ -50,13 +50,17 @@ public class ProfessorListActivity extends AppCompatActivity {
          * Hard Coding Professors in professorList
          */
         Uri image = getUriResource(this, R.drawable.empty_profile_pic);
-        Professor professor = new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC" ,image, 33.671404f, -117.911482f);
+        Professor professor = new Professor("Michael", "Super Hacker", "12:00pm to 3:00pm","MBCC"
+                ,image, 33.671404f, -117.911482f, "professor1@gmail.com", "714-445-2997");
         db.addProfessor(professor );
         Log.i("YarrCampus", "Professor id: " + professor.getmId() );
-        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,image,33.669912f, -117.911927f));
+        db.addProfessor(new Professor("Michael 2.0", "Faster...Stronger...", "12:00pm to 3:00pm","MBCC" ,
+                image,33.669912f, -117.911927f, "professor2@gmail.com", "715-445-2997"));
 
-        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBCC", image, 33.671380f, -117.911276f));
-        db.addProfessor(new Professor("Arlene Vieau", "Nice lady", "0000-2400", "CHEM", image, 33.670817f, -117.912982f));
+        db.addProfessor(new Professor("Art Moore", "Interesting guy", "1700-2000", "MBCC",
+                image, 33.671380f, -117.911276f, "professor3@gmail.com", "716-445-2997"));
+        db.addProfessor(new Professor("Arlene Vieau", "Nice lady", "0000-2400", "CHEM",
+                image, 33.670817f, -117.912982f, "professor4@gmail.com", "717-445-2997"));
 
 
         professorsList = db.getAllProfessors();
