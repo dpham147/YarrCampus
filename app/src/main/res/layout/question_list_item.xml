@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/questionLinearLayout">
+    android:id="@+id/questionLinearLayout"
+    android:background="@drawable/gradient">
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:id="@+id/questionTextView"
         android:layout_height="wrap_content"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:id="@+id/answerTextView"
-        android:layout_height="75dp" />
+        android:layout_height="75dp"
+        android:textColor="@android:color/white" />
 </LinearLayout>
