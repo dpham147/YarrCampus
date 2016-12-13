@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "YarrCampus";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     private static final String BUILDING_TABLE = "Buildings";
     private static final String BUILDING_KEY_FIELD_ID = "id";
@@ -33,6 +33,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_PROFESSORS_DESCRIPTION = "desc";
     private static final String FIELD_PROFESSORS_OFFICE_LATITUDE = "lat";
     private static final String FIELD_PROFESSORS_OFFICE_LONGITUDE = "long";
+    private static final String FIELD_PROFESSOR_EMAIL = "email";
+    private static final String FIELD_PROFESSOR_PHONENUMBER = "phone";
 
     private static final String UTILITY_TABLE = "Utilities";
     private static final String UTILITIES_KEY_FIELD_ID = "id";
@@ -82,7 +84,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 FIELD_PROFESSORS_BUILDING + " TEXT, " +
                 FIELD_PROFESSORS_IMAGE_URI + " TEXT, " +
                 FIELD_PROFESSORS_OFFICE_LATITUDE + " REAL, " +
-                FIELD_PROFESSORS_OFFICE_LONGITUDE + " REAL" + ")";
+                FIELD_PROFESSORS_OFFICE_LONGITUDE + " REAL, " +
+                FIELD_PROFESSOR_EMAIL + " TEXT, " +
+                FIELD_PROFESSOR_PHONENUMBER + " TEXT" + ")";
         db.execSQL(table);
 
         // Create the utilities table
@@ -149,7 +153,9 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getString(4),
                         Uri.parse(cursor.getString(5)),
                         cursor.getFloat(6),
-                        cursor.getFloat(7));
+                        cursor.getFloat(7),
+                        cursor.getString(8),
+                        cursor.getString(9));
 
                 allProf.add(newProf);
 
@@ -173,7 +179,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{PROFESSOR_KEY_FIELD_ID, FIELD_PROFESSORS_NAME,
                         FIELD_PROFESSORS_DESCRIPTION, FIELD_PROFESSORS_OFFICE_HOURS,
                         FIELD_PROFESSORS_BUILDING, FIELD_PROFESSORS_IMAGE_URI,
-                        FIELD_PROFESSORS_OFFICE_LATITUDE, FIELD_PROFESSORS_OFFICE_LONGITUDE},
+                        FIELD_PROFESSORS_OFFICE_LATITUDE, FIELD_PROFESSORS_OFFICE_LONGITUDE,
+                        FIELD_PROFESSOR_EMAIL, FIELD_PROFESSOR_PHONENUMBER},
                 PROFESSOR_KEY_FIELD_ID + "=?",
                 new String[]{String.valueOf(id)},
                 null, null, null, null);
@@ -188,7 +195,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 cursor.getString(4),
                 Uri.parse(cursor.getString(5)),
                 cursor.getFloat(6),
-                cursor.getFloat(7));
+                cursor.getFloat(7),
+                cursor.getString(8),
+                cursor.getString(9));
         db.close();
         return professor;
     }
@@ -210,6 +219,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(FIELD_PROFESSORS_DESCRIPTION, professor.getmDesc());
         values.put(FIELD_PROFESSORS_OFFICE_LATITUDE, professor.getmOfficeLat());
         values.put(FIELD_PROFESSORS_OFFICE_LONGITUDE, professor.getmOfficeLong());
+        values.put(FIELD_PROFESSOR_EMAIL, professor.getmEmail());
+        values.put(FIELD_PROFESSOR_PHONENUMBER, professor.getmPhoneNumber());
 
         db.insert(PROFESSOR_TABLE, null, values);
         db.close();

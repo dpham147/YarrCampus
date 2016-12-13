@@ -16,9 +16,9 @@ public class Professor implements Parcelable {
     private String mBuilding;
     private float mOfficeLat;
     private float mOfficeLong;
+    private Uri mImageURI;
     private String mEmail;
     private String mPhoneNumber;
-    private Uri mImageURI;
 
     /**
      * Default Professor Constructor
@@ -32,6 +32,8 @@ public class Professor implements Parcelable {
         mOfficeLat = 0.0f;
         mOfficeLong = 0.0f;
         mImageURI = Uri.parse("getUriToResource(this, R.drawable.empty_profile_pic)");
+        mEmail = "";
+        mPhoneNumber = "";
     }
 
     /**
@@ -45,7 +47,9 @@ public class Professor implements Parcelable {
      * @param latitude
      * @param longitude
      */
-    public Professor(int id, String name, String desc, String hours, String building, Uri imageUri, float latitude, float longitude)
+    public Professor(int id, String name, String desc, String hours,
+                     String building, Uri imageUri, float latitude, float longitude,
+                       String email, String phone )
     {
         mId = id;
         mName = name;
@@ -55,6 +59,8 @@ public class Professor implements Parcelable {
         mImageURI = imageUri;
         mOfficeLat = latitude;
         mOfficeLong = longitude;
+        mEmail = email;
+        mPhoneNumber = phone;
 
     }
 
@@ -71,9 +77,11 @@ public class Professor implements Parcelable {
      */
 
 
-    public Professor(String name, String desc, String hours, String building, Uri imageUri, float latitude, float longitude)
+    public Professor(String name, String desc, String hours,
+                     String building, Uri imageUri, float latitude, float longitude,
+                     String email, String phone)
     {
-        this(-1, name, desc, hours, building, imageUri, latitude, longitude);
+        this(-1, name, desc, hours, building, imageUri, latitude, longitude, email, phone);
     }
 
     /**
@@ -90,6 +98,8 @@ public class Professor implements Parcelable {
         mImageURI = Uri.parse(parcel.readString());
         mOfficeLat = parcel.readFloat();
         mOfficeLong = parcel.readFloat();
+        mEmail = parcel.readString();
+        mPhoneNumber = parcel.readString();
     }
 
     /**
@@ -186,9 +196,34 @@ public class Professor implements Parcelable {
      * @param mImageURI
      */
 
+
     public void setmImageURI(Uri mImageURI) {
         this.mImageURI = mImageURI;
     }
+
+    /**
+     * sets email
+     * @param email
+     */
+    public void setmEmail(String email) {this.mEmail = email;}
+
+    /**
+     * returns string email
+     * @return
+     */
+    public String getmEmail() {return mEmail;}
+
+    /**
+     * sets phone number
+     * @param phone
+     */
+    public void setmPhoneNumber(String phone) {this.mPhoneNumber = phone;}
+
+    /**
+     * returns string phone number
+     * @return
+     */
+    public String getmPhoneNumber() { return mPhoneNumber;}
 
     /**
      * Returns All Details of PRofessor
@@ -197,7 +232,7 @@ public class Professor implements Parcelable {
     public String getAllDetails()
     {
         String details = mOfficeHours + "\n"
-                + mBuilding;
+                + mBuilding ;
         return details;
     }
 
@@ -221,6 +256,8 @@ public class Professor implements Parcelable {
         dest.writeString(String.valueOf(mImageURI));
         dest.writeFloat(mOfficeLat);
         dest.writeFloat(mOfficeLong);
+        dest.writeString(mEmail);
+        dest.writeString(mPhoneNumber);
     }
 
     public static final Parcelable.Creator CREATOR = new Creator() {

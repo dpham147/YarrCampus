@@ -21,14 +21,13 @@
     <EditText
         android:layout_width="match_parent"
         android:id="@+id/contactDeveloperEditText"
-        android:layout_height="150dp"
-        android:layout_marginTop="40dp"
         android:background="@android:color/white"
         android:inputType="text|textMultiLine|textCapSentences"
         android:maxLength="140"
         android:maxLines="7"
         android:gravity="top"
-        android:hint="Text Here..." />
+        android:hint="Text Here..."
+        android:layout_height="50dp" />
 
     <TextView
         android:text="TextView"
@@ -41,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sendEmailButton"
-        android:layout_marginTop="40dp"
         android:onClick="sendEmail" />
 
 </LinearLayout>
