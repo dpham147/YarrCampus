@@ -6,7 +6,8 @@
     android:layout_column="2"
     android:layout_row="1"
     android:id="@+id/professorListLinearView"
-    android:onClick="viewProfessorDetails" >
+    android:onClick="viewProfessorDetails" 
+    android:background="?attr/colorButtonNormal">
 
     <ImageView
         android:layout_width="100dp"
